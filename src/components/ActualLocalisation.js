@@ -1,3 +1,12 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 export const ActualLocalisation = ({ localisation }) => {
     return (
         <View style={stylesActualLocalisation.container}>
@@ -6,7 +15,7 @@ export const ActualLocalisation = ({ localisation }) => {
             </Text>
             <View style={stylesActualLocalisation.iconContainer}>
                 <Image
-                    source={require("./assets/icon.png")}
+                    source={require("../../assets/icon.png")}
                     style={stylesActualLocalisation.icon}
                 />
                 <Text style={stylesActualLocalisation.label}>{localisation}</Text>

@@ -1,9 +1,18 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 export const ConversationPreview = ({ username, lastMessage, hour, messageNumber }) => {
     return (
         <View style={stylesConversationPreview.container}>
             <View style={stylesConversationPreview.containerContent}>
                 <Image
-                    source={require("./assets/icon.png")}
+                    source={require("../../assets/icon.png")}
                     style={stylesConversationPreview.profilePicture}
                 />
                 <View style={stylesConversationPreview.content}>

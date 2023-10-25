@@ -1,9 +1,18 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 export const ThumbnailPlaceType = ({ label }) => {
     return (
         <View style={stylesThumbnailPlaceType.container}>
             <View style={stylesThumbnailPlaceType.iconContainer}>
                 <Image
-                    source={require("./assets/icon.png")}
+                    source={require("../../assets/icon.png")}
                     style={stylesThumbnailPlaceType.icon}
                 />
             </View>

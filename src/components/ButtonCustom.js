@@ -1,3 +1,12 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 export const ButtonCustom = ({ text }) => {
     return (
         <TouchableOpacity style={stylesButtonCustom.bouton} onPress={() => { }}>

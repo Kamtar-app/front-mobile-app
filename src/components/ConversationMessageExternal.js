@@ -1,8 +1,19 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+import { ConversationBubble } from "./ConversationBubble";
+
+
 export const ConversationMessageExternal = ({ children }) => {
     return (
         <View style={stylesConversationMessageExternal.container}>
             <Image
-                source={require("./assets/icon.png")}
+                source={require("../../assets/icon.png")}
                 style={stylesConversationMessageExternal.profilePicture}
             />
             <ConversationBubble isExternalMessage={true}>

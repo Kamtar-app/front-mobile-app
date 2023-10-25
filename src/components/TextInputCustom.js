@@ -1,13 +1,22 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 export const TextInputCustom = ({ placeholder, startIcon = null, endIcon = null }) => {
     return (
         <View style={stylestextInputCustom.inputContainer}>
-            <Image style={stylestextInputCustom.icon} source={require("./assets/icon.png")} />
+            <Image style={stylestextInputCustom.icon} source={require("../../assets/icon.png")} />
             <TextInput
                 style={stylestextInputCustom.input}
                 placeholder={placeholder}
                 placeholderTextColor="white"
             />
-            <Image style={stylestextInputCustom.icon} source={require("./assets/icon.png")} />
+            <Image style={stylestextInputCustom.icon} source={require("../../assets/icon.png")} />
         </View>
     );
 };

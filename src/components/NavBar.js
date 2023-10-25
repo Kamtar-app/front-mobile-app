@@ -1,3 +1,14 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
+import { NavBarItem } from "./NavBarItem";
+
 export const NavBar = () => {
     return (
         <View style={stylesNavBar.navBar}>

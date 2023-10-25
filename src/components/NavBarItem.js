@@ -1,9 +1,18 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 const NavBarItem = () => {
     return (
         <TouchableOpacity style={stylesNavBar.navBarItem} onPress={() => { }}>
             <Image
                 style={stylesNavBar.navBarItemIcon}
-                source={require("./assets/icon.png")}
+                source={require("../../assets/icon.png")}
             />
         </TouchableOpacity>
     );

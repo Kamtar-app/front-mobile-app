@@ -1,20 +1,29 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 
 export const ConversationHeader = ({ username }) => {
     return (<View style={stylesConversationHeader.container}>
         <View style={stylesConversationHeader.firstContainer}>
             <Image
-                source={require("./assets/icon.png")}
+                source={require("../../assets/icon.png")}
                 style={stylesConversationHeader.backArrow}
             />
             <Image
-                source={require("./assets/icon.png")}
+                source={require("../../assets/icon.png")}
                 style={stylesConversationHeader.profilePicture}
             />
             <Text style={stylesConversationHeader.username}>{username}</Text>
         </View>
         <View style={stylesConversationHeader.secondContainer}>
             <Image
-                source={require("./assets/icon.png")}
+                source={require("../../assets/icon.png")}
                 style={stylesConversationHeader.vocalCallIcon}
             />
         </View>

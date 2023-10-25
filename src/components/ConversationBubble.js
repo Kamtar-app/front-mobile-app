@@ -1,3 +1,12 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 export const ConversationBubble = ({ children, isExternalMessage }) => {
     return (
         <View style={{

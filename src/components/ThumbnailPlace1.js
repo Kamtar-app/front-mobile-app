@@ -1,3 +1,12 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
 export const ThumbnailPlace1 = ({ imageURL, city, name, type }) => {
     return (
         <View style={stylesThumbnailPlace1.card}>
@@ -12,7 +21,7 @@ export const ThumbnailPlace1 = ({ imageURL, city, name, type }) => {
             </View>
             <Image
                 style={stylesThumbnailPlace1.like}
-                source={require("./assets/icon.png")}
+                source={require("../../assets/icon.png")}
             />
         </View>
     );

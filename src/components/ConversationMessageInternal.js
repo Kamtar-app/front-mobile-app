@@ -1,17 +1,33 @@
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+
+import { ConversationBubble } from "./ConversationBubble";
+
 export const ConversationMessageInternal = ({ children }) => {
     return (
         <View style={stylesConversationMessageInternal.container}>
             <ConversationBubble isExternalMessage={false}>
                 {children}
             </ConversationBubble>
-            <View style={stylesConversationMessageInternal.containerUserProfilPicture}>
+            <View
+                style={
+                    stylesConversationMessageInternal.containerUserProfilPicture
+                }
+            >
                 <Image
-                    source={require("./assets/icon.png")}
+                    source={require("../../assets/icon.png")}
                     style={stylesConversationMessageInternal.profilePicture}
                 />
             </View>
-        </View>)
-}
+        </View>
+    );
+};
 
 const stylesConversationMessageInternal = StyleSheet.create({
     container: {
@@ -19,13 +35,13 @@ const stylesConversationMessageInternal = StyleSheet.create({
         alignItems: "flex-end",
         flexDirection: "row",
         marginTop: 20,
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
     },
     containerUserProfilPicture: {
         width: 12,
         height: 12,
         marginLeft: 10,
-        backgroundColor: "#FE6E1F"
+        backgroundColor: "#FE6E1F",
     },
     profilePicture: {
         width: 12,

@@ -18,8 +18,8 @@ import { ButtonUnderlinedCustom } from "../components/ButtonUnderlinedCustom";
 import { SigninScreen } from "./SigninScreen";
 import Mail from "./../../assets/icons/mail.svg";
 import image from "./../../assets/images/img_fond_accueil.jpg";
-import { colors } from "./../assets/styles/constants/colors";
-import { texts } from "./../assets/styles/constants/texts";
+import { colors } from "../assets/styles/constants/colors";
+import { texts } from "../assets/styles/constants/texts";
 
 export const ChatScreen = ({}) => {
   const [textInput, setTextInput] = useState("");

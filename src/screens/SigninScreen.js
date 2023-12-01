@@ -12,7 +12,6 @@ import {
 import { TextInputCustom } from "../components/TextInputCustom";
 import { ButtonCustom } from "../components/ButtonCustom";
 import { ButtonUnderlinedCustom } from "../components/ButtonUnderlinedCustom";
-import { SigninScreen } from "./SigninScreen";
 import { ChatScreen } from "./ChatScreen";
 import { HiddenEye } from "../components/icons/HiddenEye";
 // import { Eye } from "../components/icons/Eye";
@@ -21,12 +20,12 @@ import Mail from "./../../assets/icons/mail.svg";
 import MotDePasse from "./../../assets/icons/motdepasse_icon.svg";
 import Yeux from "./../../assets/icons/motdepasse_cache_icon.svg";
 import image from "./../../assets/images/img_fond_accueil.jpg";
-import { colors } from "./../assets/styles/constants/colors";
-import { texts } from "./../assets/styles/constants/texts";
+import { colors } from "../assets/styles/constants/colors";
+import { texts } from "../assets/styles/constants/texts";
 import { useNavigation } from "@react-navigation/native";
-import { WelcomeScreen } from "./WelcomeScreen";
+import { SignupScreen } from "./SignupScreen";
 
-export const HomeScreen = ({}) => {
+export const SigninScreen = ({}) => {
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
@@ -45,7 +44,7 @@ export const HomeScreen = ({}) => {
           <TouchableOpacity
             style={styles.containerText}
             onPress={() => {
-              navigation.navigate(SigninScreen);
+              navigation.navigate(SignupScreen);
             }}
           >
             <Text style={styles.text}>Mot de passe oublié ?</Text>
@@ -53,13 +52,6 @@ export const HomeScreen = ({}) => {
           <ButtonCustom text={"Connexion"} screen={"WelcomeScreen"} />
           <ButtonUnderlinedCustom text={"S'inscrire"} screen={"SignupScreen"} />
           <ButtonUnderlinedCustom text={"ChatScreen"} screen={"ChatScreen"} />
-          {/* <View style={styles.containerText}>
-            <Text style={styles.text}>Vous êtes partenaires ? </Text>
-            <ButtonUnderlinedCustom
-              text={"Cliquez ici"}
-              screen={"SigninScreen"}
-            />
-          </View> */}
         </View>
       </ImageBackground>
     </View>

@@ -16,11 +16,10 @@ import { ThumbnailPlace2 } from "./src/components/ThumbnailPlace2";
 import { ThumbnailPlace1 } from "./src/components/ThumbnailPlace1";
 import { NavBar } from "./src/components/NavBar";
 import { NavBarItem } from "./src/components/NavBarItem";
-import { HomeScreen } from "./src/scenes/HomeScreen";
-import { SigninScreen } from "./src/scenes/SigninScreen";
-import { SignupScreen } from "./src/scenes/SignupScreen";
-import { WelcomeScreen } from "./src/scenes/WelcomeScreen";
-import { ChatScreen } from "./src/scenes/ChatScreen";
+import { SigninScreen } from "./src/screens/SigninScreen";
+import { SignupScreen } from "./src/screens/SignupScreen";
+import { WelcomeScreen } from "./src/screens/WelcomeScreen";
+import { ChatScreen } from "./src/screens/ChatScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import useCustomFonts from "./src/useCustomFonts";
@@ -37,18 +36,16 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
+      // screenOptions={{
+      //   headerShown: false,
+      // }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SigninScreen" component={SigninScreen} />
         <Stack.Screen name="SignupScreen" component={SignupScreen} />
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-    // <HomeScreen />
     // <ConnectionScreen></ConnectionScreen>
     // <View style={styles.container}>
     //   {/* <StatusBar style="auto" />

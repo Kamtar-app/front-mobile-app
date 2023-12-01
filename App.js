@@ -1,15 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Image,
-    TouchableOpacity,
-} from "react-native";
-import React from "react";
-import { Button } from "react-native";
-import { Linking } from "react-native";
+import { StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import * as Font from "expo-font";
+import { Button, Linking } from "react-native";
 import { TextInputCustom } from "./src/components/TextInputCustom";
 import { ButtonCustom } from "./src/components/ButtonCustom";
 import { ConversationBubble } from "./src/components/ConversationBubble";
@@ -23,69 +16,88 @@ import { ThumbnailPlace2 } from "./src/components/ThumbnailPlace2";
 import { ThumbnailPlace1 } from "./src/components/ThumbnailPlace1";
 import { NavBar } from "./src/components/NavBar";
 import { NavBarItem } from "./src/components/NavBarItem";
+import { HomeScreen } from "./src/scenes/HomeScreen";
+import { SigninScreen } from "./src/scenes/SigninScreen";
+import { SignupScreen } from "./src/scenes/SignupScreen";
+import { WelcomeScreen } from "./src/scenes/WelcomeScreen";
+import { ChatScreen } from "./src/scenes/ChatScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import useCustomFonts from "./src/useCustomFonts";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-    return (
-        <View style={styles.container}>
-            {/* <StatusBar style="auto" /> */}
-            <ConversationHeader username={"John"} />
-            <ConversationMessageExternal>
-                {`hello  sdfsfs sdf  sf s df s fd s fs df s fd sf s \npk \ndfgdfgd hello world`}
-            </ConversationMessageExternal>
-            <ConversationMessageInternal>
-                OKO message
-            </ConversationMessageInternal>
-            <ConversationMessageExternal>
-                OKO message
-            </ConversationMessageExternal>
-            <ConversationMessageInternal>
-                OKO message
-            </ConversationMessageInternal>
-            {/* <NavBar /> */}
-            {/* <ConversationPreview
-                username={"John"}
-                lastMessage={"Tu manges à St Malo ?"}
-                hour={"11:57"}
-                messageNumber={"1"}
-            /> */}
-            {/* <ThumbnailPlaceType label={"Parking"} /> */}
-            {/* <ActualLocalisation localisation={"Rennes, FR"} /> */}
-            {/* <ThumbnailPlace2
-                imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
-                city="Caulnes • 5 KM"
-                name="Restaurant de la gare"
-                type="Restaurant • Sanitaire • Douche • Parking sécurisé"
-                note="5"
-            /> */}
-            {/* <ThumbnailPlace1
-                imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
-                city="Caulnes • 5 KM"
-                name="Restaurant de la gare"
-                type="Restaurant • Sanitaire • Douche • Parking sécurisé"
-            /> */}
-            {/* <ButtonCustom text={"Connexion"} /> */}
-            {/* <TextInputCustom placeholder={"Email"} /> */}
-        </View>
-    );
+  const fontsLoaded = useCustomFonts();
+
+  if (!fontsLoaded) {
+    return null; // Attend que les polices soient chargées
+  }
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="SigninScreen" component={SigninScreen} />
+        <Stack.Screen name="SignupScreen" component={SignupScreen} />
+        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen name="ChatScreen" component={ChatScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    // <HomeScreen />
+    // <ConnectionScreen></ConnectionScreen>
+    // <View style={styles.container}>
+    //   {/* <StatusBar style="auto" />
+    //   <ConversationHeader username={"John"} />
+    //   <ConversationMessageExternal>
+    //     {`hello  sdfsfs sdf  sf s df s fd s fs df s fd sf s \npk \ndfgdfgd hello world`}
+    //   </ConversationMessageExternal>
+    //   <ConversationMessageInternal>OKO message</ConversationMessageInternal>
+    //   <ConversationMessageExternal>OKO message</ConversationMessageExternal>
+    //   <ConversationMessageInternal>OKO message</ConversationMessageInternal>
+    //   <NavBar /> */}
+    //   {/* <ConversationPreview
+    //     username={"John"}
+    //     lastMessage={"Tu manges à St Malo ?"}
+    //     hour={"11:57"}
+    //     messageNumber={"1"}
+    //   />
+    //   <ThumbnailPlaceType label={"Parking"} />
+    //   <ActualLocalisation localisation={"Rennes, FR"} />
+    //   <ThumbnailPlace2
+    //     imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
+    //     city="Caulnes • 5 KM"
+    //     name="Restaurant de la gare"
+    //     type="Restaurant • Sanitaire • Douche • Parking sécurisé"
+    //     note="5"
+    //   />
+    //   <ThumbnailPlace1
+    //     imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
+    //     city="Caulnes • 5 KM"
+    //     name="Restaurant de la gare"
+    //     type="Restaurant • Sanitaire • Douche • Parking sécurisé"
+    //   /> */}
+    //   {/* <ButtonCustom text={"Connexion"} />
+    //   <TextInputCustom placeholder={"Email"} />
+    // </View> */}
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "red",
-        marginLeft: 20,
-        marginRight: 20
-    },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
+    marginLeft: 20,
+    marginRight: 20,
+  },
 });
-
-
-
-
-
-
 
 // const GoogleMapsComponent = () => {
 //   const openGoogleMaps = () => {

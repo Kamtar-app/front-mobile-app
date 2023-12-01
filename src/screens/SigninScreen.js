@@ -12,7 +12,6 @@ import {
 import { TextInputCustom } from "../components/TextInputCustom";
 import { ButtonCustom } from "../components/ButtonCustom";
 import { ButtonUnderlinedCustom } from "../components/ButtonUnderlinedCustom";
-import { ChatScreen } from "./ChatScreen";
 import { HiddenEye } from "../components/icons/HiddenEye";
 // import { Eye } from "../components/icons/Eye";
 import { Password } from "../components/icons/Password";
@@ -24,6 +23,7 @@ import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
 import { useNavigation } from "@react-navigation/native";
 import { SignupScreen } from "./SignupScreen";
+import { NavBar } from "../components/NavBar";
 
 export const SigninScreen = ({}) => {
   return (
@@ -54,6 +54,7 @@ export const SigninScreen = ({}) => {
           <ButtonUnderlinedCustom text={"ChatScreen"} screen={"ChatScreen"} />
         </View>
       </ImageBackground>
+      <NavBar/>
     </View>
   );
 };

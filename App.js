@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import * as Font from "expo-font";
 import { Button, Linking } from "react-native";
 import { TextInputCustom } from "./src/components/TextInputCustom";
@@ -23,6 +23,8 @@ import { ChatScreen } from "./src/screens/ChatScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import useCustomFonts from "./src/useCustomFonts";
+import { Routes } from "./src/assets/routes";
+import { AppContext, AppContextProvider } from "./src/context/AppContext";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,18 +36,20 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-      // screenOptions={{
-      //   headerShown: false,
-      // }}
-      >
-        <Stack.Screen name="SigninScreen" component={SigninScreen} />
-        <Stack.Screen name="SignupScreen" component={SignupScreen} />
-        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-        <Stack.Screen name="ChatScreen" component={ChatScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+        // screenOptions={{
+        //   headerShown: false,
+        // }}
+        >
+          <Stack.Screen name="SigninScreen" component={SigninScreen} />
+          <Stack.Screen name="SignupScreen" component={SignupScreen} />
+          <Stack.Screen name="ChatScreen" component={ChatScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppContextProvider>
+
     // <ConnectionScreen></ConnectionScreen>
     // <View style={styles.container}>
     //   {/* <StatusBar style="auto" />

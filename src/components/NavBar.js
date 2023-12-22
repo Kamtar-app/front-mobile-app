@@ -47,32 +47,34 @@ export const NavBar = () => {
     ]
 
     return (
-        <View style={stylesNavBar.navBar}>
-            {navItemLinks.map(navItemLink => (
-                <NavBarItem
-                    active={navItemLink.active}
-                    action={navItemLink.action}
-                >
-                    {navItemLink.component(
-                        {
-                            style: stylesNavBar.logo,
-                            strokeColor: navItemLink.active ? null : "white",
-                            backgroundColor: navItemLink.active ? "white" : null
-                        }
-                    )}
-                </NavBarItem>
-            ))}
+        <View style={{flex: 1, flexDirection: "row", justifyContent: "center" }}>
+            <View style={stylesNavBar.navBar}>
+                {navItemLinks.map(navItemLink => (
+                    <NavBarItem
+                        active={navItemLink.active}
+                        action={navItemLink.action}
+                    >
+                        {navItemLink.component(
+                            {
+                                style: stylesNavBar.logo,
+                                strokeColor: navItemLink.active ? null : "white",
+                                backgroundColor: navItemLink.active ? "white" : null
+                            }
+                        )}
+                    </NavBarItem>
+                ))}
+            </View>
         </View>
     );
 };
 
 const stylesNavBar = StyleSheet.create({
     navBar: {
-        marginHorizontal: "15%",
+        // marginHorizontal: "15%",
         position: "absolute",
         bottom: 20,
         backgroundColor: "#000000",
-        width: "100%",
+        width: "80%",
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "space-evenly",

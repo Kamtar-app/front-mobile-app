@@ -25,6 +25,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import useCustomFonts from "./src/useCustomFonts";
 import { Routes } from "./src/assets/routes";
 import { AppContext, AppContextProvider } from "./src/context/AppContext";
+import { HomeScreen } from "./src/screens/HomeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,10 +40,11 @@ export default function App() {
     <AppContextProvider>
       <NavigationContainer>
         <Stack.Navigator
-        // screenOptions={{
-        //   headerShown: false,
-        // }}
+        screenOptions={{
+          headerShown: false,
+        }}
         >
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="SigninScreen" component={SigninScreen} />
           <Stack.Screen name="SignupScreen" component={SignupScreen} />
           <Stack.Screen name="ChatScreen" component={ChatScreen} />

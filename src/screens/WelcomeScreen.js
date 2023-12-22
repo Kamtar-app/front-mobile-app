@@ -20,6 +20,7 @@ import { texts } from "../assets/styles/constants/texts";
 import { Profil } from "./../../assets/icons/profil_icon.svg";
 import image from "./../../assets/images/img_fond_accueil.jpg";
 import * as Location from "expo-location";
+import { NavBar } from "../components/NavBar";
 
 export const WelcomeScreen = ({ navigation }) => {
   // const [hasPermission, setHasPermission] = useState(null);
@@ -81,6 +82,7 @@ export const WelcomeScreen = ({ navigation }) => {
           {/* <ButtonCustom text={"Inscription"} onPress={getPermissions} /> */}
         </View>
       </ImageBackground>
+      <NavBar /> 
     </View>
   );
 };

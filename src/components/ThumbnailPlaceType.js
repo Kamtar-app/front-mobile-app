@@ -7,14 +7,11 @@ import {
     TouchableOpacity,
 } from "react-native";
 
-export const ThumbnailPlaceType = ({ label }) => {
+export const ThumbnailPlaceType = ({ label, children }) => {
     return (
         <View style={stylesThumbnailPlaceType.container}>
             <View style={stylesThumbnailPlaceType.iconContainer}>
-                <Image
-                    source={require("../../assets/icon.png")}
-                    style={stylesThumbnailPlaceType.icon}
-                />
+                {children}
             </View>
             <Text style={stylesThumbnailPlaceType.label}>{label}</Text>
         </View>
@@ -25,6 +22,7 @@ const stylesThumbnailPlaceType = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
+        marginRight: 12
     },
     iconContainer: {
         width: 70,
@@ -35,7 +33,7 @@ const stylesThumbnailPlaceType = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "center",
-        marginBottom: 10,
+        marginBottom: 11,
     },
     icon: {
         width: 35,

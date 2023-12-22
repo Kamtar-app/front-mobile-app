@@ -8,6 +8,14 @@ import {
 } from "react-native";
 
 import { NavBarItem } from "./NavBarItem";
+import { Home } from "./icons/Home";
+import { Map } from "./icons/Map";
+import { Conversation } from "./icons/Conversation";
+import { Account } from "./icons/Account";
+import { useContext, useEffect } from "react";
+import { Routes } from "../assets/routes";
+import { AppContext } from "../context/AppContext";
+
 
 export const NavBar = () => {
     return (

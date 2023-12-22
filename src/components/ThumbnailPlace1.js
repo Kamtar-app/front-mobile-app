@@ -6,60 +6,69 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
+import { colors } from "../assets/styles/constants/colors";
+import { Star } from "./icons/Star";
+import { Heart } from "./icons/Heart";
 
-export const ThumbnailPlace1 = ({ imageURL, city, name, type }) => {
+export const ThumbnailPlace1 = ({ imageURL, city, name, type, small = false }) => {
     return (
-        <View style={stylesThumbnailPlace1.card}>
+        <View style={styles.card}>
             <Image
                 source={{ uri: imageURL }}
-                style={stylesThumbnailPlace1.backgroundImage}
+                style={[styles.backgroundImage, { height: small ? 160 : 210 }]}
             />
-            <View style={stylesThumbnailPlace1.textContainer}>
-                <Text style={stylesThumbnailPlace1.city}>{city}</Text>
-                <Text style={stylesThumbnailPlace1.name}>{name}</Text>
-                <Text style={stylesThumbnailPlace1.type}>{type}</Text>
+            <View style={styles.like}>
+                <Heart />
             </View>
-            <Image
-                style={stylesThumbnailPlace1.like}
-                source={require("../../assets/icon.png")}
-            />
+            <View style={styles.textContainer}>
+                <View style={styles.row}>
+                    <Text style={styles.content}>{city}</Text>
+                    <View style={styles.row}>
+                        <Star />
+                        <Text style={[styles.content, styles.note]}>9.1</Text>
+                    </View>
+                </View>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.content}>{type}</Text>
+            </View>
         </View>
     );
 };
 
-const stylesThumbnailPlace1 = StyleSheet.create({
+const styles = StyleSheet.create({
     card: {
         width: 210,
-        height: 210,
-        borderRadius: 20,
-        overflow: "hidden",
+        height: 350,
         marginRight: 15,
+        position: "relative",
     },
     backgroundImage: {
-        width: "100%",
-        height: "100%",
+        width: 210,
+        borderRadius: 10
     },
     textContainer: {
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        width: "85%",
-        padding: 10,
+        marginTop: 10
     },
-    city: {
-        color: "white",
-        textTransf7orm: "uppercase",
-        fontSize: 10,
-        fontWeight: "bold",
+    row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    content: {
+        color: colors.grey,
+        fontSize: 12,
     },
     name: {
-        color: "white",
-        fontSize: 10,
+        color: colors.black,
+        fontSize: 14,
         fontWeight: "bold",
+        marginTop: 6,
+        marginBottom: 6
     },
     type: {
         color: "white",
         fontSize: 10,
+        marginTop: 6
     },
     like: {
         margin: 15,
@@ -69,4 +78,8 @@ const stylesThumbnailPlace1 = StyleSheet.create({
         top: 0,
         right: 0,
     },
+    note: {
+        marginLeft: 6,
+        color: "#F4B742"
+    }
 });

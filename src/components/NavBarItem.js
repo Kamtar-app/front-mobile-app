@@ -18,6 +18,8 @@ const NavBarItem = () => {
     );
 };
 
+
+
 const stylesNavBar = StyleSheet.create({
     navBarItem: {
         backgroundColor: "#FE6E1F",

@@ -1,33 +1,26 @@
 import {
+    Image,
     StyleSheet,
     Text,
-    View,
-    TextInput,
-    Image,
     TouchableOpacity,
+    View
 } from "react-native";
 
-const NavBarItem = () => {
+export const NavBarItem = ({ active, action, children }) => {
     return (
-        <TouchableOpacity style={stylesNavBar.navBarItem} onPress={() => { }}>
-            <Image
-                style={stylesNavBar.navBarItemIcon}
-                source={require("../../assets/icon.png")}
-            />
+        <TouchableOpacity style={[stylesNavBar.navBarItem, active && stylesNavBar.active]} onPress={action}>
+            {children}
         </TouchableOpacity>
     );
 };
 
 
-
 const stylesNavBar = StyleSheet.create({
     navBarItem: {
-        backgroundColor: "#FE6E1F",
         borderRadius: 35,
+        padding: 12
     },
-    navBarItemIcon: {
-        margin: 12,
-        width: 20,
-        height: 20,
-    },
+    active : {
+        backgroundColor: "#FE6E1F"
+    }
 });

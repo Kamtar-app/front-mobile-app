@@ -40,9 +40,9 @@ export default function App() {
     <AppContextProvider>
       <NavigationContainer>
         <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
+          screenOptions={{
+            headerShown: false,
+          }}
         >
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="SigninScreen" component={SigninScreen} />

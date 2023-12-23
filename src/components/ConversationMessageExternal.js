@@ -8,11 +8,11 @@ import {
 } from "react-native";
 import { ConversationBubble } from "./ConversationBubble";
 
-export const ConversationMessageExternal = ({ children }) => {
+export const ConversationMessageExternal = ({ children, profilePicture }) => {
   return (
     <View style={stylesConversationMessageExternal.container}>
       <Image
-        source={require("../../assets/icon.png")}
+        source={profilePicture}
         style={stylesConversationMessageExternal.profilePicture}
       />
       <ConversationBubble isExternalMessage={true}>
@@ -27,7 +27,7 @@ const stylesConversationMessageExternal = StyleSheet.create({
     width: "100%",
     alignItems: "flex-end",
     flexDirection: "row",
-    marginTop: 20,
+    marginBottom: 10,
     justifyContent: "flex-start",
   },
   profilePicture: {

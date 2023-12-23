@@ -5,27 +5,35 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  BackHandler,
 } from "react-native";
+import { BackArrow } from "./icons/BackArrow";
+import { Phone } from "./icons/Phone";
+import { Camera } from "./icons/Camera";
+import { useNavigation } from "@react-navigation/native";
 
-export const ConversationHeader = ({ username }) => {
+export const ConversationHeader = ({ username, profilePicture }) => {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={stylesConversationHeader.container}>
       <View style={stylesConversationHeader.firstContainer}>
+        <TouchableOpacity onPress={handlePress}>
+          <BackArrow style={stylesConversationHeader.backArrow} />
+        </TouchableOpacity>
         <Image
-          source={require("../../assets/icon.png")}
-          style={stylesConversationHeader.backArrow}
-        />
-        <Image
-          source={require("../../assets/icon.png")}
+          source={profilePicture}
           style={stylesConversationHeader.profilePicture}
         />
         <Text style={stylesConversationHeader.username}>{username}</Text>
       </View>
       <View style={stylesConversationHeader.secondContainer}>
-        <Image
-          source={require("../../assets/icon.png")}
-          style={stylesConversationHeader.vocalCallIcon}
-        />
+        <Phone />
+        <Camera />
       </View>
     </View>
   );
@@ -38,9 +46,13 @@ const stylesConversationHeader = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-between",
     flexDirection: "row",
-    height: 60,
+    height: 80,
     marginTop: 40,
-    backgroundColor: "#000000",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: "#FFFFFF",
+    position: "relative",
+    zIndex: 1,
   },
   firstContainer: {
     flexDirection: "row",
@@ -61,8 +73,12 @@ const stylesConversationHeader = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  vocalCallIcon: {
-    width: 30,
-    height: 30,
+  secondContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    height: "100%",
+    width: 50,
+    justifyContent: "space-between",
   },
 });

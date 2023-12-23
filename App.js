@@ -36,9 +36,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      // screenOptions={{
-      //   headerShown: false,
-      // }}
+        screenOptions={{
+          headerShown: false,
+        }}
       >
         <Stack.Screen name="SigninScreen" component={SigninScreen} />
         <Stack.Screen name="SignupScreen" component={SignupScreen} />

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test-map",
-    "slug": "test-map",
+    "name": "kamtar-app",
+    "slug": "kamtar-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

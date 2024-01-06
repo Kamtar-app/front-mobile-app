@@ -26,6 +26,7 @@ import useCustomFonts from "./src/useCustomFonts";
 import { Routes } from "./src/assets/routes";
 import { AppContext, AppContextProvider } from "./src/context/AppContext";
 import { HomeScreen } from "./src/screens/HomeScreen";
+import { PlaceScreen } from "./src/screens/PlaceScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,10 +45,11 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="SigninScreen" component={SigninScreen} />
           <Stack.Screen name="SignupScreen" component={SignupScreen} />
-          <Stack.Screen name="ChatScreen" component={ChatScreen} />
+          <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
+          <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppContextProvider>

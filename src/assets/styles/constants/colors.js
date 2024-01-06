@@ -5,4 +5,5 @@ export const colors = {
   khaki: "#BFADA3",
   beaver: "#B89685",
   grey: "#7F8C93",
+  lightGrey: "#DCDCDC",
 };

@@ -54,7 +54,6 @@ export const SigninScreen = ({}) => {
           <ButtonUnderlinedCustom text={"ChatScreen"} screen={"ChatScreen"} />
         </View>
       </ImageBackground>
-      <NavBar/>
     </View>
   );
 };
@@ -96,12 +95,12 @@ const styles = StyleSheet.create({
   //   flexWrap: "wrap",
   //   justifyContent: "center",
   // },
-  // text: {
-  //   fontFamily: texts.fontFamilyLight,
-  //   color: colors.white,
-  //   fontSize: 15,
-  //   alignItems: "flex-start",
-  // },
+  text: {
+    fontFamily: texts.fontFamilyLight,
+    color: colors.white,
+    fontSize: 15,
+    alignItems: "flex-start",
+  },
   icon: {
     width: 20,
     height: 20,

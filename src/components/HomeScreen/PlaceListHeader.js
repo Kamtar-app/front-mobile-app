@@ -6,8 +6,8 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import { Arrow } from "./icons/Arrow";
-import { colors } from "../assets/styles/constants/colors";
+import { Arrow } from "../icons/Arrow";
+import { colors } from "../../assets/styles/constants/colors";
 
 export const PlaceListHeader = ({ label }) => {
     return (

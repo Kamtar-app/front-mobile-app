@@ -6,9 +6,9 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import { colors } from "../assets/styles/constants/colors";
-import { Star } from "./icons/Star";
-import { Heart } from "./icons/Heart";
+import { colors } from "../../assets/styles/constants/colors";
+import { Star } from "../icons/Star";
+import { Heart } from "../icons/Heart";
 
 export const ThumbnailPlace1 = ({ imageURL, city, name, type, small = false }) => {
     return (

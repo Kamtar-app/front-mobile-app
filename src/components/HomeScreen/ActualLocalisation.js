@@ -6,8 +6,8 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import { colors } from "../assets/styles/constants/colors";
-import { PingLocalisation } from "./icons/PingLocalisation";
+import { colors } from "../../assets/styles/constants/colors";
+import { PingLocalisation } from "../icons/PingLocalisation";
 
 export const ActualLocalisation = ({ localisation }) => {
     return (

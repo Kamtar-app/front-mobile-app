@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { ConversationBubble } from "./ConversationBubble";
-import { Check } from "./icons/Check";
+import { ConversationBubble } from "../ConversationBubble";
+import { Check } from "../icons/Check";
 
 export const ConversationMessageInternal = ({ children }) => {
   return (

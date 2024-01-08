@@ -11,10 +11,10 @@ import {
     ScrollView,
 } from "react-native";
 import { colors } from "../assets/styles/constants/colors";
-import { ActualLocalisation } from "../components/ActualLocalisation";
-import { WelcomeMessage } from "../components/WelcomeMessage";
-import { SearchBar } from "../components/SearchBar";
-import { ThumbnailPlaceType } from "../components/ThumbnailPlaceType";
+import { ActualLocalisation } from "../components/HomeScreen/ActualLocalisation";
+import { WelcomeMessage } from "../components/HomeScreen/WelcomeMessage";
+import { SearchBar } from "../components/HomeScreen/SearchBar";
+import { ThumbnailPlaceType } from "../components/HomeScreen/ThumbnailPlaceType";
 import { Parking } from "../components/icons/Parking";
 import { Restaurant } from "../components/icons/Restaurant";
 import { Fuel } from "../components/icons/Fuel";
@@ -23,11 +23,11 @@ import { Toilet } from "../components/icons/Toilet";
 import { Garage } from "../components/icons/Garage";
 import { CarWash } from "../components/icons/CarWash";
 import { Truck } from "../components/icons/Truck";
-import { PlaceListHeader } from "../components/PlaceListHeader";
-import { ThumbnailPlace1 } from "../components/ThumbnailPlace1";
+import { PlaceListHeader } from "../components/HomeScreen/PlaceListHeader";
+import { ThumbnailPlace1 } from "../components/HomeScreen/ThumbnailPlace1";
 import { NavBar } from "../components/NavBar";
-import { MessageHeader } from "../components/MessageHeader";
-import { ConversationPreview } from "../components/ConversationPreview";
+import { MessageHeader } from "../components/MessagesScreen/MessageHeader";
+import { ConversationPreview } from "../components/MessagesScreen/ConversationPreview";
 
 export const MessagesScreen = ({ }) => {
     return (

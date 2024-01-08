@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { ConversationBubble } from "./ConversationBubble";
+import { ConversationBubble } from "../ConversationBubble";
 
 export const ConversationMessageExternal = ({ children, profilePicture }) => {
   return (

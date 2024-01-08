@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   BackHandler,
 } from "react-native";
-import { BackArrow } from "./icons/BackArrow";
-import { Phone } from "./icons/Phone";
-import { Camera } from "./icons/Camera";
+import { BackArrow } from "../icons/BackArrow";
+import { Phone } from "../icons/Phone";
+import { Camera } from "../icons/Camera";
 import { useNavigation } from "@react-navigation/native";
 
 export const ConversationHeader = ({ username, profilePicture }) => {

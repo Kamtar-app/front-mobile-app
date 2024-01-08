@@ -7,7 +7,7 @@ import image from "./../../assets/images/img_fond_accueil.jpg";
 import camion from "./../../assets/images/camion.jpg";
 import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
-import { ImagesSlider } from "../components/ImagesSlider";
+import { ImagesSlider } from "../components/PlaceScreen/ImagesSlider";
 import { Banner } from "../components/PlaceScreen/Banner";
 import { CardCharacteristic } from "../components/PlaceScreen/CardCharacteristic";
 

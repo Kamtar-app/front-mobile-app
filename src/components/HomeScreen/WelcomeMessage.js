@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { colors } from "../assets/styles/constants/colors";
+import { colors } from "../../assets/styles/constants/colors";
 
 export const WelcomeMessage = ({ label }) => {
   return (

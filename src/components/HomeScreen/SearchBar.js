@@ -6,9 +6,9 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import { colors } from "./../assets/styles/constants/colors";
-import { texts } from "./../assets/styles/constants/texts";
-import { Glass } from "./icons/Glass";
+import { colors } from "../../assets/styles/constants/colors";
+import { texts } from "../../assets/styles/constants/texts";
+import { Glass } from "../icons/Glass";
 
 export const SearchBar = ({ }) => {
     return (

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ConversationHeader } from "../components/ConversationHeader";
-import { ConversationMessageExternal } from "../components/ConversationMessageExternal";
-import { ConversationMessageInternal } from "../components/ConversationMessageInternal";
-import { TextInputChat } from "../components/TextInputChat";
+import { ConversationHeader } from "../components/ChatScreen/ConversationHeader";
+import { ConversationMessageExternal } from "../components/ChatScreen/ConversationMessageExternal";
+import { ConversationMessageInternal } from "../components/ChatScreen/ConversationMessageInternal";
+import { TextInputChat } from "../components/ChatScreen/TextInputChat";
 import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
 

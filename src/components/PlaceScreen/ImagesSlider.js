@@ -3,8 +3,8 @@ import { View, Image, StyleSheet, Text } from "react-native";
 import Swiper from "react-native-swiper";
 
 // import image from "./../../assets/images/img_fond_accueil.jpg";
-import { colors } from "../assets/styles/constants/colors";
-import { texts } from "../assets/styles/constants/texts";
+import { colors } from "../../assets/styles/constants/colors";
+import { texts } from "../../assets/styles/constants/texts";
 
 export const ImagesSlider = ({ images }) => {
   const renderPagination = (index, total) => {

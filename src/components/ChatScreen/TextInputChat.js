@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { Send } from "./../components/icons/Send";
-import { colors } from "../assets/styles/constants/colors";
+import { Send } from "../icons/Send";
+import { colors } from "../../assets/styles/constants/colors";
 
 export const TextInputChat = ({
   elements,

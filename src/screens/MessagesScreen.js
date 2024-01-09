@@ -24,7 +24,7 @@ import { Garage } from "../components/icons/Garage";
 import { CarWash } from "../components/icons/CarWash";
 import { Truck } from "../components/icons/Truck";
 import { PlaceListHeader } from "../components/HomeScreen/PlaceListHeader";
-import { ThumbnailPlace1 } from "../components/HomeScreen/ThumbnailPlace1";
+import { ThumbnailPlace1 } from "../components/ThumbnailPlace1";
 import { NavBar } from "../components/NavBar";
 import { MessageHeader } from "../components/MessagesScreen/MessageHeader";
 import { ConversationPreview } from "../components/MessagesScreen/ConversationPreview";

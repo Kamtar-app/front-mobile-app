@@ -6,16 +6,16 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import { colors } from "../../assets/styles/constants/colors";
-import { Star } from "../icons/Star";
-import { Heart } from "../icons/Heart";
+import { colors } from "../assets/styles/constants/colors";
+import { Star } from "./icons/Star";
+import { Heart } from "./icons/Heart";
 
-export const ThumbnailPlace1 = ({ imageURL, city, name, type, small = false }) => {
+export const ThumbnailPlace1 = ({ imageURL, city, name, type, small = false, width = 210, placeColor = colors.black }) => {
     return (
-        <View style={styles.card}>
+        <View style={[styles.card,  { height: small ? 160 : 210, width: width }]}>
             <Image
                 source={{ uri: imageURL }}
-                style={[styles.backgroundImage, { height: small ? 160 : 210 }]}
+                style={[styles.backgroundImage]}
             />
             <View style={styles.like}>
                 <Heart />
@@ -28,7 +28,7 @@ export const ThumbnailPlace1 = ({ imageURL, city, name, type, small = false }) =
                         <Text style={[styles.content, styles.note]}>9.1</Text>
                     </View>
                 </View>
-                <Text style={styles.name}>{name}</Text>
+                <Text style={[styles.name, {color: placeColor}]}>{name}</Text>
                 <Text style={styles.content}>{type}</Text>
             </View>
         </View>
@@ -37,13 +37,12 @@ export const ThumbnailPlace1 = ({ imageURL, city, name, type, small = false }) =
 
 const styles = StyleSheet.create({
     card: {
-        width: 210,
-        height: 350,
         marginRight: 15,
         position: "relative",
     },
     backgroundImage: {
-        width: 210,
+        width: "100%",
+        height: "100%",
         borderRadius: 10
     },
     textContainer: {
@@ -59,7 +58,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     name: {
-        color: colors.black,
         fontSize: 14,
         fontWeight: "bold",
         marginTop: 6,

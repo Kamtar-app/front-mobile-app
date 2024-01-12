@@ -55,7 +55,9 @@ export const SignupScreen = ({ navigation }) => {
             startIcon={<Password color="#fff" />}
             endIcon={<HiddenEye color="#fff" />}
           />
-          <ButtonCustom text={"Inscription"} screen={"ConnectionScreen"} />
+          <View style={{ marginTop: 70 }}>
+            <ButtonCustom text={"Inscription"} screen={"ConnectionScreen"} />
+          </View>
           <ButtonUnderlinedCustom
             text={"Se connecter"}
             screen={"SigninScreen"}

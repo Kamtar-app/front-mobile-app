@@ -27,6 +27,7 @@ import { PlaceListHeader } from "../components/HomeScreen/PlaceListHeader";
 import { ThumbnailPlace1 } from "../components/ThumbnailPlace1";
 import { ThumbnailPlace2 } from "../components/HomeScreen/ThumbnailPlace2";
 import { NavBar } from "../components/NavBar";
+import { BottomSheetSearch } from "../components/BottomSheetSearch/BottomSheetSearch";
 
 export const HomeScreen = ({ }) => {
 
@@ -38,14 +39,14 @@ export const HomeScreen = ({ }) => {
                 <SearchBar />
                 <View style={{ height: 100, marginBottom: 40 }}>
                     <ScrollView horizontal={true} style={styles.thumbnailList} showsHorizontalScrollIndicator={false}>
-                        <ThumbnailPlaceType label={"Parking"} ><Parking /></ThumbnailPlaceType>
-                        <ThumbnailPlaceType label={"Restaurant"} ><Restaurant /></ThumbnailPlaceType>
-                        <ThumbnailPlaceType label={"Carburant"} ><Fuel /></ThumbnailPlaceType>
-                        <ThumbnailPlaceType label={"Douche"} ><Shower /></ThumbnailPlaceType>
-                        <ThumbnailPlaceType label={"Sanitaire"} ><Toilet /></ThumbnailPlaceType>
-                        <ThumbnailPlaceType label={"Garage"} ><Garage /></ThumbnailPlaceType>
-                        <ThumbnailPlaceType label={"Station lavage"} ><CarWash /></ThumbnailPlaceType>
-                        <ThumbnailPlaceType label={"Entreprise"} ><Truck /></ThumbnailPlaceType>
+                        <ThumbnailPlaceType label={"Parking"} labelColor={colors.darkGrey} backgroundColor={colors.darkGrey}><Parking /></ThumbnailPlaceType>
+                        <ThumbnailPlaceType label={"Restaurant"} labelColor={colors.darkGrey} backgroundColor={colors.darkGrey}><Restaurant /></ThumbnailPlaceType>
+                        <ThumbnailPlaceType label={"Carburant"} labelColor={colors.darkGrey} backgroundColor={colors.darkGrey}><Fuel /></ThumbnailPlaceType>
+                        <ThumbnailPlaceType label={"Douche"} labelColor={colors.darkGrey} backgroundColor={colors.darkGrey}><Shower /></ThumbnailPlaceType>
+                        <ThumbnailPlaceType label={"Sanitaire"} labelColor={colors.darkGrey} backgroundColor={colors.darkGrey}><Toilet /></ThumbnailPlaceType>
+                        <ThumbnailPlaceType label={"Garage"} labelColor={colors.darkGrey} backgroundColor={colors.darkGrey}><Garage /></ThumbnailPlaceType>
+                        <ThumbnailPlaceType label={"Station lavage"} labelColor={colors.darkGrey} backgroundColor={colors.darkGrey}><CarWash /></ThumbnailPlaceType>
+                        <ThumbnailPlaceType label={"Entreprise"} labelColor={colors.darkGrey} backgroundColor={colors.darkGrey}><Truck /></ThumbnailPlaceType>
                     </ScrollView>
                 </View>
                 <PlaceListHeader label={"Autour de vous"} />
@@ -60,7 +61,7 @@ export const HomeScreen = ({ }) => {
                                 type="Restaurant • Sanitaire • Douche • Parking sécurisé"
                             />
                         </View>
-                        {/* <ThumbnailPlace1
+                        <ThumbnailPlace1
                             imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
                             city="Caulnes • 5 KM"
                             name="Restaurant de la gare"
@@ -71,7 +72,7 @@ export const HomeScreen = ({ }) => {
                             city="Caulnes • 5 KM"
                             name="Restaurant de la gare"
                             type="Restaurant • Sanitaire • Douche • Parking sécurisé"
-                        /> */}
+                        />
                     </ScrollView>
                 </View>
                 <PlaceListHeader label={"Vous pourriez aimer"} />
@@ -101,7 +102,8 @@ export const HomeScreen = ({ }) => {
                     </ScrollView>
                 </View>
             </ScrollView>
-            <NavBar />
+            {/* <NavBar /> */}
+            <BottomSheetSearch />
         </View>
     );
 };

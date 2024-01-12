@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   containerText: {
     display: "flex",
     alignItems: "flex-end",
+    marginBottom: 70
   },
   text: {
     fontSize: 17,

@@ -1,18 +1,14 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { View, Image, StyleSheet, Text, ScrollView, Button, TextInput, TouchableOpacity, FlatList } from "react-native";
 
-import { colors } from "./../../assets/styles/constants/colors";
+import { colors } from "../assets/styles/constants/colors";
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { ThumbnailPlace1 } from "../ThumbnailPlace1";
+import { ThumbnailPlace1 } from "./ThumbnailPlace1";
 
-export const BottomBarPlace = () => {
-  // ref
+export const BottomSheetPlace = () => {
   const bottomSheetModalRef = useRef(null);
-
-  // variables
   const snapPoints = useMemo(() => ['47%'], []);
 
-  // callbacks
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
@@ -20,7 +16,6 @@ export const BottomBarPlace = () => {
     console.log('handleSheetChanges', index);
   }, []);
 
-  // renders
   return (
     <BottomSheetModalProvider>
       <View style={styles.container}>
@@ -69,7 +64,6 @@ const styles = StyleSheet.create({
   },
   customHandle: {
     alignItems: 'center',
-    backgroundColor: 'red',
     paddingTop: 5,
     paddingBottom: 8,
     borderTopLeftRadius: 15,

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 37,
     marginLeft: 20,
+    marginBottom: 25
   },
   label: {
     fontSize: 25,

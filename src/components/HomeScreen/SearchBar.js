@@ -10,7 +10,7 @@ import { colors } from "../../assets/styles/constants/colors";
 import { texts } from "../../assets/styles/constants/texts";
 import { Glass } from "../icons/Glass";
 
-export const SearchBar = ({ }) => {
+export const SearchBar = () => {
     return (
         <View style={stylestextInputCustom.inputContainer}>
             <View style={stylestextInputCustom.containerIcon}>
@@ -53,7 +53,6 @@ const stylestextInputCustom = StyleSheet.create({
         backgroundColor: "#E0E0E0",
         borderRadius: 35,
         marginBottom: 20,
-        marginTop: 25,
         marginHorizontal: 20
     },
     input: {

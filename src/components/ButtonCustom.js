@@ -14,26 +14,24 @@ export const ButtonCustom = ({ text, screen = null, onPress = null }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={stylesButtonCustom.bouton} onPress={onPress}>
-      <Text style={stylesButtonCustom.texteBouton}>{text}</Text>
+    <TouchableOpacity style={stylesButtonCustom.button} onPress={onPress}>
+      <Text style={stylesButtonCustom.textButton}>{text}</Text>
     </TouchableOpacity>
   );
 };
 
 const stylesButtonCustom = StyleSheet.create({
-  bouton: {
+  button: {
     backgroundColor: colors.primary,
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 70,
     paddingVertical: 17,
     borderRadius: 35,
   },
-  texteBouton: {
+  textButton: {
     color: "white",
     fontWeight: "bold",
     fontSize: 17,
-    fontFamily: texts.fontFamilySemiBold,
   },
 });

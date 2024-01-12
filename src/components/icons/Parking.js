@@ -4,7 +4,7 @@ export const Parking = () => (
     <Svg width="35" height="35" viewBox="0 0 35 35">
         <Defs>
             <ClipPath id="clip0_46_2589">
-                <Rect width="35" height="34.9927" fill="white" />
+                <Rect width="35" height="35" fill="white" />
             </ClipPath>
         </Defs>
         <Path

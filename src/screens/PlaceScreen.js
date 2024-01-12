@@ -10,8 +10,10 @@ import { texts } from "../assets/styles/constants/texts";
 import { ImagesSlider } from "../components/PlaceScreen/ImagesSlider";
 import { Banner } from "../components/PlaceScreen/Banner";
 import { CardCharacteristic } from "../components/PlaceScreen/CardCharacteristic";
+import { BottomSheetSteps } from "../components/BottomSheetSteps";
+import { BottomSheetSearch } from "../components/BottomSheetSearch/BottomSheetSearch";
 
-export const PlaceScreen = ({}) => {
+export const PlaceScreen = ({ }) => {
   const characteristics = [
     { title: "Restaurant", icon: <Star /> },
     { title: "Parking", icon: <Star /> },

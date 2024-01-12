@@ -14,7 +14,7 @@ export default function useCustomFonts() {
         "Mulish-Black": require("./../assets/fonts/Mulish-Black.ttf"),
         "Mulish-Italic": require("./../assets/fonts/Mulish-Italic.ttf"),
         "Mulish-Light": require("./../assets/fonts/Mulish-Light.ttf"),
-        "Mulish-Medium": require("./../assets/fonts//Mulish-Medium.ttf"),
+        "Mulish-Medium": require("./../assets/fonts/Mulish-Medium.ttf"),
         // Ajoutez d'autres poids de police si nécessaire
       });
       setFontsLoaded(true);

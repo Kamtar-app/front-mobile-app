@@ -26,9 +26,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: "30%",
     marginBottom: 15,
+    justifyContent: "space-around",
   },
   text: {
     fontFamily: texts.fontFamilyBold,
     fontSize: 12,
+    marginTop: 30,
+    backgroundColor: "red",
   },
 });

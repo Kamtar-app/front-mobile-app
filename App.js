@@ -1,25 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import React, { createContext, useEffect, useState } from "react";
-// import * as Font from "expo-font";
-// import { Button, Linking } from "react-native";
-// import { TextInputCustom } from "./src/components/TextInputCustom";
-// import { ButtonCustom } from "./src/components/ButtonCustom";
-// import { ConversationBubble } from "./src/components/ConversationBubble";
-// import { ConversationMessageExternal } from "./src/components/ConversationMessageExternal";
-// import { ConversationMessageInternal } from "./src/components/ConversationMessageInternal";
-// import { ConversationHeader } from "./src/components/ConversationHeader";
-// import { ConversationPreview } from "./src/components/ConversationPreview";
-// import { ActualLocalisation } from "./src/components/ActualLocalisation";
-// import { ThumbnailPlaceType } from "./src/components/ThumbnailPlaceType";
-// import { ThumbnailPlace2 } from "./src/components/ThumbnailPlace2";
-// import { ThumbnailPlace1 } from "./src/components/ThumbnailPlace1";
-// import { NavBar } from "./src/components/NavBar";
-// import { NavBarItem } from "./src/components/NavBarItem";
-// import { SigninScreen } from "./src/screens/SigninScreen";
-// import { SignupScreen } from "./src/screens/SignupScreen";
-// import { WelcomeScreen } from "./src/screens/WelcomeScreen";
-// import { ChatScreen } from "./src/screens/ChatScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import useCustomFonts from "./src/useCustomFonts";
@@ -27,6 +8,7 @@ import { Routes } from "./src/assets/routes";
 import { AppContext, AppContextProvider } from "./src/context/AppContext";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { PlaceScreen } from "./src/screens/PlaceScreen";
+import { SigninScreen } from "./src/screens/SigninScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -45,50 +27,14 @@ export default function App() {
             headerShown: false,
           }}
         >
-          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          <Stack.Screen name="SigninScreen" component={SigninScreen} />
-          <Stack.Screen name="SignupScreen" component={SignupScreen} />
-          <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
+          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
+          {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
+          {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
+          {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
           <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppContextProvider>
-
-    // <ConnectionScreen></ConnectionScreen>
-    // <View style={styles.container}>
-    //   {/* <StatusBar style="auto" />
-    //   <ConversationHeader username={"John"} />
-    //   <ConversationMessageExternal>
-    //     {`hello  sdfsfs sdf  sf s df s fd s fs df s fd sf s \npk \ndfgdfgd hello world`}
-    //   </ConversationMessageExternal>
-    //   <ConversationMessageInternal>OKO message</ConversationMessageInternal>
-    //   <ConversationMessageExternal>OKO message</ConversationMessageExternal>
-    //   <ConversationMessageInternal>OKO message</ConversationMessageInternal>
-    //   <NavBar /> */}
-    //   {/* <ConversationPreview
-    //     username={"John"}
-    //     lastMessage={"Tu manges à St Malo ?"}
-    //     hour={"11:57"}
-    //     messageNumber={"1"}
-    //   />
-    //   <ThumbnailPlaceType label={"Parking"} />
-    //   <ActualLocalisation localisation={"Rennes, FR"} />
-    //   <ThumbnailPlace2
-    //     imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
-    //     city="Caulnes • 5 KM"
-    //     name="Restaurant de la gare"
-    //     type="Restaurant • Sanitaire • Douche • Parking sécurisé"
-    //     note="5"
-    //   />
-    //   <ThumbnailPlace1
-    //     imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
-    //     city="Caulnes • 5 KM"
-    //     name="Restaurant de la gare"
-    //     type="Restaurant • Sanitaire • Douche • Parking sécurisé"
-    //   /> */}
-    //   {/* <ButtonCustom text={"Connexion"} />
-    //   <TextInputCustom placeholder={"Email"} />
-    // </View> */}
   );
 }
 

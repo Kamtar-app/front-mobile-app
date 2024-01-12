@@ -34,7 +34,7 @@ const stylesConversationMessageInternal = StyleSheet.create({
     width: "100%",
     alignItems: "flex-end",
     flexDirection: "row",
-    marginBottom: 10,
+    marginBottom: 13,
     justifyContent: "flex-end",
   },
   containerUserProfilPicture: {

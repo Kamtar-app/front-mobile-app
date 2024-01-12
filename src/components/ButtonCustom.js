@@ -10,12 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { colors } from "./../assets/styles/constants/colors";
 import { texts } from "./../assets/styles/constants/texts";
 
-export const ButtonCustom = ({
-  text,
-  screen = null,
-  onPress = null,
-  icon = null,
-}) => {
+export const ButtonCustom = ({ text, onPress = null, icon = null }) => {
   const navigation = useNavigation();
 
   return (

@@ -1,15 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  BackHandler,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { BackArrow } from "../icons/BackArrow";
 import { Phone } from "../icons/Phone";
-import { Camera } from "../icons/Camera";
 import { useNavigation } from "@react-navigation/native";
 
 export const ConversationHeader = ({ username, profilePicture }) => {
@@ -33,7 +24,6 @@ export const ConversationHeader = ({ username, profilePicture }) => {
       </View>
       <View style={stylesConversationHeader.secondContainer}>
         <Phone />
-        <Camera />
       </View>
     </View>
   );
@@ -46,7 +36,7 @@ const stylesConversationHeader = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-between",
     flexDirection: "row",
-    height: 80,
+    height: 60,
     marginTop: 40,
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -75,10 +65,9 @@ const stylesConversationHeader = StyleSheet.create({
   },
   secondContainer: {
     display: "flex",
-    flexDirection: "row",
     alignItems: "center",
     height: "100%",
-    width: 50,
-    justifyContent: "space-between",
+    width: 20,
+    justifyContent: "flex-end",
   },
 });

@@ -29,11 +29,11 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
           {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
           {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
           {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
-          {/* <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
+          <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppContextProvider>

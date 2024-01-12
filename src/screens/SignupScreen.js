@@ -34,9 +34,9 @@ export const SignupScreen = ({ navigation }) => {
         imageStyle={styles.image}
       >
         <View style={styles.view}>
-          {/* <View style={styles.containerAvatar}>
+          <View style={styles.containerAvatar}>
             <Profil color="#fff" size="46" />
-          </View> */}
+          </View>
           <TextInputCustom
             placeholder={"Nom"}
             startIcon={<Profil color="#fff" size="20" />}
@@ -55,14 +55,13 @@ export const SignupScreen = ({ navigation }) => {
             startIcon={<Password color="#fff" />}
             endIcon={<HiddenEye color="#fff" />}
           />
-          <View style={{ marginTop: 70 }}>
-            <ButtonCustom text={"Inscription"} screen={"ConnectionScreen"} />
+          <View style={styles.containerButton}>
+            <ButtonCustom text={"Inscription"} />
           </View>
           <ButtonUnderlinedCustom
             text={"Se connecter"}
             screen={"SigninScreen"}
           />
-          <ButtonUnderlinedCustom text={"Welcome"} screen={"WelcomeScreen"} />
         </View>
       </ImageBackground>
     </View>
@@ -95,6 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 100,
     opacity: 0.5,
+    marginTop: 60,
     marginBottom: 65,
     display: "flex",
     alignItems: "center",
@@ -109,7 +109,10 @@ const styles = StyleSheet.create({
     fontFamily: texts.fontFamilyLight,
     color: colors.white,
     fontSize: 15,
-    // backgroundColor: "green",
     alignItems: "flex-start",
+  },
+  containerButton: {
+    marginTop: 20,
+    width: "100%",
   },
 });

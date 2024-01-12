@@ -15,12 +15,14 @@ export const TextInputChat = ({
   setElements,
   textInput,
   setTextInput,
+  scrollview = null,
 }) => {
   const handlePress = () => {
     const newElement = textInput;
     setElements([...elements, newElement]);
     setTextInput("");
     console.log(textInput);
+    scrollview();
   };
 
   return (

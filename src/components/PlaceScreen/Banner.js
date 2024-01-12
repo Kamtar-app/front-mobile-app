@@ -7,9 +7,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { colors } from "../../assets/styles/constants/colors";
+import { ButtonCustom } from "../ButtonCustom";
+import { Arrow } from "../icons/Arrow";
 
 export const Banner = ({}) => {
-  return <View style={stylesBanner.container}></View>;
+  return (
+    <View style={stylesBanner.container}>
+      {/* TODO Manon : ajouter un lien vers la map */}
+      <ButtonCustom text={"Y aller"} icon={<Arrow />} />
+    </View>
+  );
 };
 
 const stylesBanner = StyleSheet.create({

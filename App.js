@@ -9,6 +9,8 @@ import { AppContext, AppContextProvider } from "./src/context/AppContext";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { PlaceScreen } from "./src/screens/PlaceScreen";
 import { SigninScreen } from "./src/screens/SigninScreen";
+import { SignupScreen } from "./src/screens/SignupScreen";
+import { ChatScreen } from "./src/screens/ChatScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,11 +30,10 @@ export default function App() {
           }}
         >
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          {/* <Stack.Screen name="SigninScreen" component={SigninScreen} />
-          <Stack.Screen name="SignupScreen" component={SignupScreen} />
-          <Stack.Screen name="ChatScreen" component={ChatScreen} />
-          <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
-          <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
+          {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
+          {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
+          {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
+          {/* <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </AppContextProvider>

@@ -12,7 +12,7 @@ import { texts } from "../../assets/styles/constants/texts";
 export const CardCharacteristic = ({ icon, title }) => {
   return (
     <View style={styles.container}>
-      {icon}
+      <View style={styles.iconContainer}>{icon}</View>
       <Text style={styles.text}>{title}</Text>
     </View>
   );
@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
     fontFamily: texts.fontFamilyBold,
     fontSize: 12,
     marginTop: 30,
-    backgroundColor: "red",
+  },
+  iconContainer: {
+    height: 40,
   },
 });

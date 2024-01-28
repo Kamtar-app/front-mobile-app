@@ -16,7 +16,7 @@ export const ButtonCustom = ({ text, onPress = null, icon = null }) => {
   return (
     <TouchableOpacity style={stylesButtonCustom.button} onPress={onPress}>
       <Text style={stylesButtonCustom.textButton}>{text}</Text>
-      <View>{icon}</View>
+      {icon ? <View style={stylesButtonCustom.icon}>{icon}</View> : ""}
     </TouchableOpacity>
   );
 };
@@ -29,10 +29,18 @@ const stylesButtonCustom = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 15,
     borderRadius: 35,
+    flexDirection: "row",
+    paddingHorizontal: 20,
   },
   textButton: {
     color: "white",
     fontWeight: "bold",
     fontSize: 17,
+  },
+  icon: {
+    display: "flex",
+    flexGrow: 1,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
 });

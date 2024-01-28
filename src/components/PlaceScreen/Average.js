@@ -37,6 +37,7 @@ const stylesAverage = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     maxWidth: "70%",
+    marginBottom: 5,
   },
   value: {
     marginRight: 10,

@@ -54,8 +54,8 @@ const stylestextInputCustom = StyleSheet.create({
   //   },
   inputContainer: {
     backgroundColor: "#FFFFFF34",
-    borderRadius: 35,
-    marginBottom: 20,
+    borderRadius: 7,
+    marginBottom: 12,
     width: "100%",
   },
   input: {

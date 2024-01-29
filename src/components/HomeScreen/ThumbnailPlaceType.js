@@ -6,17 +6,15 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
+import { colors } from "../../assets/styles/constants/colors";
 
-export const ThumbnailPlaceType = ({ label }) => {
+export const ThumbnailPlaceType = ({ label, labelColor, backgroundColor, children }) => {
     return (
         <View style={stylesThumbnailPlaceType.container}>
-            <View style={stylesThumbnailPlaceType.iconContainer}>
-                <Image
-                    source={require("../../assets/icon.png")}
-                    style={stylesThumbnailPlaceType.icon}
-                />
+            <View style={[stylesThumbnailPlaceType.iconContainer, { backgroundColor: backgroundColor}]}>
+                {children}
             </View>
-            <Text style={stylesThumbnailPlaceType.label}>{label}</Text>
+            <Text style={[stylesThumbnailPlaceType.label, {color: labelColor}]}>{label}</Text>
         </View>
     );
 };
@@ -25,17 +23,17 @@ const stylesThumbnailPlaceType = StyleSheet.create({
     container: {
         alignItems: "center",
         justifyContent: "center",
+        marginRight: 12
     },
     iconContainer: {
         width: 70,
         height: 70,
         overflow: "hidden",
         borderRadius: 70,
-        backgroundColor: "black",
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "center",
-        marginBottom: 10,
+        marginBottom: 11,
     },
     icon: {
         width: 35,

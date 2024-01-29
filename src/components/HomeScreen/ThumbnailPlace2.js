@@ -6,6 +6,7 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
+import { Star } from "../icons/Star";
 
 export const ThumbnailPlace2 = ({ imageURL, city, name, type, note }) => {
     return (
@@ -20,10 +21,11 @@ export const ThumbnailPlace2 = ({ imageURL, city, name, type, note }) => {
                 <Text style={stylesThumbnailPlace2.type}>{type}</Text>
             </View>
             <View style={stylesThumbnailPlace2.noteContainer}>
-                <Image
+                <Star />
+                {/* <Image
                     source={require("../../assets/icon.png")}
                     style={stylesThumbnailPlace2.star}
-                />
+                /> */}
                 <Text style={stylesThumbnailPlace2.note}>{note}</Text>
             </View>
         </View>

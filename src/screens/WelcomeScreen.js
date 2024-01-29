@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 20,
     alignItems: "flex-start",
+    marginBottom: 70
   },
   orangeText: {
     color: colors.primary,

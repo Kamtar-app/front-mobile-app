@@ -1,15 +1,24 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { ConversationHeader } from "../components/ConversationHeader";
-import { ConversationMessageExternal } from "../components/ConversationMessageExternal";
-import { ConversationMessageInternal } from "../components/ConversationMessageInternal";
-import { TextInputChat } from "../components/TextInputChat";
+import React, { useState, useRef, useEffect } from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { ConversationHeader } from "../components/ChatScreen/ConversationHeader";
+import { ConversationMessageExternal } from "../components/ChatScreen/ConversationMessageExternal";
+import { ConversationMessageInternal } from "../components/ChatScreen/ConversationMessageInternal";
+import { TextInputChat } from "../components/ChatScreen/TextInputChat";
 import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
 
 export const ChatScreen = ({}) => {
   const [textInput, setTextInput] = useState("");
   const [elements, setElements] = useState([]);
+  const scrollViewRef = useRef();
+
+  useEffect(() => {
+    scrollViewRef.current.scrollToEnd({ animated: true });
+  }, []);
+
+  const handleScrollview = () => {
+    scrollViewRef.current.scrollToEnd({ animated: true });
+  };
 
   return (
     <View style={styles.container}>
@@ -18,32 +27,54 @@ export const ChatScreen = ({}) => {
         profilePicture={require("./../../assets/images/camion.jpg")}
       />
       <View style={styles.body}>
-        <ConversationMessageExternal
-          profilePicture={require("./../../assets/images/camion.jpg")}
-          children={<Text>Je suis un test</Text>}
-        />
-        <ConversationMessageExternal
-          profilePicture={require("./../../assets/images/camion.jpg")}
+        <ScrollView
+          style={styles.containerScrollView}
+          showsVerticalScrollIndicator={false}
+          ref={scrollViewRef}
+          contentContainerStyle={styles.scrollViewContent}
         >
-          {`hello  sdfsfs sdf  sf s df s fd s fs df s fd sf s \npk \ndfgdfgd hello world`}
-        </ConversationMessageExternal>
-        <ConversationMessageInternal>OKO message</ConversationMessageInternal>
-        <ConversationMessageExternal
-          profilePicture={require("./../../assets/images/camion.jpg")}
-        >
-          OKO message
-        </ConversationMessageExternal>
-        {elements.map((item, index) => (
-          <ConversationMessageInternal key={index}>
-            {item}
+          <ConversationMessageExternal
+            profilePicture={require("./../../assets/images/camion.jpg")}
+            children={
+              <Text>
+                Premier message Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit. Fusce non bibendum dolor. Proin ultrices arcu a
+                nisi dignissim, ac sollicitudin nisi tincidunt. Sed sollicitudin
+                felis in feugiat fermentum.
+              </Text>
+            }
+          />
+          <ConversationMessageInternal>
+            Nullam iaculis nunc in metus eleifend, id ullamcorper nulla varius.
+            Nulla fermentum urna a erat dictum vestibulum. Integer semper, ex
+            sit amet convallis vulputate, ligula nunc interdum ex, sit amet
+            efficitur elit dui sed risus.
           </ConversationMessageInternal>
-        ))}
+          <ConversationMessageInternal>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas.
+          </ConversationMessageInternal>
+          <ConversationMessageExternal
+            profilePicture={require("./../../assets/images/camion.jpg")}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
+            bibendum dolor. Proin ultrices arcu a nisi dignissim, ac
+            sollicitudin nisi tincidunt. Sed sollicitudin felis in feugiat
+            fermentum.
+          </ConversationMessageExternal>
+          {elements.map((item, index) => (
+            <ConversationMessageInternal key={index}>
+              {item}
+            </ConversationMessageInternal>
+          ))}
+        </ScrollView>
         <TextInputChat
           elements={elements}
           setElements={setElements}
           textInput={textInput}
           setTextInput={setTextInput}
           style={styles.input}
+          scrollview={handleScrollview}
         />
       </View>
     </View>

@@ -12,7 +12,7 @@ import {
 import { TextInputCustom } from "../components/TextInputCustom";
 import { ButtonCustom } from "../components/ButtonCustom";
 import { ButtonUnderlinedCustom } from "../components/ButtonUnderlinedCustom";
-import { HiddenEye } from "../components/icons/HiddenEye";
+import { Logo } from "../components/icons/Logo";
 // import { Eye } from "../components/icons/Eye";
 import { Password } from "../components/icons/Password";
 import Mail from "./../../assets/icons/mail.svg";
@@ -31,7 +31,7 @@ export const SigninScreen = ({}) => {
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <View style={styles.view}>
           <View style={styles.containerLogo}>
-            <HiddenEye style={styles.logo} color="#000" />
+            <Logo style={styles.logo} />
           </View>
           <TextInputCustom
             placeholder={"Email"}
@@ -54,7 +54,6 @@ export const SigninScreen = ({}) => {
           <ButtonUnderlinedCustom text={"ChatScreen"} screen={"ChatScreen"} />
         </View>
       </ImageBackground>
-      <NavBar/>
     </View>
   );
 };
@@ -76,14 +75,13 @@ const styles = StyleSheet.create({
   containerLogo: {
     display: "flex",
     alignItems: "center",
-    marginBottom: 235,
-  },
-  logo: {
-    fontSize: 50,
+    marginTop: 100,
+    marginBottom: 135,
   },
   containerText: {
     display: "flex",
     alignItems: "flex-end",
+    marginBottom: 70
   },
   text: {
     fontSize: 17,
@@ -96,12 +94,12 @@ const styles = StyleSheet.create({
   //   flexWrap: "wrap",
   //   justifyContent: "center",
   // },
-  // text: {
-  //   fontFamily: texts.fontFamilyLight,
-  //   color: colors.white,
-  //   fontSize: 15,
-  //   alignItems: "flex-start",
-  // },
+  text: {
+    fontFamily: texts.fontFamilyLight,
+    color: colors.white,
+    fontSize: 15,
+    alignItems: "flex-start",
+  },
   icon: {
     width: 20,
     height: 20,

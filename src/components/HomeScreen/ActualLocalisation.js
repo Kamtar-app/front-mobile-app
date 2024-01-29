@@ -6,6 +6,8 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
+import { colors } from "../../assets/styles/constants/colors";
+import { PingLocalisation } from "../icons/PingLocalisation";
 
 export const ActualLocalisation = ({ localisation }) => {
     return (
@@ -14,10 +16,11 @@ export const ActualLocalisation = ({ localisation }) => {
                 Localisation actuelle
             </Text>
             <View style={stylesActualLocalisation.iconContainer}>
-                <Image
+                <PingLocalisation color={colors.black} />
+                {/* <Image
                     source={require("../../assets/icon.png")}
                     style={stylesActualLocalisation.icon}
-                />
+                /> */}
                 <Text style={stylesActualLocalisation.label}>{localisation}</Text>
             </View>
         </View>
@@ -26,6 +29,7 @@ export const ActualLocalisation = ({ localisation }) => {
 
 const stylesActualLocalisation = StyleSheet.create({
     container: {
+        marginTop: 60,
         alignItems: "center",
         justifyContent: "center",
     },

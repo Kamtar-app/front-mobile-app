@@ -11,6 +11,7 @@ import { PlaceScreen } from "./src/screens/PlaceScreen";
 import { SigninScreen } from "./src/screens/SigninScreen";
 import { SignupScreen } from "./src/screens/SignupScreen";
 import { ChatScreen } from "./src/screens/ChatScreen";
+import { AdviceScreen } from "./src/screens/AdviceScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,11 +30,12 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="AdviceScreen" component={AdviceScreen} />
+          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="SigninScreen" component={SigninScreen} />
           <Stack.Screen name="SignupScreen" component={SignupScreen} />
           <Stack.Screen name="ChatScreen" component={ChatScreen} />
-          <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
+          <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </AppContextProvider>

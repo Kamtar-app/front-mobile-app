@@ -10,12 +10,23 @@ import { useNavigation } from "@react-navigation/native";
 import { colors } from "./../assets/styles/constants/colors";
 import { texts } from "./../assets/styles/constants/texts";
 
-export const ButtonCustom = ({ text, onPress = null, icon = null }) => {
+export const ButtonCustom = ({
+  text,
+  onPress = null,
+  icon = null,
+  color = colors.primary,
+  textColor = colors.white,
+}) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={stylesButtonCustom.button} onPress={onPress}>
-      <Text style={stylesButtonCustom.textButton}>{text}</Text>
+    <TouchableOpacity
+      style={[stylesButtonCustom.button, { backgroundColor: color }]}
+      onPress={onPress}
+    >
+      <Text style={[stylesButtonCustom.textButton, { color: textColor }]}>
+        {text}
+      </Text>
       {icon ? <View style={stylesButtonCustom.icon}>{icon}</View> : ""}
     </TouchableOpacity>
   );
@@ -36,11 +47,14 @@ const stylesButtonCustom = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 17,
+    // backgroundColor: "red",
+    lineHeight: 19,
   },
   icon: {
-    display: "flex",
-    flexGrow: 1,
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
+    marginLeft: 10,
+    // display: "flex",
+    // flexGrow: 1,
+    // justifyContent: "flex-end",
+    // alignItems: "flex-end",
   },
 });

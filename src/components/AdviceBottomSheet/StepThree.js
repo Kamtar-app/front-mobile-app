@@ -20,8 +20,11 @@ import { ArrowTwo } from "../icons/ArrowTwo";
 import { HomeScreen } from "../../screens/HomeScreen";
 import { Image } from "react-native-svg";
 
-export const StepThree = ({ step }) => {
-  const [buttonEnabled, setButtonEnabled] = useState(false);
+export const StepThree = ({ handleContinuePress, step, handleClose }) => {
+  const handleClosePress = () => {
+    handleClose();
+    handleContinuePress();
+  };
 
   return (
     <>
@@ -34,12 +37,7 @@ export const StepThree = ({ step }) => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <ButtonCustom
-          text={"Retour à l'accueil"}
-          onPress={() => {
-            navigation.navigate(HomeScreen);
-          }}
-        />
+        <ButtonCustom text={"Retour à l'accueil"} onPress={handleClosePress} />
       </View>
     </>
   );

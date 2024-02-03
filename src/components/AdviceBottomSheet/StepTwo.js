@@ -19,8 +19,6 @@ import { ButtonCustom } from "../ButtonCustom";
 import { ArrowTwo } from "../icons/ArrowTwo";
 
 export const StepTwo = ({ handleContinuePress, step }) => {
-  const [buttonEnabled, setButtonEnabled] = useState(false);
-
   return (
     <>
       <View style={styles.marge}>

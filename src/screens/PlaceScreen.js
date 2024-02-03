@@ -143,11 +143,6 @@ export const PlaceScreen = ({}) => {
               onPress={handlePresentPress}
             />
           </View>
-          <RatingBottomSheet
-            bottomSheetModal={bottomSheetModalRef}
-            isSheetOpen={isSheetOpen}
-            handleSheetChanges={handleSheetChanges}
-          />
           <View style={styles.padding}>
             <Text style={styles.titles}>Où se situe le lieu</Text>
             <Text style={styles.location}>Saint Brieuc, Bretagne, France</Text>
@@ -157,6 +152,11 @@ export const PlaceScreen = ({}) => {
           </View>
         </View>
       </ScrollView>
+      <RatingBottomSheet
+        bottomSheetModal={bottomSheetModalRef}
+        isSheetOpen={isSheetOpen}
+        handleSheetChanges={handleSheetChanges}
+      />
       <Banner style={styles.banner} />
     </View>
   );

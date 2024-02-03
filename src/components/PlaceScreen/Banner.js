@@ -31,6 +31,7 @@ const stylesBanner = StyleSheet.create({
     height: 100,
     backgroundColor: colors.black,
     position: "absolute",
+    zIndex: -1,
     bottom: 0,
     paddingHorizontal: 25,
     paddingVertical: 20,

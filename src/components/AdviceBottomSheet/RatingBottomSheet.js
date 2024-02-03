@@ -36,12 +36,19 @@ export const RatingBottomSheet = ({
   const [currentStep, setCurrentStep] = useState(1);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
+  const handleCloseSheet = () => {
+    bottomSheetModal.current?.close();
+  };
+
   const handleContinuePress = () => {
     if (currentStep === 1) {
       setCurrentStep(2);
     }
     if (currentStep === 2) {
       setCurrentStep(3);
+    }
+    if (currentStep === 3) {
+      setCurrentStep(1);
     }
   };
 
@@ -62,7 +69,13 @@ export const RatingBottomSheet = ({
           />
         );
       case 3:
-        return <StepThree step={currentStep} />;
+        return (
+          <StepThree
+            handleContinuePress={handleContinuePress}
+            step={currentStep}
+            handleClose={handleCloseSheet}
+          />
+        );
       default:
         return null;
     }
@@ -92,7 +105,7 @@ export const RatingBottomSheet = ({
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    zIndex: 999,
+    zIndex: 9999,
     position: "relative",
   },
   contentContainer: {

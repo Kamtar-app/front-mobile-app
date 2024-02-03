@@ -45,7 +45,7 @@ export const Step = ({ ActiveStep = 1 }) => {
       <View
         style={[
           styles.stepContainer,
-          ActiveStep >= 4 ? styles.active : styles.disable,
+          ActiveStep >= 3 ? styles.active : styles.disable,
         ]}
       >
         <Text style={styles.stepNumber}>

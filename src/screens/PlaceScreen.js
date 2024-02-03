@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -27,10 +27,13 @@ import { BackButton } from "../components/BackButton";
 import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
 import { LikeButton } from "../components/LikeButton";
+import { RatingBottomSheet } from "../components/AdviceBottomSheet/RatingBottomSheet";
 
 export const PlaceScreen = ({}) => {
   const scrollViewRef = useRef();
   const [notesContainerOffset, setNotesContainerOffset] = useState(0);
+  const bottomSheetModalRef = useRef(null);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const characteristics = [
     { title: "Restaurant", icon: <Restaurant color="black" /> },
@@ -49,6 +52,14 @@ export const PlaceScreen = ({}) => {
 
   const scrollToNotesContainer = () => {
     scrollViewRef.current.scrollTo({ y: notesContainerOffset, animated: true });
+  };
+
+  const handlePresentPress = () => {
+    bottomSheetModalRef.current?.present();
+  };
+
+  const handleSheetChanges = (index) => {
+    setIsSheetOpen(index !== -1);
   };
 
   return (
@@ -127,7 +138,17 @@ export const PlaceScreen = ({}) => {
             />
           </ScrollView>
           <View style={styles.padding}>
-            <ButtonCustom text={"Laisser un avis"} />
+            <ButtonCustom
+              text={"Laisser un avis"}
+              onPress={handlePresentPress}
+            />
+          </View>
+          <RatingBottomSheet
+            bottomSheetModal={bottomSheetModalRef}
+            isSheetOpen={isSheetOpen}
+            handleSheetChanges={handleSheetChanges}
+          />
+          <View style={styles.padding}>
             <Text style={styles.titles}>Où se situe le lieu</Text>
             <Text style={styles.location}>Saint Brieuc, Bretagne, France</Text>
           </View>

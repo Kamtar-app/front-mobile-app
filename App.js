@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet, Text } from "react-native";
 import React, { createContext, useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -23,22 +24,24 @@ export default function App() {
   }
 
   return (
-    <AppContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="AdviceScreen" component={AdviceScreen} />
-          {/* <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          <Stack.Screen name="SigninScreen" component={SigninScreen} />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <AppContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            {/* <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="AdviceScreen" component={AdviceScreen} />
+            <Stack.Screen name="SigninScreen" component={SigninScreen} />
           <Stack.Screen name="SignupScreen" component={SignupScreen} />
-          <Stack.Screen name="ChatScreen" component={ChatScreen} />
-          <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AppContextProvider>
+          <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
+            <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AppContextProvider>
+    </GestureHandlerRootView>
   );
 }
 

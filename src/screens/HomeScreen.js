@@ -102,8 +102,8 @@ export const HomeScreen = ({ }) => {
                     </ScrollView>
                 </View>
             </ScrollView>
+
             {/* <NavBar /> */}
-            <BottomSheetSearch />
         </View>
     );
 };

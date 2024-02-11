@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Star } from "../icons/Star";
 import { colors } from "../../assets/styles/constants/colors";
 import mapStyle from "./../../../map-style.json";
@@ -15,23 +15,13 @@ export const Map = () => {
     longitudeDelta: 0.0421,
   };
 
-  const customMapStyle = [
-    {
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#f5f5f5", // Couleur de fond grise
-        },
-      ],
-    },
-  ];
-
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={initialRegion}
         customMapStyle={mapStyle}
+        provider={PROVIDER_GOOGLE}
       >
         {/* Marqueur de lieu */}
         <Marker

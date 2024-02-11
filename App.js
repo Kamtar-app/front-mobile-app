@@ -11,6 +11,9 @@ import { PlaceScreen } from "./src/screens/PlaceScreen";
 import { SigninScreen } from "./src/screens/SigninScreen";
 import { SignupScreen } from "./src/screens/SignupScreen";
 import { ChatScreen } from "./src/screens/ChatScreen";
+import { MapScreen } from "./src/screens/MapScreen";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,19 +26,26 @@ export default function App() {
 
   return (
     <AppContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
-          {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
-          {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
-          {/* <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
-        </Stack.Navigator>
-      </NavigationContainer>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <BottomSheetModalProvider>
+
+
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
+              {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
+              {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
+              {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
+              {/* <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
+              <Stack.Screen name="MapScreen" component={MapScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </AppContextProvider>
   );
 }

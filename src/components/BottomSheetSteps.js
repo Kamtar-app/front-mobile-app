@@ -1,100 +1,111 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { forwardRef, useCallback, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { View, Image, StyleSheet, Text, ScrollView, Button, TextInput, TouchableOpacity, FlatList } from "react-native";
 
 import { colors } from "../assets/styles/constants/colors";
-import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import { ThumbnailPlace1 } from "./ThumbnailPlace1";
 import { ButtonCustom } from "./ButtonCustom";
 import { Star } from "./icons/Star";
 import { Arrow } from "./icons/Arrow";
 import { Cross } from "./icons/Cross";
+import { Plus } from "./icons/Plus";
 import { PointList } from "./PointList";
+import { AppContext } from "../context/AppContext";
+import { cropString } from "../utils/string";
 
-export const BottomSheetSteps = () => {
+export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch }, ref) => {
   const bottomSheetModalRef = useRef(null);
+  const { stepList, setStepList } = useContext(AppContext);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   bottomSheetModalRef.current.present();
+  // }, []);
+
+  const openBottomSheet = () => {
+    console.log('expend')
     bottomSheetModalRef.current.present();
-  }, []);
+    bottomSheetModalRef.current.expand();
+  };
+
+  useImperativeHandle(ref, () => ({
+    openBottomSheet
+  }));
+
+  const getLabelStep = (stepId) => {
+    switch (stepId) {
+      case 0:
+        return "Depuis";
+      case stepList.length - 1:
+        return "À";
+      default:
+        return "En passant par";
+    }
+  }
+
+  const getIconStep = (stepId) => {
+    switch (true) {
+      case stepId === 0:
+        return <TouchableOpacity onPress={() => addStep()}><Plus /></TouchableOpacity>;
+      case stepList.length > 2:
+        return <TouchableOpacity onPress={() => removeFromStepList(stepId)}><Cross /></TouchableOpacity>;
+      default:
+        return "";
+    }
+  }
+
+  const addStep = () => {
+    bottomSheetModalRef.current.close();
+    openBottomSheetSearch()
+  }
+
+  const removeFromStepList = (idToDelete) => {
+    const updatedStepList = stepList.filter((step, id) => id !== idToDelete);
+    console.log(idToDelete)
+    setStepList(updatedStepList);
+  }
+
+  // Au clic sur un élément (même niveau que icon)
+  // Avec un id pour modifier le bon step dans la liste
 
   return (
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          enableDynamicSizing
-          backgroundStyle={{ backgroundColor: '#252525' }}
-          handleIndicatorStyle={{ backgroundColor: 'white' }}
-        >
-          <BottomSheetView>
-            <View style={[styles.contentContainer]}>
-              <View style={styles.duration}>
-                <Text style={styles.time}>1h30</Text>
-                <Text style={styles.distance}>(56km)</Text>
-              </View>
-              <View style={styles.stepsBlock}>
-                <PointList style={styles.pointList}></PointList>
-                <View style={styles.stepList}>
-                  <View style={styles.step}>
-                    <View style={styles.stepContent}>
-                      <View style={styles.labelPlace}>
-                        <Text style={styles.label}>Depuis</Text>
-                        <Text style={styles.place}>La locanda</Text>
-                      </View>
-                      <Cross />
-                    </View>
-                    <View style={styles.horizontalBar}></View>
-                  </View>
-                  <View style={styles.step}>
-                    <View style={styles.stepContent}>
-                      <View style={styles.labelPlace}>
-                        <Text style={styles.label}>En passant par</Text>
-                        <Text style={styles.place}>La locanda</Text>
-                      </View>
-                      <Cross />
-                    </View>
-                    <View style={styles.horizontalBar}></View>
-                  </View>
-                  <View style={styles.step}>
-                    <View style={styles.stepContent}>
-                      <View style={styles.labelPlace}>
-                        <Text style={styles.label}>En passant par</Text>
-                        <Text style={styles.place}>La locanda</Text>
-                      </View>
-                      <Cross />
-                    </View>
-                    <View style={styles.horizontalBar}></View>
-                  </View>
-                  
-                  <View style={styles.step}>
-                    <View style={styles.stepContent}>
-                      <View style={styles.labelPlace}>
-                        <Text style={styles.label}>En passant par</Text>
-                        <Text style={styles.place}>La locanda</Text>
-                      </View>
-                      <Cross />
-                    </View>
-                    <View style={styles.horizontalBar}></View>
-                  </View>
-                  <View style={styles.step}>
-                    <View style={styles.stepContent}>
-                      <View style={styles.labelPlace}>
-                        <Text style={styles.label}>À</Text>
-                        <Text style={styles.place}>Lorem Ipsum</Text>
-                      </View>
-                      <Cross />
-                    </View>
-                  </View>
-                </View>
-              </View>
-              <ButtonCustom text={"Y aller"} />
+    <View style={styles.container}>
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        enableDynamicSizing
+        backgroundStyle={{ backgroundColor: '#252525' }}
+        handleIndicatorStyle={{ backgroundColor: 'white' }}
+      >
+        <BottomSheetScrollView>
+          <View style={[styles.contentContainer]}>
+            <View style={styles.duration}>
+              <Text style={styles.time}>1h30</Text>
+              <Text style={styles.distance}>(56km)</Text>
             </View>
-          </BottomSheetView>
-        </BottomSheetModal>
-      </View>
-    </BottomSheetModalProvider>
+            <View style={styles.stepsBlock}>
+              <PointList style={styles.pointList}></PointList>
+
+              <View style={styles.stepList}>
+                {stepList.map((step, id) =>
+                  <View style={styles.step}>
+                    <View style={styles.stepContent}>
+                      <View style={styles.labelPlace}>
+                        <Text style={styles.label}>{getLabelStep(id)}</Text>
+                        <Text style={styles.place}>{cropString(step.properties.label, 22)}</Text>
+                      </View>
+                      {getIconStep(id)}
+                    </View>
+                    <View style={styles.horizontalBar}></View>
+                  </View>
+                )}
+              </View>
+            </View>
+            {/* <ButtonCustom text={"Y aller"} /> */}
+          </View>
+        </BottomSheetScrollView>
+      </BottomSheetModal>
+    </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

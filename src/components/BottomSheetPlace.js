@@ -17,35 +17,33 @@ export const BottomSheetPlace = () => {
   }, []);
 
   return (
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
-        <Button
-          onPress={handlePresentModalPress}
-          title="Present Modal"
-          color="black"
-        />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          index={0}
-          snapPoints={snapPoints}
-          onChange={handleSheetChanges}
-          backgroundStyle={{ backgroundColor: '#252525' }}
-          handleIndicatorStyle={{ backgroundColor: 'white' }}
-        >
-          <View style={styles.contentContainer}>
-            <ThumbnailPlace1
-              imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
-              city="Caulnes • 5 KM"
-              name="Restaurant de la gare"
-              type="Restaurant • Sanitaire • Douche • Parking sécurisé"
-              small={false}
-              width={"100%"}
-              placeColor={colors.white}
-            />
-          </View>
-        </BottomSheetModal>
-      </View>
-    </BottomSheetModalProvider>
+    <View style={styles.container}>
+      <Button
+        onPress={handlePresentModalPress}
+        title="Present Modal"
+        color="black"
+      />
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        index={0}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+        backgroundStyle={{ backgroundColor: '#252525' }}
+        handleIndicatorStyle={{ backgroundColor: 'white' }}
+      >
+        <View style={styles.contentContainer}>
+          <ThumbnailPlace1
+            imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
+            city="Caulnes • 5 KM"
+            name="Restaurant de la gare"
+            type="Restaurant • Sanitaire • Douche • Parking sécurisé"
+            small={false}
+            width={"100%"}
+            placeColor={colors.white}
+          />
+        </View>
+      </BottomSheetModal>
+    </View>
   );
 };
 

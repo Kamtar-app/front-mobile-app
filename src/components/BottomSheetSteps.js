@@ -13,7 +13,7 @@ import { PointList } from "./PointList";
 import { AppContext } from "../context/AppContext";
 import { cropString } from "../utils/string";
 
-export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch }, ref) => {
+export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, distance, setIdStepToModify }, ref) => {
   const bottomSheetModalRef = useRef(null);
   const { stepList, setStepList } = useContext(AppContext);
 
@@ -22,7 +22,6 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch }, ref) => {
   // }, []);
 
   const openBottomSheet = () => {
-    console.log('expend')
     bottomSheetModalRef.current.present();
     bottomSheetModalRef.current.expand();
   };
@@ -60,12 +59,24 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch }, ref) => {
 
   const removeFromStepList = (idToDelete) => {
     const updatedStepList = stepList.filter((step, id) => id !== idToDelete);
-    console.log(idToDelete)
     setStepList(updatedStepList);
   }
 
-  // Au clic sur un élément (même niveau que icon)
-  // Avec un id pour modifier le bon step dans la liste
+  const convertTimeToString = (duration) => {
+    const hours = Math.floor(duration / 60);
+    const minutes = Math.floor(duration % 60);
+
+    const hoursString = hours > 0 ? `${hours}h ` : '';
+    const minutesString = minutes > 0 ? `${minutes}m` : '';
+
+    return hoursString + minutesString;
+  }
+
+  const handleUpdateStep = (stepId) => {
+    setIdStepToModify(stepId);
+    bottomSheetModalRef.current.close();
+    openBottomSheetSearch()
+  }
 
   return (
     <View style={styles.container}>
@@ -77,9 +88,9 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch }, ref) => {
       >
         <BottomSheetScrollView>
           <View style={[styles.contentContainer]}>
-            <View style={styles.duration}>
-              <Text style={styles.time}>1h30</Text>
-              <Text style={styles.distance}>(56km)</Text>
+            <View style={styles.directionData}>
+              <Text style={styles.duration}>{convertTimeToString(duration)}</Text>
+              <Text style={styles.distance}>({parseFloat(distance).toFixed(2)}km)</Text>
             </View>
             <View style={styles.stepsBlock}>
               <PointList style={styles.pointList}></PointList>
@@ -88,13 +99,17 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch }, ref) => {
                 {stepList.map((step, id) =>
                   <View style={styles.step}>
                     <View style={styles.stepContent}>
-                      <View style={styles.labelPlace}>
-                        <Text style={styles.label}>{getLabelStep(id)}</Text>
-                        <Text style={styles.place}>{cropString(step.properties.label, 22)}</Text>
-                      </View>
+                      <TouchableOpacity onPress={() => handleUpdateStep(id)}>
+                        <View style={styles.labelPlace}>
+                          <Text style={styles.label}>{getLabelStep(id)}</Text>
+                          <Text style={styles.place}>{cropString(step.properties.label, 22)}</Text>
+                        </View>
+                      </TouchableOpacity>
                       {getIconStep(id)}
                     </View>
-                    <View style={styles.horizontalBar}></View>
+                    {stepList.length - 1 !== id &&
+                      <View style={styles.horizontalBar}></View>
+                    }
                   </View>
                 )}
               </View>
@@ -117,17 +132,16 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 15,
     paddingTop: 30,
-    marginBottom: 45,
+    marginBottom: 2,
   },
   steps: {
     flex: 1,
-    backgroundColor: "red"
   },
-  duration: {
+  directionData: {
     flexDirection: "row",
     marginBottom: 25,
   },
-  time: {
+  duration: {
     marginRight: 5,
     fontSize: 16,
     color: colors.white,

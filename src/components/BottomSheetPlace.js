@@ -12,9 +12,6 @@ export const BottomSheetPlace = () => {
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
-  const handleSheetChanges = useCallback((index) => {
-    console.log('handleSheetChanges', index);
-  }, []);
 
   return (
     <View style={styles.container}>

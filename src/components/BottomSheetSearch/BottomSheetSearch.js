@@ -18,16 +18,12 @@ import { Filters } from "./Filters";
 import { Filter } from "../icons/Filter";
 import { AppContext } from "../../context/AppContext";
 
-export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps }, ref) => {
+export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps, idStepToModify, setIdStepToModify }, ref) => {
     const bottomSheetModalRef = useRef(null);
     const snapPoints = useMemo(() => ['15%', '80%'], []);
-
-    // SEARCH
     const [isFilterDisplay, setIsFilterDisplay] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-
-    // Global
     const { location, stepList, setStepList } = useContext(AppContext);
 
     useEffect(() => {
@@ -88,22 +84,24 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps }, ref) => {
     };
 
     const addToStepList = (step) => {
-        console.log(stepList)
+        let newStepList = [...stepList];
 
-        // let alreadyInStepList = false;
+        let stepPosition = null;
+        if (idStepToModify !== null) {
+            stepPosition = idStepToModify;
+            newStepList = newStepList.filter((step, id) => id !== idStepToModify);
+        } else {
+            stepPosition = newStepList.length < 2 ? newStepList.length : newStepList.length - 1
+        }
 
-        // if(stepList.hasOwnProperty(step.properties.id)){
-        //     alreadyInStepList = true;
-        // }
+        setIdStepToModify(null);
 
-        // if (alreadyInStepList === false) {
-            let newStepList = [...stepList];
-            newStepList.splice(newStepList.length - 1, 0, step);
-            setStepList(newStepList);            
+        newStepList.splice(stepPosition, 0, step);
+        setStepList(newStepList);
+        setSearchText("");
 
-            openBottomSheetSteps();
-            bottomSheetModalRef.current.close();
-        // }
+        bottomSheetModalRef.current.close();
+        openBottomSheetSteps();
     }
 
     return (
@@ -137,6 +135,9 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps }, ref) => {
                             </ScrollView>
                             <View style={styles.horizontalBar} />
                             <View>
+                                {searchResults.length === 0 &&
+                                    <Text style={styles.noResult}>Pas de résultat...</Text>
+                                }
                                 {searchResults.map((result, key) => (
                                     <TouchableOpacity onPress={() => addToStepList(result)}>
                                         <DestinationPreview
@@ -179,6 +180,13 @@ const styles = StyleSheet.create({
         marginTop: 5,
         height: 0.5,
         backgroundColor: colors.lightGrey
+    },
+    noResult: {
+        marginTop: 40,
+        textAlign: "center",
+        color: colors.grey,
+        fontSize: 15,
+        fontWeight: "bold"
     }
 });
 

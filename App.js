@@ -13,7 +13,6 @@ import { SigninScreen } from "./src/screens/SigninScreen";
 import { SignupScreen } from "./src/screens/SignupScreen";
 import { ChatScreen } from "./src/screens/ChatScreen";
 import { MapScreen } from "./src/screens/MapScreen";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 const Stack = createNativeStackNavigator();
@@ -29,8 +28,6 @@ export default function App() {
     <AppContextProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <BottomSheetModalProvider>
-
-
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{

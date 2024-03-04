@@ -1,22 +1,52 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
-import { View, Image, StyleSheet, Text, ScrollView, Button, TextInput, TouchableOpacity, FlatList } from "react-native";
+import React, { forwardRef, useCallback, useContext, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import {
+  BottomSheetModal,
+  BottomSheetView,
+  BottomSheetModalProvider,
+} from '@gorhom/bottom-sheet';
+import { ThumbnailPlace1 } from './ThumbnailPlace1';
+import { colors } from '../assets/styles/constants/colors';
+import { AppContext } from '../context/AppContext';
+import { calculateDistance } from '../utils/location';
+import { ButtonCustom } from './ButtonCustom';
+import { Arrow } from './icons/Arrow';
 
-import { colors } from "../assets/styles/constants/colors";
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { ThumbnailPlace1 } from "./ThumbnailPlace1";
-
-export const BottomSheetPlace = () => {
+export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps, addToStepList }, ref) => {
   const bottomSheetModalRef = useRef(null);
-  const snapPoints = useMemo(() => ['47%'], []);
+  const snapPoints = useMemo(() => ['53%'], []);
+  const { location } = useContext(AppContext);
 
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
+  useEffect(() => {
+    console.log(currentPlace.categoryPlaces)
+  }, [currentPlace])
+
+  const formatCategoriesPlaceNames = () => {
+    if (currentPlace.categoryPlaces) {
+      return currentPlace.categoryPlaces.map((categoryPlace) => (
+        categoryPlace.category.name
+      )).join(' • ')
+    }
+  }
+
+  const openBottomSheet = () => {
+    bottomSheetModalRef.current.present();
+    bottomSheetModalRef.current.expand();
+  };
+
+  useImperativeHandle(ref, () => ({
+    openBottomSheet
+  }));
+
+  const handleChangeState = (modalState) => {
+    if(modalState === -1){
+      openBottomSheetSteps();
+    }
+  }
 
   return (
     <View style={styles.container}>
       <Button
-        onPress={handlePresentModalPress}
         title="Present Modal"
         color="black"
       />
@@ -24,25 +54,32 @@ export const BottomSheetPlace = () => {
         ref={bottomSheetModalRef}
         index={0}
         snapPoints={snapPoints}
-        onChange={handleSheetChanges}
         backgroundStyle={{ backgroundColor: '#252525' }}
         handleIndicatorStyle={{ backgroundColor: 'white' }}
+        onChange={handleChangeState}
       >
-        <View style={styles.contentContainer}>
-          <ThumbnailPlace1
-            imageURL="https://www.referenseo.com/wp-content/uploads/2019/03/image-attractive.jpg"
-            city="Caulnes • 5 KM"
-            name="Restaurant de la gare"
-            type="Restaurant • Sanitaire • Douche • Parking sécurisé"
-            small={false}
-            width={"100%"}
-            placeColor={colors.white}
-          />
-        </View>
+        {location && currentPlace &&
+          <>
+            <View style={styles.contentContainer}>
+              <ThumbnailPlace1
+                imageURL="https://www.relais-routier-bourges.com/galerie/crop/a3-1594383292.jpg"
+                city={currentPlace.city + " • " + calculateDistance(location.latitude, location.longitude, currentPlace.latitude, currentPlace.longitude) + " KM"}
+                name={currentPlace.name}
+                type={formatCategoriesPlaceNames()}
+                small={false}
+                width={"100%"}
+                placeColor={colors.white}
+              />
+              <View style={{marginTop: 90, width: "100%", marginRight: 15}}>
+                <ButtonCustom text={"Ajouter à mon trajet"}></ButtonCustom>
+              </View>
+            </View>
+          </>
+        }
       </BottomSheetModal>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -53,18 +90,9 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     alignItems: 'center',
+    flexDirection: "column",
     paddingLeft: 30,
     paddingRight: 15,
-    paddingTop: 30
-  },
-  customHandle: {
-    alignItems: 'center',
-    paddingTop: 5,
-    paddingBottom: 8,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
-  handleText: {
-    color: 'white',
+    paddingTop: 30,
   },
 });

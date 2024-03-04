@@ -12,6 +12,7 @@ import mapStyle from "./../../map-style.json";
 import { SearchBar } from "../components/HomeScreen/SearchBar";
 import { BottomSheetSearch } from "../components/BottomSheetSearch/BottomSheetSearch";
 import { BottomSheetSteps } from "../components/BottomSheetSteps";
+import { BottomSheetPlace } from "../components/BottomSheetPlace";
 import { AppContext } from "../context/AppContext";
 import MapViewDirections from "react-native-maps-directions";
 import { PinPlain } from "../components/icons/PinPlain";
@@ -21,6 +22,7 @@ import { Parking } from "../components/icons/Parking";
 import { Fuel } from "../components/icons/Fuel";
 import { Shower } from "../components/icons/Shower";
 import { Toilet } from "../components/icons/Toilet";
+import { calculateDistance } from "../utils/location";
 
 
 const matchCategoryIdIcon = {
@@ -35,6 +37,7 @@ const matchCategoryIdIcon = {
 export const MapScreen = ({ }) => {
     const bottomSheetSearchRef = useRef();
     const bottomSheetStepsRef = useRef();
+    const bottomSheetPlaceRef = useRef();
     const mapRef = useRef();
 
     const { location, stepList, setStepList } = useContext(AppContext);
@@ -43,6 +46,7 @@ export const MapScreen = ({ }) => {
     const [idStepToModify, setIdStepToModify] = useState();
     const [currentLocationString, setCurrentLocationString] = useState();
     const [placeList, setPlaceList] = useState([]);
+    const [currentPlace, setCurrentPlace] = useState([]);
 
     useEffect(() => {
         if (directionData) {
@@ -52,7 +56,7 @@ export const MapScreen = ({ }) => {
 
     const findPlaceInRoad = async (coordinates) => {
         try {
-            const response = await fetch('http://172.20.10.2:3000/place/place-around-many-coordinates', {
+            const response = await fetch(`${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}/place/place-around-many-coordinates`, {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
@@ -76,26 +80,53 @@ export const MapScreen = ({ }) => {
         console.log(stepList)
         let newStepList = [...stepList];
         // newStepList.splice(stepPosition, 0, {
-        //     "geometry": { "coordinates": [Array], "type": "Point" },
+        //     "geometry": { "coordinates": [Array] },
         //     "properties": {
-        //         "city": "Cesson-Sévigné", 
-        //         "context": "35, Ille-et-Vilaine, Bretagne", 
         //         "label": "2 Cours de la Vilaine 35510 Cesson-Sévigné", 
-        //         "name": "2 Cours de la Vilaine", 
-        //         "street": "Cours de la Vilaine" 
         //     } });
 
         // setStepList();
     }
 
+    const insertCoordinate = (place) => {
+        let coordinates = { latitude: place.latitude, longitude: place.longitude }
+        let minDistance = Number.MAX_VALUE;
+        let insertIndex = 0;
 
-    // On créer un objet qui reprend les données utilisé par la vue
-    // Au clic sur ajouter au trajet, on l'ajoute à vol d'oiseau juste après le pin le plus proche (si ce n'est pas le dernier, si c'est le cas, avant dernier) 
+        // Parcourez la liste existante pour trouver l'endroit optimal
+        for (let i = 1; i < stepList.length - 2; i++) {
+            // stepList[i].geometry.coordinates
+            const distanceAfter = calculateDistance(coordinates, stepList[i].geometry.coordinates) + calculateDistance(coordinates, stepList[i + 1].geometry.coordinates);
+            const distanceBefore = calculateDistance(coordinates, stepList[i - 1].geometry.coordinates) + calculateDistance(coordinates, stepList[i].geometry.coordinates);
 
-    // Au clic sur le lieu on affiche la bottomsheet de détail
+            // Comparez les distances avant et après
+            if (distanceAfter < minDistance) {
+                minDistance = distanceAfter;
+                insertIndex = i + 1;
+            }
+
+            if (distanceBefore < minDistance) {
+                minDistance = distanceBefore;
+                insertIndex = i;
+            }
+        }
+
+        const newStepList = stepList.splice(
+            insertIndex,
+            0,
+            {
+                "id": place.id,
+                "geometry": { "coordinates": [coordinates.latitude, coordinates.longitude] },
+                "properties": {
+                    "label": place.name + " " + place.city,
+                }
+            }
+        );
+
+        setStepList(newStepList);
+    }
+
     // Au clic dessus on renvoi sur la page du lieu
-
-
     // Au chargement de la position du mec il faut faire une requête pour avoir les lieux à proximité (+ ou -50km)
     // Les afficher sur la carte
     // Ajouter des lieux autour de Rennes dans la base
@@ -111,7 +142,7 @@ export const MapScreen = ({ }) => {
     const searchCurrentLocation = async (locationData) => {
 
         try {
-            const response = await fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${locationData.longitude}&lat=${locationData.latitude}&limit=1`);
+            const response = await fetch(`${process.env.API_GOUV_END_POINT}/reverse/?lon=${locationData.longitude}&lat=${locationData.latitude}&limit=1`);
             const data = await response.json();
             if (data.features) {
                 setCurrentLocationString(data.features[0].properties.context);
@@ -142,6 +173,13 @@ export const MapScreen = ({ }) => {
 
     const openBottomSheetSteps = () => {
         bottomSheetStepsRef.current.openBottomSheet();
+    };
+
+    const openBottomSheetPlace = (place) => {
+        setCurrentPlace(place);
+        bottomSheetPlaceRef.current.openBottomSheet();
+        bottomSheetSearchRef.current.closeBottomSheet();
+        bottomSheetStepsRef.current.closeBottomSheet();
     };
 
     useEffect(() => {
@@ -239,7 +277,7 @@ export const MapScreen = ({ }) => {
                         }
                         {placeList.length > 0 &&
                             (placeList.map(place => (
-                                <Marker key={place.id} onPress={() => { addPlaceToStepList(place) }} coordinate={{ latitude: place.latitude, longitude: place.longitude }}>
+                                <Marker key={place.id} onPress={() => { openBottomSheetPlace(place) }} coordinate={{ latitude: place.latitude, longitude: place.longitude }}>
                                     <View style={styles.markerContainer}>
                                         <View style={styles.iconContainer}>
                                             {matchCategoryIdIcon[place.categoryPlaces[0].categoryId]}
@@ -270,12 +308,12 @@ export const MapScreen = ({ }) => {
                     </>
                 }
             </MapView>
-            <BottomSheetSearch
+            {/* <BottomSheetSearch
                 ref={bottomSheetSearchRef}
                 openBottomSheetSteps={openBottomSheetSteps}
                 idStepToModify={idStepToModify}
                 setIdStepToModify={setIdStepToModify}
-            />
+            /> */}
             <BottomSheetSteps
                 ref={bottomSheetStepsRef}
                 openBottomSheetSearch={openBottomSheetSearch}
@@ -283,6 +321,7 @@ export const MapScreen = ({ }) => {
                 distance={directionData?.distance}
                 setIdStepToModify={setIdStepToModify}
             />
+            <BottomSheetPlace ref={bottomSheetPlaceRef} currentPlace={currentPlace} openBottomSheetSteps={openBottomSheetSteps} />
 
         </View>
     );

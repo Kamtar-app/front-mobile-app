@@ -17,17 +17,21 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
   const bottomSheetModalRef = useRef(null);
   const { stepList, setStepList } = useContext(AppContext);
 
-  // useEffect(() => {
-  //   bottomSheetModalRef.current.present();
-  // }, []);
+  useEffect(() => {
+    bottomSheetModalRef.current.present();
+  }, []);
 
   const openBottomSheet = () => {
     bottomSheetModalRef.current.present();
     bottomSheetModalRef.current.expand();
   };
 
+  const closeBottomSheet = () => {
+    bottomSheetModalRef.current.close();
+  };
+
   useImperativeHandle(ref, () => ({
-    openBottomSheet
+    openBottomSheet, closeBottomSheet
   }));
 
   const getLabelStep = (stepId) => {

@@ -38,12 +38,16 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps, idStepToMod
         fetchData();
     }, [searchText]);
 
+    const closeBottomSheet = () => {
+        bottomSheetModalRef.current.close();
+    };
+
     const openBottomSheet = () => {
         bottomSheetModalRef.current.expand();
     };
 
     useImperativeHandle(ref, () => ({
-        openBottomSheet
+        openBottomSheet, closeBottomSheet
     }));
 
     const addCurrentLocationToStep = async () => {
@@ -51,7 +55,7 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps, idStepToMod
             return;
         }
         try {
-            const response = await fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${location.longitude}&lat=${location.latitude}&limit=1`);
+            const response = await fetch(`${process.env.API_GOUV_END_POINT}/reverse/?lon=${location.longitude}&lat=${location.latitude}&limit=1`);
 
             const data = await response.json();
             if (data.features) {
@@ -73,7 +77,7 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps, idStepToMod
         }
 
         try {
-            const response = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(searchText)}&limit=10`);
+            const response = await fetch(`${process.env.API_GOUV_END_POINT}/search/?q=${encodeURIComponent(searchText)}&limit=10`);
             const data = await response.json();
             if (data.features) {
                 setSearchResults(data.features);

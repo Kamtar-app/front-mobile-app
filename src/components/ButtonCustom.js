@@ -16,7 +16,7 @@ export const ButtonCustom = ({
   onPress = null,
   icon = null,
 }) => {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   return (
     <TouchableOpacity style={stylesButtonCustom.button} onPress={onPress}>

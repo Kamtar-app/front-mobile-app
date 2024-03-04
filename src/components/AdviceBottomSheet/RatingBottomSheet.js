@@ -40,12 +40,38 @@ export const RatingBottomSheet = ({
     bottomSheetModal.current?.close();
   };
 
+  // try {
+  //   const response = await fetch('http://127.0.0.1:3000/comments', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       content: "je suis un commentaire test",
+  //       userId: 12,
+  //       placeId: 12
+  //     }),
+  //   });
+
+  //   if (!response.ok) {
+  //     throw new Error('La requête a échoué avec un statut ' + response.status);
+  //   }
+
+  //   const responseData = await response.json();
+  //   console.log(responseData); // Affiche la réponse du serveur (optionnel)
+  //   // Traitez la réponse ou effectuez une action supplémentaire si nécessaire
+  // } catch (error) {
+  //   console.error('Une erreur s\'est produite lors de l\'envoi de la requête :', error);
+  //   // Traitez les erreurs ou affichez un message d'erreur à l'utilisateur
+  // }
+
   const handleContinuePress = () => {
     if (currentStep === 1) {
       setCurrentStep(2);
     }
     if (currentStep === 2) {
       setCurrentStep(3);
+      console.log(handleContinuePress);
     }
     if (currentStep === 3) {
       setCurrentStep(1);

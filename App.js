@@ -32,8 +32,8 @@ export default function App() {
               headerShown: false,
             }}
           >
-            {/* <Stack.Screen name="HomeScreen" component={HomeScreen} />
-            <Stack.Screen name="AdviceScreen" component={AdviceScreen} />
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            {/* <Stack.Screen name="AdviceScreen" component={AdviceScreen} />
             <Stack.Screen name="SigninScreen" component={SigninScreen} />
           <Stack.Screen name="SignupScreen" component={SignupScreen} />
           <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}

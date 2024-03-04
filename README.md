@@ -17,5 +17,13 @@ npm install
 npm run start
 ```
 
+```bash
+# lancer le projet
+expo start
+```
+
 Scannez le QR code à l'écran avec l'application [Expo go](https://expo.dev/client)
 
+## Outils de développement
+
+Style de la map : [text](https://mapstyle.withgoogle.com/)

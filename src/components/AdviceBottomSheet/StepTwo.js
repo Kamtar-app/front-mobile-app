@@ -19,6 +19,13 @@ import { ButtonCustom } from "../ButtonCustom";
 import { ArrowTwo } from "../icons/ArrowTwo";
 
 export const StepTwo = ({ handleContinuePress, step }) => {
+  const [commentContent, setCommentContent] = useState("");
+
+  const handlePress = () => {
+    // Appeler la fonction de manipulation du bouton de l'extérieur
+    handleContinuePress(commentContent);
+  };
+
   return (
     <>
       <View style={styles.marge}>
@@ -37,13 +44,16 @@ export const StepTwo = ({ handleContinuePress, step }) => {
           placeholderTextColor={colors.grey}
           multiline={true}
           numberOfLines={5}
+          value={commentContent}
+          onChangeText={(text) => setCommentContent(text)}
         />
       </View>
       <View style={styles.buttonContainer}>
         <ButtonCustom
           text={"Continuer"}
           icon={<ArrowTwo color={colors.white} />}
-          onPress={handleContinuePress}
+          onPress={handlePress}
+          // onPress={handleContinuePress}
         />
       </View>
     </>

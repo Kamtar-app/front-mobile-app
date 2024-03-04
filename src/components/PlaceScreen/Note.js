@@ -7,13 +7,21 @@ import { Star } from "../icons/Star";
 export const Note = ({ note, total }) => {
   const starsArray = Array(5).fill(null);
 
+  const getColor = (index) => {
+    if (index < note) {
+      return colors.primary;
+    } else {
+      return colors.primaryGray;
+    }
+  };
+
   return (
     <View style={styleNote.container}>
       <Text style={styleNote.value}>{note}</Text>
       <View style={styleNote.stars}>
         {starsArray.map((_, index) => (
           <View key={index} style={styleNote.star}>
-            <Star color={colors.primary} size={15} />
+            <Star color={getColor(index + 1)} size={15} />
           </View>
         ))}
       </View>
@@ -27,6 +35,7 @@ const styleNote = StyleSheet.create({
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "flex-end",
+    width: "50%",
   },
   value: {
     marginBottom: 10,

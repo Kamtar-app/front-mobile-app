@@ -28,7 +28,6 @@ import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
 import { LikeButton } from "../components/LikeButton";
 import { RatingBottomSheet } from "../components/AdviceBottomSheet/RatingBottomSheet";
-import { ADDRESS_IP } from "@env";
 
 export const PlaceScreen = ({ route, navigation }) => {
   const id = route.params.id;
@@ -46,7 +45,7 @@ export const PlaceScreen = ({ route, navigation }) => {
 
   // const fetchUserById = async (userId) => {
   //   try {
-  //     const response = await fetch(`http://10.135.129.146:3000/user/${userId}`);
+  //     const response = await fetch(`${process.env.API_END_POINT}/user/${userId}`);
   //     const userData = await response.json();
   //     return userData;
   //   } catch (error) {
@@ -56,14 +55,14 @@ export const PlaceScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     // fetch(`http://${ADDRESS_IP}:3000/place/${id}`)
-    fetch(`http://10.135.129.146:3000/place/${id}`)
+    fetch(`${process.env.API_END_POINT}/place/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setPlace(data);
       })
       .catch((error) => console.error("Error fetching place details:", error));
 
-    fetch(`http://10.135.129.146:3000/rate/place/${id}`)
+    fetch(`${process.env.API_END_POINT}/rate/place/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setRates(data);
@@ -72,7 +71,7 @@ export const PlaceScreen = ({ route, navigation }) => {
   }, []);
 
   const fetchUserData = (userId) => {
-    return fetch(`http://10.135.129.146:3000/users/${userId}`)
+    return fetch(`${process.env.API_END_POINT}/users/${userId}`)
       .then((response) => response.json())
       .then((data) => setUser(data))
       .catch((error) => {
@@ -91,45 +90,6 @@ export const PlaceScreen = ({ route, navigation }) => {
       // console.log("ratesLength : " + ratesLength);
       const total = rates.reduce((acc, note) => acc + note.value, 0);
       setTotalRates((total / rates.length).toFixed(2));
-
-      // rates.forEach((rate) => {
-      //   fetch(`http://10.135.129.146:3000/user/${rate.userId}`)
-      //     .then((response) => response.json())
-      //     .then((userData) => {
-      //       // console.log(userData);
-      //       // setUsersMap();
-      //       // console.log(userrData);
-      //       const newUserMap = { ...usersMap, [rate.id]: userData };
-      //       console.log("ooooooooooooooooook");
-      //       console.log(newUserMap);
-      //       // setUsersMap(newUserMap);
-      //       // console.log(newUserMap);
-      //       // setUsers(usersMap);
-      //     })
-      //     .catch((error) =>
-      //       console.error("Error fetching user details:", error)
-      //     );
-      // });
-
-      // if (usersMap) {
-      //   console.log(usersMap);
-      // }
-
-      // const usersPromises = rates.map(async (rate) => {
-      //   fetch(`http://10.135.129.146:3000/user/${rate.userId}`)
-      //     .then((response) => response.json())
-      //     .then((data) => {
-      //       console.log("user : " + data);
-      //       setUser(data);
-      //       return data;
-      //     })
-      //     .catch((error) =>
-      //       console.error("Error fetching user details:", error)
-      //     );
-
-      //   const users = await Promise.all(usersPromises);
-      //   setUsers(users);
-      // });
     }
   }, [rates]);
 

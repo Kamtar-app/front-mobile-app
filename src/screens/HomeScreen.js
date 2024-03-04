@@ -29,15 +29,13 @@ import { ThumbnailPlace2 } from "../components/HomeScreen/ThumbnailPlace2";
 import { NavBar } from "../components/NavBar";
 import { BottomSheetSearch } from "../components/BottomSheetSearch/BottomSheetSearch";
 import axios from "axios";
-import { ADDRESS_IP } from "@env";
 
 export const HomeScreen = ({}) => {
   const [places, setPlaces] = useState([]);
   // const [user, setUser] = useState([]);
 
   useEffect(() => {
-    fetch(`http://10.135.129.146:3000/place/`, {
-      // fetch(`http://${ADDRESS_IP}:3000/place/`, {
+    fetch(`${process.env.API_END_POINT}/place/`, {
       timeout: 40000,
     })
       .then((response) => {
@@ -52,14 +50,6 @@ export const HomeScreen = ({}) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-
-    // fetch(`http://10.135.129.146:3000/user/${id}`)
-    // .then((response) => response.json())
-    // .then((data) => {
-    //   setUser(data);
-    //   // console.log(data);
-    // })
-    // .catch((error) => console.error("Error fetching rate details:", error));
   }, []);
 
   return (

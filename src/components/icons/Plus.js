@@ -1,11 +1,11 @@
 import { Svg, Path } from "react-native-svg";
 
-export const Plus = () => {
+export const Plus = ({width = 20}) => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width="11"
-      height="11"
+      width={width}
+      height={width}
       viewBox="0 0 11 11"
       fill="none"
     >

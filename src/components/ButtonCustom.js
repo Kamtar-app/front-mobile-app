@@ -17,7 +17,7 @@ export const ButtonCustom = ({
   color = colors.primary,
   textColor = colors.white,
 }) => {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   return (
     <TouchableOpacity

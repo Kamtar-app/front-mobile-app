@@ -18,17 +18,6 @@ export const Map = ({ lat, long }) => {
     longitudeDelta: 0.05,
   };
 
-  const customMapStyle = [
-    {
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#f5f5f5", // Couleur de fond grise
-        },
-      ],
-    },
-  ];
-
   return (
     <View style={styles.container}>
       <MapView

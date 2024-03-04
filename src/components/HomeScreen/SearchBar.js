@@ -10,7 +10,14 @@ import { colors } from "../../assets/styles/constants/colors";
 import { texts } from "../../assets/styles/constants/texts";
 import { Glass } from "../icons/Glass";
 
-export const SearchBar = () => {
+export const SearchBar = ({setSearchText, searchText, endIcon = null, openBottomSheet = null}) => {
+
+    const handleTextInputFocus = () => {
+        if (openBottomSheet) {
+          openBottomSheet();
+        }
+      };
+      
     return (
         <View style={stylestextInputCustom.inputContainer}>
             <View style={stylestextInputCustom.containerIcon}>
@@ -20,12 +27,13 @@ export const SearchBar = () => {
                 style={stylestextInputCustom.input}
                 placeholder={"Où allons nous ?"}
                 placeholderTextColor={colors.grey}
-                onChange={() => {}}
-                value={""}
+                onFocus={handleTextInputFocus}
+                value={searchText}
+                onChangeText={setSearchText}
             />
-            {/* {endIcon && (
+            {endIcon && (
                 <View style={stylestextInputCustom.containerEndIcon}>{endIcon}</View>
-            )} */}
+            )}
         </View>
     );
 };
@@ -50,6 +58,7 @@ const stylestextInputCustom = StyleSheet.create({
     //     top: 0,
     //   },
     inputContainer: {
+        width: "75%",
         backgroundColor: "#E0E0E0",
         borderRadius: 35,
         marginBottom: 20,
@@ -80,8 +89,8 @@ const stylestextInputCustom = StyleSheet.create({
     },
     containerEndIcon: {
         position: "absolute",
-        right: "5%",
-        transform: [{ translateY: 17 }],
+        right: "2%",
+        top: "15%"
     },
     endIcon: {
         width: 10,

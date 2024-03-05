@@ -36,7 +36,7 @@ export const PlaceScreen = ({ route, navigation }) => {
   const bottomSheetModalRef = useRef(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [place, setPlace] = useState(null);
-  const [rates, setRates] = useState(null);
+  const [rates, setRates] = useState([]);
   const [ratesLength, setRatesLength] = useState(null);
   const [totalRates, setTotalRates] = useState(null);
   const [user, setUser] = useState(null);
@@ -86,7 +86,7 @@ export const PlaceScreen = ({ route, navigation }) => {
   useEffect(() => {
     setRatesLength(rates ? rates.length : null);
 
-    if (rates) {
+    if (rates.length > 0) {
       // console.log("ratesLength : " + ratesLength);
       const total = rates.reduce((acc, note) => acc + note.value, 0);
       setTotalRates((total / rates.length).toFixed(2));

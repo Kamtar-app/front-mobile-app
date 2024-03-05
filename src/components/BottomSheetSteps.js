@@ -13,7 +13,7 @@ import { PointList } from "./PointList";
 import { AppContext } from "../context/AppContext";
 import { cropString } from "../utils/string";
 
-export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, distance, setIdStepToModify }, ref) => {
+export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, distance, setIdStepToModify, display }, ref) => {
   const bottomSheetModalRef = useRef(null);
   const { stepList, setStepList } = useContext(AppContext);
 
@@ -27,6 +27,7 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
   };
 
   const closeBottomSheet = () => {
+    bottomSheetModalRef.current.dismiss();
     bottomSheetModalRef.current.close();
   };
 
@@ -79,6 +80,7 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
   const handleUpdateStep = (stepId) => {
     setIdStepToModify(stepId);
     bottomSheetModalRef.current.close();
+    bottomSheetModalRef.current.dismiss();
     openBottomSheetSearch()
   }
 
@@ -89,6 +91,7 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
         enableDynamicSizing
         backgroundStyle={{ backgroundColor: '#252525' }}
         handleIndicatorStyle={{ backgroundColor: 'white' }}
+        style={{ display: display ? "block" : "none" }}
       >
         <BottomSheetScrollView>
           <View style={[styles.contentContainer]}>

@@ -1,8 +1,8 @@
 import { Svg, Path, G, Rect, Defs, ClipPath } from "react-native-svg";
 
-export const Glass = ({ color }) => {
+export const Glass = ({ color, width = 18, height = 17 }) => {
   return (
-    <Svg width={18} height={17} viewBox="0 0 18 17" fill="none">
+    <Svg width={width} height={height} viewBox="0 0 18 17" fill="none">
     <Defs>
       <ClipPath id="clip0">
         <Rect width="17" height="17" fill="white" transform="translate(0.5)" />

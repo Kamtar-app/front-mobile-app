@@ -104,7 +104,7 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
 
               <View style={styles.stepList}>
                 {stepList.map((step, id) =>
-                  <View style={styles.step}>
+                  <View style={styles.step} key={id}>
                     <View style={styles.stepContent}>
                       <TouchableOpacity onPress={() => handleUpdateStep(id)}>
                         <View style={styles.labelPlace}>

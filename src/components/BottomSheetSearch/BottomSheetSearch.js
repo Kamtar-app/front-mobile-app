@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { View, StyleSheet, Text, ScrollView, Button, TextInput, TouchableOpacity, FlatList } from "react-native";
 
-import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import { SearchBar } from "../HomeScreen/SearchBar";
 import { ThumbnailPlaceType } from "../HomeScreen/ThumbnailPlaceType";
 import { Restaurant } from "../icons/Restaurant";
@@ -123,7 +123,7 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps, idStepToMod
                 handleIndicatorStyle={{ backgroundColor: colors.white }}
                 style={{ display: display ? "block" : "none" }}
             >
-                <ScrollView>
+                <BottomSheetScrollView>
                     {isFilterDisplay
                         ? <Filters close={() => { setIsFilterDisplay(false) }} />
                         : <View style={styles.contentContainer}>
@@ -133,7 +133,7 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps, idStepToMod
                                     <Filter />
                                 </TouchableOpacity>
                             </View>
-                            <ScrollView horizontal={true} style={styles.thumbnailList} showsHorizontalScrollIndicator={false}>
+                            <BottomSheetScrollView horizontal={true} style={styles.thumbnailList} showsHorizontalScrollIndicator={false}>
                                 <ThumbnailPlaceType label={"Parking"} labelColor={colors.white} backgroundColor={colors.darkGrey}><Parking /></ThumbnailPlaceType>
                                 <ThumbnailPlaceType label={"Restaurant"} labelColor={colors.white} backgroundColor={colors.darkGrey}><Restaurant /></ThumbnailPlaceType>
                                 <ThumbnailPlaceType label={"Carburant"} labelColor={colors.white} backgroundColor={colors.darkGrey}><Fuel /></ThumbnailPlaceType>
@@ -142,14 +142,14 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps, idStepToMod
                                 <ThumbnailPlaceType label={"Garage"} labelColor={colors.white} backgroundColor={colors.darkGrey}><Garage /></ThumbnailPlaceType>
                                 <ThumbnailPlaceType label={"Station lavage"} labelColor={colors.white} backgroundColor={colors.darkGrey}><CarWash /></ThumbnailPlaceType>
                                 <ThumbnailPlaceType label={"Entreprise"} labelColor={colors.white} backgroundColor={colors.darkGrey}><Truck /></ThumbnailPlaceType>
-                            </ScrollView>
+                            </BottomSheetScrollView>
                             <View style={styles.horizontalBar} />
                             <View>
                                 {searchResults.length === 0 &&
                                     <Text style={styles.noResult}>Pas de résultat...</Text>
                                 }
                                 {searchResults.map((result, key) => (
-                                    <TouchableOpacity onPress={() => addToStepList(result)}>
+                                    <TouchableOpacity key={key} onPress={() => addToStepList(result)}>
                                         <DestinationPreview
                                             key={result.properties.id}
                                             title={result.properties.label}
@@ -165,7 +165,7 @@ export const BottomSheetSearch = forwardRef(({ openBottomSheetSteps, idStepToMod
                             </View>
                         </View>
                     }
-                </ScrollView>
+                </BottomSheetScrollView>
             </BottomSheetModal>
         </View>
     );

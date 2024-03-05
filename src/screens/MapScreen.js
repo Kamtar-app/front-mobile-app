@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
     },
     userPinLabelContent: {
         color: colors.white,
-        fontWeight: 700,
+        fontWeight: "700",
         fontSize: 12
     },
     container: {

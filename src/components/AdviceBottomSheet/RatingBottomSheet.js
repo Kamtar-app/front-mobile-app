@@ -19,6 +19,7 @@ import {
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
+  BottomSheetScrollView,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { colors } from "../../assets/styles/constants/colors";
@@ -118,10 +119,10 @@ export const RatingBottomSheet = ({
           handleIndicatorStyle={{ backgroundColor: "white" }}
           // onChange={handleSheetChanges}
         >
-          <ScrollView>
+          <BottomSheetScrollView>
             <View style={styles.contentContainer}>{renderContent()}</View>
             <View style={styles.horizontalBar} />
-          </ScrollView>
+          </BottomSheetScrollView>
         </BottomSheetModal>
       </View>
     </BottomSheetModalProvider>

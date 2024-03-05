@@ -33,8 +33,8 @@ export const BackButton = ({
 
 const stylesBackButton = StyleSheet.create({
   button: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
     padding: 10,

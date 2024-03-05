@@ -12,14 +12,10 @@ import { calculateDistance } from '../utils/location';
 import { ButtonCustom } from './ButtonCustom';
 import { Arrow } from './icons/Arrow';
 
-export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps, addToStepList }, ref) => {
+export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps, closeAllBottomSheet, addToStepList, display }, ref) => {
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ['53%'], []);
   const { location } = useContext(AppContext);
-
-  useEffect(() => {
-    console.log(currentPlace.categoryPlaces)
-  }, [currentPlace])
 
   const formatCategoriesPlaceNames = () => {
     if (currentPlace.categoryPlaces) {
@@ -34,12 +30,17 @@ export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps
     bottomSheetModalRef.current.expand();
   };
 
+  const closeBottomSheet = () => {
+    bottomSheetModalRef.current.close();
+    bottomSheetModalRef.current.dismiss();
+  };
+
   useImperativeHandle(ref, () => ({
-    openBottomSheet
+    openBottomSheet, closeBottomSheet
   }));
 
   const handleChangeState = (modalState) => {
-    if(modalState === -1){
+    if (modalState === -1) {
       openBottomSheetSteps();
     }
   }
@@ -57,20 +58,22 @@ export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps
         backgroundStyle={{ backgroundColor: '#252525' }}
         handleIndicatorStyle={{ backgroundColor: 'white' }}
         onChange={handleChangeState}
+        style={{ display: display ? "block" : "none" }}
       >
         {location && currentPlace &&
           <>
             <View style={styles.contentContainer}>
               <ThumbnailPlace1
-                imageURL="https://www.relais-routier-bourges.com/galerie/crop/a3-1594383292.jpg"
+                imageURL={currentPlace.imageUrl}
                 city={currentPlace.city + " • " + calculateDistance(location.latitude, location.longitude, currentPlace.latitude, currentPlace.longitude) + " KM"}
                 name={currentPlace.name}
                 type={formatCategoriesPlaceNames()}
                 small={false}
                 width={"100%"}
                 placeColor={colors.white}
+                closeAllBottomSheet={closeAllBottomSheet}
               />
-              <View style={{marginTop: 90, width: "100%", marginRight: 15}}>
+              <View style={{ marginTop: 90, width: "100%", marginRight: 15 }}>
                 <ButtonCustom text={"Ajouter à mon trajet"}></ButtonCustom>
               </View>
             </View>

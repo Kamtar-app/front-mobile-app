@@ -23,6 +23,7 @@ import {
   BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetModalProvider,
+  BottomSheetScrollView,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { SearchBar } from "../HomeScreen/SearchBar";
@@ -42,7 +43,10 @@ import { Filter } from "../icons/Filter";
 import { AppContext } from "../../context/AppContext";
 
 export const BottomSheetSearch = forwardRef(
-  ({ openBottomSheetSteps, idStepToModify, setIdStepToModify }, ref) => {
+  (
+    { openBottomSheetSteps, idStepToModify, setIdStepToModify, display },
+    ref
+  ) => {
     const bottomSheetModalRef = useRef(null);
     const snapPoints = useMemo(() => ["15%", "80%"], []);
     const [isFilterDisplay, setIsFilterDisplay] = useState(false);
@@ -64,9 +68,12 @@ export const BottomSheetSearch = forwardRef(
 
     const closeBottomSheet = () => {
       bottomSheetModalRef.current.close();
+      bottomSheetModalRef.current.dismiss();
     };
 
     const openBottomSheet = () => {
+      console.log("pkkkk");
+      bottomSheetModalRef.current.present();
       bottomSheetModalRef.current.expand();
     };
 
@@ -154,8 +161,9 @@ export const BottomSheetSearch = forwardRef(
           snapPoints={snapPoints}
           backgroundStyle={{ backgroundColor: colors.darkGrey2 }}
           handleIndicatorStyle={{ backgroundColor: colors.white }}
+          style={{ display: display ? "block" : "none" }}
         >
-          <ScrollView>
+          <BottomSheetScrollView>
             {isFilterDisplay ? (
               <Filters
                 close={() => {
@@ -178,7 +186,7 @@ export const BottomSheetSearch = forwardRef(
                     <Filter />
                   </TouchableOpacity>
                 </View>
-                <ScrollView
+                <BottomSheetScrollView
                   horizontal={true}
                   style={styles.thumbnailList}
                   showsHorizontalScrollIndicator={false}
@@ -239,14 +247,17 @@ export const BottomSheetSearch = forwardRef(
                   >
                     <Truck />
                   </ThumbnailPlaceType>
-                </ScrollView>
+                </BottomSheetScrollView>
                 <View style={styles.horizontalBar} />
                 <View>
                   {searchResults.length === 0 && (
                     <Text style={styles.noResult}>Pas de résultat...</Text>
                   )}
                   {searchResults.map((result, key) => (
-                    <TouchableOpacity onPress={() => addToStepList(result)}>
+                    <TouchableOpacity
+                      key={key}
+                      onPress={() => addToStepList(result)}
+                    >
                       <DestinationPreview
                         key={result.properties.id}
                         title={result.properties.label}
@@ -264,7 +275,7 @@ export const BottomSheetSearch = forwardRef(
                 </View>
               </View>
             )}
-          </ScrollView>
+          </BottomSheetScrollView>
         </BottomSheetModal>
       </View>
     );

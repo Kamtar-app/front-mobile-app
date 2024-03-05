@@ -27,22 +27,22 @@ export default function App() {
   return (
     <AppContextProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <BottomSheetModalProvider>
-          <NavigationContainer>
+        <NavigationContainer>
+          <BottomSheetModalProvider>
             <Stack.Navigator
               screenOptions={{
                 headerShown: false,
               }}
             >
-              {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
-              {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
-              {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
-              {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
-              {/* <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
               <Stack.Screen name="MapScreen" component={MapScreen} />
+              <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen name="SigninScreen" component={SigninScreen} />
+              <Stack.Screen name="SignupScreen" component={SignupScreen} />
+              <Stack.Screen name="ChatScreen" component={ChatScreen} />
+              <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
             </Stack.Navigator>
-          </NavigationContainer>
-        </BottomSheetModalProvider>
+          </BottomSheetModalProvider>
+        </NavigationContainer>
       </GestureHandlerRootView>
     </AppContextProvider>
   );

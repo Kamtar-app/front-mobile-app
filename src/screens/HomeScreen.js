@@ -28,7 +28,6 @@ import { ThumbnailPlace1 } from "../components/ThumbnailPlace1";
 import { ThumbnailPlace2 } from "../components/HomeScreen/ThumbnailPlace2";
 import { NavBar } from "../components/NavBar";
 import { BottomSheetSearch } from "../components/BottomSheetSearch/BottomSheetSearch";
-import axios from "axios";
 
 export const HomeScreen = ({}) => {
   const [places, setPlaces] = useState([]);

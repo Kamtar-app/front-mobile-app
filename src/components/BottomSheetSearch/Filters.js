@@ -5,6 +5,7 @@ import { Cross } from "../icons/Cross";
 import { colors } from "../../assets/styles/constants/colors";
 import { Check } from "../icons/Check";
 import { Star } from "../icons/Star";
+import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 export const Filters = ({ close }) => {
 
@@ -28,7 +29,7 @@ export const Filters = ({ close }) => {
     const noteList = [4, 3, 2, 1];
 
     return (
-        <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
+        <BottomSheetScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
             <View style={styles.iconCross}>
                 <TouchableOpacity onPress={() => close()}>
                     <Cross />
@@ -37,8 +38,8 @@ export const Filters = ({ close }) => {
             <Text style={styles.firstTitle}>Filtres</Text>
             <Text style={styles.secondTitle}>Trier par</Text>
             <View>
-                {sortList.map(sortItem => (
-                    <View style={styles.input}>
+                {sortList.map((sortItem, key) => (
+                    <View key={key} style={styles.input}>
                         <Text style={styles.label}>
                             {sortItem}
                         </Text>
@@ -57,8 +58,8 @@ export const Filters = ({ close }) => {
 
             </View>
             <View>
-                {filterPlaceTypeList.map(filterItem => (
-                    <View style={styles.input}>
+                {filterPlaceTypeList.map((filterItem, key) => (
+                    <View key={key} style={styles.input}>
                         <Text style={styles.label}>
                             {filterItem}
                         </Text>
@@ -70,12 +71,12 @@ export const Filters = ({ close }) => {
             </View>
             <Text style={styles.secondTitle}>Note</Text>
             <View>
-                {noteList.map(note => (
-                    <View style={styles.input}>
+                {noteList.map((note, key) => (
+                    <View key={key} style={styles.input}>
                         <View style={[styles.input, { alignItems: "center" }]}>
                             <View style={{ flexDirection: "row" }}>
-                                {[...Array(5).keys()].map(key => (
-                                    <View>
+                                {[...Array(5).keys()].map((key, id) => (
+                                    <View key={id}>
                                         <Star size={24} color={key < note ? "#F4B742" : colors.grey} />
                                     </View>
                                 ))}
@@ -91,14 +92,15 @@ export const Filters = ({ close }) => {
                     </View>
                 ))}
             </View>
-        </ScrollView>
+        </BottomSheetScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 20
+        margin: 20,
+        flexGrow: 1 
     },
     firstTitle: {
         fontSize: 30,
@@ -130,14 +132,14 @@ const styles = StyleSheet.create({
         width: 27,
         borderWidth: 2,
         borderColor: colors.grey,
-        borderRadius: "50%"
+        borderRadius: 50
     },
     selectPlain: {
         margin: 5,
         height: 13,
         width: 13,
         backgroundColor: colors.white,
-        borderRadius: "50%"
+        borderRadius: 50
     },
     checkEmpty: {
         height: 27,

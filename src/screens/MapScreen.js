@@ -23,6 +23,10 @@ import { Fuel } from "../components/icons/Fuel";
 import { Shower } from "../components/icons/Shower";
 import { Toilet } from "../components/icons/Toilet";
 import { calculateDistance } from "../utils/location";
+import { Glass } from "../components/icons/Glass";
+import { Filter } from "../components/icons/Filter";
+import { BackButton } from "../components/BackButton";
+import { useIsFocused } from "@react-navigation/native";
 
 const matchCategoryIdIcon = {
   1: <Parking size={25} />,
@@ -52,6 +56,8 @@ export const MapScreen = ({}) => {
     }
   }, [directionData]);
 
+  const isFocused = useIsFocused();
+
   const findPlaceInRoad = async (coordinates) => {
     try {
       const response = await fetch(
@@ -70,6 +76,7 @@ export const MapScreen = ({}) => {
       );
 
       const data = await response.json();
+
       // Continuez avec le traitement de la réponse
       setPlaceList(data.places);
     } catch (error) {
@@ -78,18 +85,6 @@ export const MapScreen = ({}) => {
         error
       );
     }
-  };
-
-  const addPlaceToStepList = (place) => {
-    console.log(stepList);
-    let newStepList = [...stepList];
-    // newStepList.splice(stepPosition, 0, {
-    //     "geometry": { "coordinates": [Array] },
-    //     "properties": {
-    //         "label": "2 Cours de la Vilaine 35510 Cesson-Sévigné",
-    //     } });
-
-    // setStepList();
   };
 
   // const insertCoordinate = (place) => {
@@ -189,6 +184,12 @@ export const MapScreen = ({}) => {
     bottomSheetStepsRef.current.closeBottomSheet();
   };
 
+  const closeAllBottomSheet = () => {
+    bottomSheetPlaceRef.current.closeBottomSheet();
+    bottomSheetSearchRef.current.closeBottomSheet();
+    bottomSheetStepsRef.current.closeBottomSheet();
+  };
+
   useEffect(() => {
     mapRef.current?.animateToRegion({ ...getMapRegion() });
   }, [stepList, location]);
@@ -224,9 +225,34 @@ export const MapScreen = ({}) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.backButton}>
+        <BackButton bg={colors.darkGrey} />
+      </View>
+
       <View style={styles.openBottomSheetContainer}>
-        <View style={styles.openerBottomSheetSearch} />
-        <View style={styles.openerBottomSheetSteps} />
+        <TouchableOpacity
+          onPress={() => {
+            openBottomSheetSearch();
+          }}
+        >
+          <View style={styles.openerBottomSheetSearch}>
+            <Glass color={colors.white} width={20} height={20} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            openBottomSheetSteps();
+          }}
+        >
+          <View style={styles.openerBottomSheetSteps}>
+            <Filter
+              backgroundColor="transparent"
+              color={colors.white}
+              width={50}
+              height={50}
+            />
+          </View>
+        </TouchableOpacity>
       </View>
       {location && (
         <View style={styles.containerCenter}>
@@ -262,11 +288,11 @@ export const MapScreen = ({}) => {
                 latitude: stepList[0].geometry.coordinates[1],
                 longitude: stepList[0].geometry.coordinates[0],
               }}
-              //   destination={{
-              //     latitude: stepList[stepList.length - 1].geometry.coordinates[1],
-              //     longitude:
-              //       stepList[stepList.length - 1].geometry.coordinates[0],
-              //   }}
+              destination={{
+                latitude: stepList[stepList.length - 1].geometry.coordinates[1],
+                longitude:
+                  stepList[stepList.length - 1].geometry.coordinates[0],
+              }}
               waypoints={stepList.map((step) => ({
                 latitude: step.geometry.coordinates[1],
                 longitude: step.geometry.coordinates[0],
@@ -322,7 +348,7 @@ export const MapScreen = ({}) => {
                 >
                   <View style={styles.markerContainer}>
                     <View style={styles.iconContainer}>
-                      {matchCategoryIdIcon[place.categoryPlaces[0].categoryId]}
+                      {matchCategoryIdIcon[place.categoryPlaces[0]?.categoryId]}
                     </View>
                     <View style={styles.triangle} />
                   </View>
@@ -355,24 +381,30 @@ export const MapScreen = ({}) => {
           </>
         )}
       </MapView>
-      <BottomSheetSearch
-        ref={bottomSheetSearchRef}
-        openBottomSheetSteps={openBottomSheetSteps}
-        idStepToModify={idStepToModify}
-        setIdStepToModify={setIdStepToModify}
-      />
-      <BottomSheetSteps
-        ref={bottomSheetStepsRef}
-        openBottomSheetSearch={openBottomSheetSearch}
-        duration={directionData?.duration}
-        distance={directionData?.distance}
-        setIdStepToModify={setIdStepToModify}
-      />
-      <BottomSheetPlace
-        ref={bottomSheetPlaceRef}
-        currentPlace={currentPlace}
-        openBottomSheetSteps={openBottomSheetSteps}
-      />
+      <View style={{ display: "none" }}>
+        <BottomSheetSearch
+          ref={bottomSheetSearchRef}
+          openBottomSheetSteps={openBottomSheetSteps}
+          idStepToModify={idStepToModify}
+          setIdStepToModify={setIdStepToModify}
+          display={isFocused}
+        />
+        <BottomSheetSteps
+          ref={bottomSheetStepsRef}
+          openBottomSheetSearch={openBottomSheetSearch}
+          duration={directionData?.duration}
+          distance={directionData?.distance}
+          setIdStepToModify={setIdStepToModify}
+          display={isFocused}
+        />
+        <BottomSheetPlace
+          ref={bottomSheetPlaceRef}
+          currentPlace={currentPlace}
+          openBottomSheetSteps={openBottomSheetSteps}
+          closeAllBottomSheet={closeAllBottomSheet}
+          display={isFocused}
+        />
+      </View>
     </View>
   );
 };
@@ -409,8 +441,8 @@ const styles = StyleSheet.create({
   },
   openBottomSheetContainer: {
     position: "absolute",
-    top: 75,
-    right: 30,
+    bottom: 30,
+    left: 30,
     zIndex: 2,
     flexDirection: "row",
   },
@@ -418,14 +450,18 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 50,
-    backgroundColor: "green",
+    backgroundColor: colors.darkGrey,
+    justifyContent: "center",
+    alignItems: "center",
   },
   openerBottomSheetSteps: {
     width: 50,
     height: 50,
     borderRadius: 50,
-    backgroundColor: "red",
+    backgroundColor: colors.darkGrey,
     marginLeft: 25,
+    justifyContent: "center",
+    alignItems: "center",
   },
   extremityMarker: {
     width: 15,
@@ -463,6 +499,7 @@ const styles = StyleSheet.create({
   topUserPositionPlace: {
     color: colors.white,
     fontWeight: "700",
+    fontSize: 10,
     marginLeft: 10,
   },
   topUserPositionPlaceContainer: {
@@ -473,7 +510,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderRadius: 50,
     position: "absolute",
-    bottom: 150,
+    bottom: 30,
     right: 25,
     zIndex: 2,
     width: 60,
@@ -510,5 +547,12 @@ const styles = StyleSheet.create({
     borderLeftColor: "transparent",
     borderRightColor: "transparent",
     borderTopColor: colors.black,
+  },
+  backButton: {
+    position: "absolute",
+    top: 40,
+    left: 5,
+    zIndex: 2,
+    flexDirection: "row",
   },
 });

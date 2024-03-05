@@ -22,10 +22,14 @@ export const ThumbnailPlace1 = ({
   width = 210,
   placeColor = colors.black,
   id = 1,
+  closeAllBottomSheet = null
 }) => {
   const navigation = useNavigation();
 
   const goToPlaceDetail = (id) => {
+    if(closeAllBottomSheet){
+      closeAllBottomSheet();
+    }
     navigation.navigate("PlaceScreen", { id: String(id) });
   };
 

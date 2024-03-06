@@ -2,7 +2,6 @@ import React from "react";
 import { View, Image, StyleSheet, Text } from "react-native";
 import Swiper from "react-native-swiper";
 
-// import image from "./../../assets/images/img_fond_accueil.jpg";
 import { colors } from "../../assets/styles/constants/colors";
 import { texts } from "../../assets/styles/constants/texts";
 
@@ -22,7 +21,11 @@ export const ImagesSlider = ({ images }) => {
       <Swiper style={stylesSlider.wrapper} renderPagination={renderPagination}>
         {images.map((image, index) => (
           <View key={index} style={stylesSlider.slide}>
-            <Image source={image} style={stylesSlider.image} />
+            {typeof image === "string" ? (
+              <Image source={{ uri: image }} style={stylesSlider.image} />
+            ) : (
+              <Image source={image} style={stylesSlider.image} />
+            )}
           </View>
         ))}
       </Swiper>

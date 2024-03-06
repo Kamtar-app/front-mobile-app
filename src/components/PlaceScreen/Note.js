@@ -7,13 +7,13 @@ import { Star } from "../icons/Star";
 export const Note = ({ note, total }) => {
   const starsArray = Array(5).fill(null);
 
-  const getColor = (index) => {
-    if (index < note) {
-      return colors.primary;
-    } else {
-      return colors.primaryGray;
-    }
-  };
+  // const getColor = (index) => {
+  //   if (index < note) {
+  //     return colors.primary;
+  //   } else {
+  //     return colors.primaryGray;
+  //   }
+  // };
 
   return (
     <View style={styleNote.container}>
@@ -21,7 +21,11 @@ export const Note = ({ note, total }) => {
       <View style={styleNote.stars}>
         {starsArray.map((_, index) => (
           <View key={index} style={styleNote.star}>
-            <Star color={getColor(index + 1)} size={15} />
+            {index < note ? (
+              <Star color={colors.primary} size={15} />
+            ) : (
+              <Star color={colors.primaryGray} size={15} />
+            )}
           </View>
         ))}
       </View>

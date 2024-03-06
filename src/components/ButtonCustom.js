@@ -6,23 +6,26 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { colors } from "./../assets/styles/constants/colors";
 import { texts } from "./../assets/styles/constants/texts";
 
 export const ButtonCustom = ({
   text,
   onPress = null,
+  screen = null,
   icon = null,
   color = colors.primary,
   textColor = colors.white,
 }) => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       style={[stylesButtonCustom.button, { backgroundColor: color }]}
-      onPress={onPress}
+      onPress={() => {
+        onPress ? onPress() : navigation.navigate(screen);
+      }}
     >
       <Text style={[stylesButtonCustom.textButton, { color: textColor }]}>
         {text}

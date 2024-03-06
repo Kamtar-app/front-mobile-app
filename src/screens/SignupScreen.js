@@ -47,11 +47,13 @@ export const SignupScreen = ({ navigation }) => {
           />
           <TextInputCustom
             placeholder={"Mot de passe"}
+            secureTextEntry={true}
             startIcon={<Password color="#fff" />}
             endIcon={<HiddenEye color="#fff" />}
           />
           <TextInputCustom
             placeholder={"Confirmation"}
+            secureTextEntry={true}
             startIcon={<Password color="#fff" />}
             endIcon={<HiddenEye color="#fff" />}
           />

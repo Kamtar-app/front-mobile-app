@@ -9,8 +9,14 @@ import {
 import { colors } from "../../assets/styles/constants/colors";
 import { ButtonCustom } from "../ButtonCustom";
 import { ArrowTwo } from "../icons/ArrowTwo";
+import { useNavigation } from "@react-navigation/native";
 
-export const Banner = ({}) => {
+export const Banner = ({ id }) => {
+  const navigation = useNavigation();
+  const handleNavigateToMap = () => {
+    navigation.navigate("MapScreen", { placeId: id });
+  };
+
   return (
     <View style={stylesBanner.container}>
       {/* TODO Manon : ajouter un lien vers la map */}
@@ -19,6 +25,7 @@ export const Banner = ({}) => {
           text={"Y aller"}
           icon={<ArrowTwo color="white" size={20} />}
           style={stylesBanner.button}
+          onPress={handleNavigateToMap}
         />
       </View>
     </View>

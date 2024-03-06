@@ -14,6 +14,7 @@ import { SignupScreen } from "./src/screens/SignupScreen";
 import { ChatScreen } from "./src/screens/ChatScreen";
 import { MapScreen } from "./src/screens/MapScreen";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { MessagesScreen } from "./src/screens/MessagesScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,12 +35,13 @@ export default function App() {
                 headerShown: false,
               }}
             >
+              {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
               <Stack.Screen name="MapScreen" component={MapScreen} />
               <Stack.Screen name="HomeScreen" component={HomeScreen} />
-              <Stack.Screen name="SigninScreen" component={SigninScreen} />
-              <Stack.Screen name="SignupScreen" component={SignupScreen} />
-              <Stack.Screen name="ChatScreen" component={ChatScreen} />
+              {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
+              {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
               <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
+              {/* <Stack.Screen name="MessagesScreen" component={MessagesScreen} /> */}
             </Stack.Navigator>
           </BottomSheetModalProvider>
         </NavigationContainer>

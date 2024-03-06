@@ -14,6 +14,9 @@ import { Toilet } from "../components/icons/Toilet";
 import image from "./../../assets/images/img_fond_accueil.jpg";
 import camion from "./../../assets/images/camion.jpg";
 import restaurant from "./../../assets/images/restaurant.jpg";
+import resto_2 from "./../../assets/images/resto_2.jpg";
+import resto_3 from "./../../assets/images/resto_3.jpg";
+import resto_4 from "./../../assets/images/resto_4.jpg";
 import { ImagesSlider } from "../components/PlaceScreen/ImagesSlider";
 import { Banner } from "../components/PlaceScreen/Banner";
 import { CardCharacteristic } from "../components/PlaceScreen/CardCharacteristic";
@@ -54,7 +57,7 @@ export const PlaceScreen = ({ route, navigation }) => {
   // };
 
   useEffect(() => {
-    // fetch(`http://${ADDRESS_IP}:3000/place/${id}`)
+    console.log(`${process.env.API_END_POINT}/place/${id}`);
     fetch(`${process.env.API_END_POINT}/place/${id}`)
       .then((response) => response.json())
       .then((data) => {
@@ -115,7 +118,9 @@ export const PlaceScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView ref={scrollViewRef} style={styles.containerScrollView}>
-        <ImagesSlider images={[restaurant, camion, image]} />
+        <ImagesSlider
+          images={[place?.imageUrl, restaurant, resto_2, resto_3, resto_4]}
+        />
         <BackButton />
         <LikeButton />
         <Discount text={"Sur le menu du midi"} />
@@ -163,7 +168,6 @@ export const PlaceScreen = ({ route, navigation }) => {
             style={styles.thumbnailList}
             showsHorizontalScrollIndicator={false}
           >
-            {/* TODO : continuer l'affichage dynamique des commentaires */}
             {ratesLength > 0 ? (
               rates.map((rate, index) => (
                 <AdviceCard
@@ -202,7 +206,7 @@ export const PlaceScreen = ({ route, navigation }) => {
         isSheetOpen={isSheetOpen}
         handleSheetChanges={handleSheetChanges}
       />
-      <Banner style={styles.banner} />
+      <Banner style={styles.banner} id={place?.id} />
     </View>
   );
 };
@@ -274,5 +278,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     marginHorizontal: 20,
     marginTop: 30,
+    marginBottom: 20,
   },
 });

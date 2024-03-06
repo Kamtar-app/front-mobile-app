@@ -23,6 +23,7 @@ import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
 import { useNavigation } from "@react-navigation/native";
 import { SignupScreen } from "./SignupScreen";
+import { HomeScreen } from "./HomeScreen";
 import { NavBar } from "../components/NavBar";
 
 export const SigninScreen = ({}) => {
@@ -40,6 +41,7 @@ export const SigninScreen = ({}) => {
           <TextInputCustom
             placeholder={"Mot de passe"}
             startIcon={<Password color="#fff" />}
+            secureTextEntry={true}
           />
           <TouchableOpacity
             style={styles.containerText}
@@ -49,9 +51,8 @@ export const SigninScreen = ({}) => {
           >
             <Text style={styles.text}>Mot de passe oublié ?</Text>
           </TouchableOpacity>
-          <ButtonCustom text={"Connexion"} screen={"WelcomeScreen"} />
+          <ButtonCustom text={"Connexion"} screen={"HomeScreen"} />
           <ButtonUnderlinedCustom text={"S'inscrire"} screen={"SignupScreen"} />
-          <ButtonUnderlinedCustom text={"ChatScreen"} screen={"ChatScreen"} />
         </View>
       </ImageBackground>
     </View>
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
   containerText: {
     display: "flex",
     alignItems: "flex-end",
-    marginBottom: 70
+    marginBottom: 70,
   },
   text: {
     fontSize: 17,

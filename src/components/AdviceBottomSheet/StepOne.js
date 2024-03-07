@@ -1,22 +1,13 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  ScrollView,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
-import { SearchBar } from "../HomeScreen/SearchBar";
-import { Parking } from "../icons/Parking";
-import { colors } from "../../assets/styles/constants/colors";
-import { Step } from "./Step";
+// StepOne.js
+
+import React, { useState } from "react";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Star } from "../icons/Star";
+import { colors } from "../../assets/styles/constants/colors";
 import { texts } from "../../assets/styles/constants/texts";
 import { ButtonCustom } from "../ButtonCustom";
 import { ArrowTwo } from "../icons/ArrowTwo";
+import { StepTwo } from "./StepTwo";
 
 export const StepOne = ({ handleContinuePress, step }) => {
   const [buttonEnabled, setButtonEnabled] = useState(false);
@@ -25,6 +16,10 @@ export const StepOne = ({ handleContinuePress, step }) => {
   const handleStarPress = (selectedRating) => {
     setRating(selectedRating);
     setButtonEnabled(true);
+  };
+
+  const handlePress = () => {
+    handleContinuePress(rating, "");
   };
 
   const renderStars = () => {
@@ -45,11 +40,11 @@ export const StepOne = ({ handleContinuePress, step }) => {
   return (
     <>
       <View style={styles.marge}>
-        <Step ActiveStep={step} />
+        {/* <Step ActiveStep={step} /> */}
         <Text style={styles.title}>Comment était votre lieu d'arrivé ?</Text>
         <View style={styles.starContainer}>{renderStars()}</View>
         <Text style={styles.textContainer}>
-          Évaluez votre éxperience pour aider les autres conducteurs à trouver
+          Évaluez votre expérience pour aider les autres conducteurs à trouver
           un lieu.
         </Text>
       </View>
@@ -57,14 +52,18 @@ export const StepOne = ({ handleContinuePress, step }) => {
         <ButtonCustom
           text={"Continuer"}
           icon={
-            <ArrowTwo color={rating > 0 ? colors.white : colors.darkWhite} />
+            <ArrowTwo color={buttonEnabled ? colors.white : colors.darkWhite} />
           }
-          color={rating > 0 ? colors.primary : colors.primaryGray}
-          textColor={rating > 0 ? colors.white : colors.darkWhite}
-          onPress={handleContinuePress}
-          disabled={rating > 0 ? buttonEnabled : !buttonEnabled}
+          color={buttonEnabled ? colors.primary : colors.primaryGray}
+          textColor={buttonEnabled ? colors.white : colors.darkWhite}
+          onPress={handlePress}
+          disabled={!buttonEnabled}
         />
-        <ButtonCustom text={"Évaluer plus tard"} color={colors.darkGrey2} />
+        <ButtonCustom
+          text={"Évaluer plus tard"}
+          color={colors.darkGrey2}
+          onPress={() => handleContinuePress(0)}
+        />
       </View>
     </>
   );

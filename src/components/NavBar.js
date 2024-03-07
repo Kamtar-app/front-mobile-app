@@ -12,7 +12,7 @@ export const NavBar = () => {
   const { activeLink, setActiveLink } = useContext(AppContext);
 
   const isActive = (screen) => {
-    console.log(activeLink, screen);
+    // console.log(activeLink, screen);
     return activeLink === screen;
   };
 
@@ -24,12 +24,14 @@ export const NavBar = () => {
     },
     {
       active: isActive(Routes.MapScreen),
-      action: () => setActiveLink(Routes.MapScreen),
+      // action: () => setActiveLink(Routes.MapScreen),
+      action: "MapScreen",
       component: (props) => <Map {...props} />,
     },
     {
       active: isActive(Routes.ConversationScreen),
-      action: () => setActiveLink(Routes.ConversationScreen),
+      // action: () => setActiveLink(Routes.ConversationScreen),
+      action: "ChatScreen",
       component: (props) => <Conversation {...props} />,
     },
     {

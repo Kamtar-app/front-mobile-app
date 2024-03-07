@@ -1,5 +1,5 @@
 export const calculateDistance = (lat1, lon1, lat2, lon2) => {
-  console.log(lat1, lon1, lat2, lon2);
+  // console.log(lat1, lon1, lat2, lon2);
   // Rayon moyen de la Terre en kilomètres
   const R = 6371;
 

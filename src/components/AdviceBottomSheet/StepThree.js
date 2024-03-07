@@ -21,8 +21,8 @@ import { Image } from "react-native-svg";
 
 export const StepThree = ({ handleContinuePress, step, handleClose }) => {
   const handleClosePress = () => {
-    // handleClose();
-    // handleContinuePress();
+    handleClose();
+    handleContinuePress();
   };
 
   return (

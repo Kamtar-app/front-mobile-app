@@ -206,10 +206,19 @@ export const HomeScreen = ({}) => {
               <ThumbnailPlace1
                 key={index}
                 imageURL={placeShuffle.imageUrl}
-                city={`${placeShuffle.city} • ${placeShuffle.distance} KM`}
+                city={`${placeShuffle.city} • ${
+                  location
+                    ? calculateDistance(
+                        location.latitude,
+                        location.longitude,
+                        placeShuffle.latitude,
+                        placeShuffle.longitude
+                      ) + " KM"
+                    : ""
+                }`}
                 name={placeShuffle.name}
                 type={placeShuffle.type}
-                average={rateAverages[placeShuffle.id]}
+                average={rateAverages[placeShuffle.id]?.toFixed(2)}
                 id={placeShuffle.id}
               />
             ))}

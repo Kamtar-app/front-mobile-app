@@ -181,7 +181,7 @@ export const PlaceScreen = ({ route, navigation }) => {
                 />
               ))
             ) : (
-              <Text>
+              <Text style={styles.padding}>
                 Il n'y a pas encore de commentaires pour ce point d'intérêt.
               </Text>
             )}
@@ -205,6 +205,7 @@ export const PlaceScreen = ({ route, navigation }) => {
         bottomSheetModal={bottomSheetModalRef}
         isSheetOpen={isSheetOpen}
         handleSheetChanges={handleSheetChanges}
+        placeId={place?.id}
       />
       <Banner style={styles.banner} id={place?.id} />
     </View>

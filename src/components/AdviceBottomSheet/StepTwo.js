@@ -1,19 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  ScrollView,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
-import { SearchBar } from "../HomeScreen/SearchBar";
-import { Parking } from "../icons/Parking";
+// StepTwo.js
+
+import React, { useState } from "react";
+import { View, StyleSheet, Text, TextInput } from "react-native";
 import { colors } from "../../assets/styles/constants/colors";
-import { Step } from "./Step";
-import { Star } from "../icons/Star";
 import { texts } from "../../assets/styles/constants/texts";
 import { ButtonCustom } from "../ButtonCustom";
 import { ArrowTwo } from "../icons/ArrowTwo";
@@ -22,14 +11,14 @@ export const StepTwo = ({ handleContinuePress, step }) => {
   const [commentContent, setCommentContent] = useState("");
 
   const handlePress = () => {
-    // Appeler la fonction de manipulation du bouton de l'extérieur
-    handleContinuePress(commentContent);
+    handleContinuePress("", commentContent);
+    // console.log(commentContent);
   };
 
   return (
     <>
       <View style={styles.marge}>
-        <Step ActiveStep={step} />
+        {/* <Step ActiveStep={step} /> */}
         <Text style={styles.title}>
           Que devraient savoir les autres conducteurs ?
         </Text>
@@ -53,7 +42,6 @@ export const StepTwo = ({ handleContinuePress, step }) => {
           text={"Continuer"}
           icon={<ArrowTwo color={colors.white} />}
           onPress={handlePress}
-          // onPress={handleContinuePress}
         />
       </View>
     </>
@@ -63,6 +51,7 @@ export const StepTwo = ({ handleContinuePress, step }) => {
 const styles = StyleSheet.create({
   marge: {
     justifyContent: "center",
+    marginHorizontal: 24,
   },
   title: {
     color: colors.white,

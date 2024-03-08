@@ -11,8 +11,6 @@ import { Restaurant } from "../components/icons/Restaurant";
 import { Parking } from "../components/icons/Parking";
 import { Shower } from "../components/icons/Shower";
 import { Toilet } from "../components/icons/Toilet";
-import image from "./../../assets/images/img_fond_accueil.jpg";
-import camion from "./../../assets/images/camion.jpg";
 import restaurant from "./../../assets/images/restaurant.jpg";
 import resto_2 from "./../../assets/images/resto_2.jpg";
 import resto_3 from "./../../assets/images/resto_3.jpg";
@@ -56,6 +54,16 @@ export const PlaceScreen = ({ route, navigation }) => {
   //   }
   // };
 
+  const request = () => {
+    console.log("je suis dans request");
+    fetch(`${process.env.API_END_POINT}/rate/place/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setRates(data);
+      })
+      .catch((error) => console.error("Error fetching rate details:", error));
+  };
+
   useEffect(() => {
     console.log(`${process.env.API_END_POINT}/place/${id}`);
     fetch(`${process.env.API_END_POINT}/place/${id}`)
@@ -65,12 +73,7 @@ export const PlaceScreen = ({ route, navigation }) => {
       })
       .catch((error) => console.error("Error fetching place details:", error));
 
-    fetch(`${process.env.API_END_POINT}/rate/place/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setRates(data);
-      })
-      .catch((error) => console.error("Error fetching rate details:", error));
+    request();
   }, []);
 
   const fetchUserData = (userId) => {
@@ -206,6 +209,7 @@ export const PlaceScreen = ({ route, navigation }) => {
         isSheetOpen={isSheetOpen}
         handleSheetChanges={handleSheetChanges}
         placeId={place?.id}
+        request={request}
       />
       <Banner style={styles.banner} id={place?.id} />
     </View>

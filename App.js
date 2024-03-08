@@ -37,9 +37,9 @@ export default function App() {
             >
               {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
               <Stack.Screen name="HomeScreen" component={HomeScreen} />
-              {/* <Stack.Screen name="MapScreen" component={MapScreen} /> */}
+              <Stack.Screen name="MapScreen" component={MapScreen} />
               {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
-              {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
+              <Stack.Screen name="ChatScreen" component={ChatScreen} />
               <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
               {/* <Stack.Screen name="MessagesScreen" component={MessagesScreen} /> */}
             </Stack.Navigator>

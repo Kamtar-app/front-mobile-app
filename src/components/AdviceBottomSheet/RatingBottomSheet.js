@@ -17,12 +17,13 @@ import { colors } from "../../assets/styles/constants/colors";
 import { StepOne } from "./StepOne";
 import { StepTwo } from "./StepTwo";
 import { StepThree } from "./StepThree";
+import RNRestart from "react-native-restart";
 
 export const RatingBottomSheet = ({
   bottomSheetModal,
-  // isSheetOpen,
   handleSheetChanges,
   placeId,
+  request,
 }) => {
   // const bottomSheetModalRef = useRef(bottomSheetModal);
   const snapPoints = useMemo(() => ["62%"], []);
@@ -36,9 +37,6 @@ export const RatingBottomSheet = ({
   };
 
   useEffect(() => {
-    console.log(rate);
-    console.log(placeId);
-    console.log("comment " + comment);
     if (rate && comment) {
       try {
         fetch(`${process.env.API_END_POINT}/rate`, {
@@ -59,7 +57,7 @@ export const RatingBottomSheet = ({
                 "La requête a échoué avec un statut " + response.status
               );
             }
-            return response.json(); // Renvoie une promesse résolue avec le corps de la réponse
+            return response.json();
           })
           .then((responseData) => {
             console.log(responseData);
@@ -117,6 +115,7 @@ export const RatingBottomSheet = ({
             handleContinuePress={handleContinuePress}
             step={currentStep}
             handleClose={handleCloseSheet}
+            request={request}
           />
         );
       default:

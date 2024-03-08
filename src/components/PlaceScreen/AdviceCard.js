@@ -14,6 +14,14 @@ export const AdviceCard = ({
 }) => {
   const starsArray = Array(5).fill(null);
 
+  const formatDate = (dateString) => {
+    const options = { month: "long", year: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("fr-FR", options);
+  };
+
+  const formattedDate = formatDate(dateMember);
+
   return (
     <View style={styleAdviceCard.container}>
       <View style={styleAdviceCard.dateContainer}>
@@ -36,7 +44,7 @@ export const AdviceCard = ({
         <View style={styleAdviceCard.memberContainer}>
           <Text style={styleAdviceCard.text}>{name}</Text>
           <Text style={styleAdviceCard.dateMember}>
-            Membre depuis {dateMember}
+            Membre depuis {formattedDate}
           </Text>
         </View>
       </View>

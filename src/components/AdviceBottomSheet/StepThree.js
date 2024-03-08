@@ -19,11 +19,24 @@ import { ButtonCustom } from "../ButtonCustom";
 import { ArrowTwo } from "../icons/ArrowTwo";
 import { Image } from "react-native-svg";
 
-export const StepThree = ({ handleContinuePress, step, handleClose }) => {
+export const StepThree = ({
+  handleContinuePress,
+  step,
+  handleClose,
+  request,
+}) => {
+  // const [reload, setReload] = useState(false);
+
   const handleClosePress = () => {
     handleClose();
     handleContinuePress();
+    request();
+    // setReload(true);
   };
+
+  // useEffect(() => {
+  //   request();
+  // }, [reload]);
 
   return (
     <>

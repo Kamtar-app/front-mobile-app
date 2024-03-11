@@ -13,6 +13,7 @@ import { SigninScreen } from "./src/screens/SigninScreen";
 import { SignupScreen } from "./src/screens/SignupScreen";
 import { ChatScreen } from "./src/screens/ChatScreen";
 import { MapScreen } from "./src/screens/MapScreen";
+import { ListPlaceScreen } from "./src/screens/ListPlaceScreen";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { MessagesScreen } from "./src/screens/MessagesScreen";
 
@@ -37,6 +38,10 @@ export default function App() {
             >
               {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
               <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen
+                name="ListPlaceScreen"
+                component={ListPlaceScreen}
+              />
               {/* <Stack.Screen name="MapScreen" component={MapScreen} /> */}
               {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
               {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}

@@ -10,7 +10,7 @@ import { colors } from "../../assets/styles/constants/colors";
 import { texts } from "../../assets/styles/constants/texts";
 import { Glass } from "../icons/Glass";
 
-export const SearchBar = ({
+export const SearchBar2 = ({
   setSearchText,
   searchText,
   endIcon = null,
@@ -49,7 +49,7 @@ const stylestextInputCustom = StyleSheet.create({
     fontSize: 17,
   },
   searchSection: {
-    flex: 1,
+    // flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -63,11 +63,12 @@ const stylestextInputCustom = StyleSheet.create({
   //     top: 0,
   //   },
   inputContainer: {
-    width: "75%",
+    // width: "10%",
     backgroundColor: "#E0E0E0",
     borderRadius: 35,
     marginBottom: 20,
     marginHorizontal: 20,
+    marginTop: 100,
   },
   input: {
     padding: 10,

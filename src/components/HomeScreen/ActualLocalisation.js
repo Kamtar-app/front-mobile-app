@@ -17,11 +17,7 @@ export const ActualLocalisation = ({ localisation }) => {
             </Text>
             <View style={stylesActualLocalisation.iconContainer}>
                 <PingLocalisation color={colors.black} />
-                {/* <Image
-                    source={require("../../assets/icon.png")}
-                    style={stylesActualLocalisation.icon}
-                /> */}
-                <Text style={stylesActualLocalisation.label}>{localisation}</Text>
+                <Text style={stylesActualLocalisation.label}>{localisation ? localisation : "Recherche en cours..."}</Text>
             </View>
         </View>
     );

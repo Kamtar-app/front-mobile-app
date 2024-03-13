@@ -77,6 +77,7 @@ export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps
                 width={"100%"}
                 placeColor={colors.white}
                 closeAllBottomSheet={closeAllBottomSheet}
+                id={currentPlace.id}
               />
               <View style={{ marginTop: 90, width: "100%", marginRight: 15 }}>
                 <ButtonCustom text={"Ajouter à mon trajet"} onPress={() => addPlaceToStepList()}></ButtonCustom>

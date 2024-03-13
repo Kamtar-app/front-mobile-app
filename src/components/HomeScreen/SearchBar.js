@@ -16,6 +16,7 @@ export const SearchBar = ({
   endIcon = null,
   openBottomSheet = null,
   placeholder = "Où allons nous ?",
+  width = null
 }) => {
   const handleTextInputFocus = () => {
     if (openBottomSheet) {
@@ -24,7 +25,7 @@ export const SearchBar = ({
   };
 
   return (
-    <View style={stylestextInputCustom.inputContainer}>
+    <View style={width === null ? [stylestextInputCustom.inputContainer] : [stylestextInputCustom.inputContainer, { width: width }]}>
       <View style={stylestextInputCustom.containerIcon}>
         <Glass color={colors.grey} />
       </View>
@@ -63,7 +64,7 @@ const stylestextInputCustom = StyleSheet.create({
   //     top: 0,
   //   },
   inputContainer: {
-    width: "75%",
+    // width: "100%",
     backgroundColor: "#E0E0E0",
     borderRadius: 35,
     marginBottom: 20,

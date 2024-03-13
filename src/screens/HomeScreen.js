@@ -28,15 +28,18 @@ import { ThumbnailPlace1 } from "../components/ThumbnailPlace1";
 import { ThumbnailPlace2 } from "../components/HomeScreen/ThumbnailPlace2";
 import { NavBar } from "../components/NavBar";
 import { BottomSheetSearch } from "../components/BottomSheetSearch/BottomSheetSearch";
-import { calculateDistance } from "../utils/location";
+import { calculateDistance, searchCurrentLocationString } from "../utils/location";
 import { AppContext } from "../context/AppContext";
+import { useNavigation } from "@react-navigation/native";
 
-export const HomeScreen = ({}) => {
+export const HomeScreen = ({ }) => {
   const [places, setPlaces] = useState([]);
   const [placesShuffle, setPlacesShuffle] = useState([]);
   const [rateAverages, setRateAverages] = useState({});
   const [distance, setDistance] = useState({});
+  const [currentLocationString, setCurrentLocationString] = useState();
   const { location } = useContext(AppContext);
+  const navigation = useNavigation();
 
   useEffect(() => {
     console.log(`${process.env.API_END_POINT}/place/`);
@@ -95,12 +98,30 @@ export const HomeScreen = ({}) => {
     fetchRateAverages();
   }, [places]);
 
+  useEffect(() => {
+    if (location) {
+      findCurrentLocation(location)
+    }
+  }, [location])
+
+  const findCurrentLocation = async (locationData) => {
+    setCurrentLocationString(await searchCurrentLocationString(locationData));
+  };
+
+  const handleNavigateToMapScreen = () => {
+    navigation.navigate("MapScreen");
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
-        <ActualLocalisation localisation={"Rennes, FR"} />
+        <ActualLocalisation localisation={currentLocationString} />
         <WelcomeMessage />
-        <SearchBar />
+        <TouchableOpacity onPress={() => handleNavigateToMapScreen()}>
+          <View pointerEvents="none">
+            <SearchBar />
+          </View>
+        </TouchableOpacity>
         <View style={{ height: 100, marginBottom: 40 }}>
           <ScrollView
             horizontal={true}
@@ -177,16 +198,15 @@ export const HomeScreen = ({}) => {
               <ThumbnailPlace1
                 key={index}
                 imageURL={place.imageUrl}
-                city={`${place.city} • ${
-                  location
-                    ? calculateDistance(
-                        location.latitude,
-                        location.longitude,
-                        place.latitude,
-                        place.longitude
-                      ) + " KM"
-                    : ""
-                }`}
+                city={`${place.city} • ${location
+                  ? calculateDistance(
+                    location.latitude,
+                    location.longitude,
+                    place.latitude,
+                    place.longitude
+                  ) + " KM"
+                  : ""
+                  }`}
                 name={place.name}
                 type={place.type}
                 average={rateAverages[place.id]?.toFixed(2)}
@@ -207,16 +227,15 @@ export const HomeScreen = ({}) => {
               <ThumbnailPlace1
                 key={index}
                 imageURL={placeShuffle.imageUrl}
-                city={`${placeShuffle.city} • ${
-                  location
-                    ? calculateDistance(
-                        location.latitude,
-                        location.longitude,
-                        placeShuffle.latitude,
-                        placeShuffle.longitude
-                      ) + " KM"
-                    : ""
-                }`}
+                city={`${placeShuffle.city} • ${location
+                  ? calculateDistance(
+                    location.latitude,
+                    location.longitude,
+                    placeShuffle.latitude,
+                    placeShuffle.longitude
+                  ) + " KM"
+                  : ""
+                  }`}
                 name={placeShuffle.name}
                 type={placeShuffle.type}
                 average={rateAverages[placeShuffle.id]?.toFixed(2)}

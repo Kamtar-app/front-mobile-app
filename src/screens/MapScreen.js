@@ -22,18 +22,20 @@ import { Parking } from "../components/icons/Parking";
 import { Fuel } from "../components/icons/Fuel";
 import { Shower } from "../components/icons/Shower";
 import { Toilet } from "../components/icons/Toilet";
-import { calculateDistance } from "../utils/location";
+import { calculateDistance, FRANCE_DEFAULT_LOCATION, searchCurrentLocationString } from "../utils/location";
 import { Glass } from "../components/icons/Glass";
 import { Filter } from "../components/icons/Filter";
 import { BackButton } from "../components/BackButton";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
 import { Garage } from "../components/icons/Garage";
 import { CarWash } from "../components/icons/CarWash";
 import { Truck } from "../components/icons/Truck";
 import { matchCategoryIdIcon } from "../utils/icon";
 
-
 export const MapScreen = ({ }) => {
+    const route = useRoute();
+    const placeId = route.params?.placeId;
+
     const bottomSheetSearchRef = useRef();
     const bottomSheetStepsRef = useRef();
     const bottomSheetPlaceRef = useRef();
@@ -53,20 +55,38 @@ export const MapScreen = ({ }) => {
         fetchUsers();
     }, []);
 
-  useEffect(() => {
-    if (directionData) {
-      findPlaceInRoad(directionData.coordinates);
+    useEffect(() => {
+        if (placeId) {
+            fetchPlaceById(placeId);
+        }
+    }, [route]);
+
+
+    const fetchPlaceById = async (id) => {
+        fetch(`${process.env.API_END_POINT}/place/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                insertCoordinate(data);
+            })
+            .catch((error) => console.error("Error fetching place details:", error));
     }
-  }, [directionData]);
 
     useEffect(() => {
-        mapRef.current?.animateToRegion({ ...getMapRegion() })
+        if (directionData) {
+            findPlaceInRoad(directionData.coordinates);
+        }
+    }, [directionData]);
+
+    useEffect(() => {
+        if(stepList && location){
+            mapRef.current?.animateToRegion({ ...getMapRegion() })
+        }
     }, [stepList, location])
 
 
     useEffect(() => {
         if (location) {
-            searchCurrentLocation(location)
+            findCurrentLocation(location)
         }
     }, [location])
 
@@ -85,34 +105,34 @@ export const MapScreen = ({ }) => {
         }
     }, [stepList])
 
-  const findPlaceInRoad = async (coordinates) => {
-    try {
-      const response = await fetch(
-        `${process.env.API_END_POINT}/place/place-around-many-coordinates`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            maxDistance: 30,
-            coordinateList: coordinates,
-          }),
+    const findPlaceInRoad = async (coordinates) => {
+        try {
+            const response = await fetch(
+                `${process.env.API_END_POINT}/place/place-around-many-coordinates`,
+                {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        maxDistance: 30,
+                        coordinateList: coordinates,
+                    }),
+                }
+            );
+
+            const data = await response.json();
+
+            // Continuez avec le traitement de la réponse
+            setPlaceList(data.places);
+        } catch (error) {
+            console.error(
+                "Erreur lors de la récupération des données de l'API",
+                error
+            );
         }
-      );
-
-      const data = await response.json();
-
-      // Continuez avec le traitement de la réponse
-      setPlaceList(data.places);
-    } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des données de l'API",
-        error
-      );
-    }
-  };
+    };
 
     const insertCoordinate = (place) => {
         console.log(place);
@@ -136,62 +156,39 @@ export const MapScreen = ({ }) => {
         setStepList(newStepList);
     }
 
-    // Au clic dessus on renvoi sur la page du lieu
-    // Au chargement de la position du mec il faut faire une requête pour avoir les lieux à proximité (+ ou -50km)
-    // Les afficher sur la carte
-    // Ajouter des lieux autour de Rennes dans la base
-    // Lier toutes les pages et tous les bouttons et vérifier le parcours de démo
+    const findCurrentLocation = async (locationData) => {
+        setCurrentLocationString(await searchCurrentLocationString(locationData));
+    };
 
     useEffect(() => {
-        if (location) {
-            searchCurrentLocation(location)
+        if (stepList.length >= 2) {
+            setStepListExtremity({
+                start: {
+                    latitude: stepList[0].geometry.coordinates[1],
+                    longitude: stepList[0].geometry.coordinates[0],
+                },
+                end: {
+                    latitude: stepList[stepList.length - 1].geometry.coordinates[1],
+                    longitude: stepList[stepList.length - 1].geometry.coordinates[0],
+                },
+            });
         }
-    }, [location])
+    }, [stepList]);
 
+    const openBottomSheetSearch = () => {
+        bottomSheetSearchRef.current.openBottomSheet();
+    };
 
-    const searchCurrentLocation = async (locationData) => {
+    const openBottomSheetSteps = () => {
+        bottomSheetStepsRef.current.openBottomSheet();
+    };
 
-        try {
-            const response = await fetch(`${process.env.API_GOUV_END_POINT}/reverse/?lon=${locationData.longitude}&lat=${locationData.latitude}&limit=1`);
-            const data = await response.json();
-            if (data.features) {
-                setCurrentLocationString(data.features[0].properties.context);
-            }
-        } catch (error) {
-            console.error("Erreur lors de la récupération des données de l'API", error);
-        }
-    }
-  };
-
-  useEffect(() => {
-    if (stepList.length >= 2) {
-      setStepListExtremity({
-        start: {
-          latitude: stepList[0].geometry.coordinates[1],
-          longitude: stepList[0].geometry.coordinates[0],
-        },
-        end: {
-          latitude: stepList[stepList.length - 1].geometry.coordinates[1],
-          longitude: stepList[stepList.length - 1].geometry.coordinates[0],
-        },
-      });
-    }
-  }, [stepList]);
-
-  const openBottomSheetSearch = () => {
-    bottomSheetSearchRef.current.openBottomSheet();
-  };
-
-  const openBottomSheetSteps = () => {
-    bottomSheetStepsRef.current.openBottomSheet();
-  };
-
-  const openBottomSheetPlace = (place) => {
-    setCurrentPlace(place);
-    bottomSheetPlaceRef.current.openBottomSheet();
-    bottomSheetSearchRef.current.closeBottomSheet();
-    bottomSheetStepsRef.current.closeBottomSheet();
-  };
+    const openBottomSheetPlace = (place) => {
+        setCurrentPlace(place);
+        bottomSheetPlaceRef.current.openBottomSheet();
+        bottomSheetSearchRef.current.closeBottomSheet();
+        bottomSheetStepsRef.current.closeBottomSheet();
+    };
 
     const closeAllBottomSheet = () => {
         bottomSheetPlaceRef.current.closeBottomSheet();
@@ -199,30 +196,26 @@ export const MapScreen = ({ }) => {
         bottomSheetStepsRef.current.closeBottomSheet();
     }
 
-    useEffect(() => {
-        mapRef.current?.animateToRegion({ ...getMapRegion() })
-    }, [stepList, location])
+    const getMapRegion = () => {
+        if (stepList.length < 2) {
+            return location
+                ? {
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    latitudeDelta: 1,
+                    longitudeDelta: 1,
+                }
+                : {};
+        }
 
-  const getMapRegion = () => {
-    if (stepList.length < 2) {
-      return location
-        ? {
-            latitude: location.latitude,
-            longitude: location.longitude,
-            latitudeDelta: 1,
-            longitudeDelta: 1,
-          }
-        : {};
-    }
+        // Calculer la région qui englobe tout le trajet
+        const allLatitudes = stepList.map((step) => step.geometry.coordinates[1]);
+        const allLongitudes = stepList.map((step) => step.geometry.coordinates[0]);
 
-    // Calculer la région qui englobe tout le trajet
-    const allLatitudes = stepList.map((step) => step.geometry.coordinates[1]);
-    const allLongitudes = stepList.map((step) => step.geometry.coordinates[0]);
-
-    const minLat = Math.min(...allLatitudes);
-    const maxLat = Math.max(...allLatitudes);
-    const minLon = Math.min(...allLongitudes);
-    const maxLon = Math.max(...allLongitudes);
+        const minLat = Math.min(...allLatitudes);
+        const maxLat = Math.max(...allLatitudes);
+        const minLon = Math.min(...allLongitudes);
+        const maxLon = Math.max(...allLongitudes);
 
         return {
             latitude: (minLat + maxLat) / 2,
@@ -247,65 +240,66 @@ export const MapScreen = ({ }) => {
             });
     };
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.backButton}>
-        <BackButton bg={colors.darkGrey} />
-      </View>
-
-      <View style={styles.openBottomSheetContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            openBottomSheetSearch();
-          }}
-        >
-          <View style={styles.openerBottomSheetSearch}>
-            <Glass color={colors.white} width={20} height={20} />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            openBottomSheetSteps();
-          }}
-        >
-          <View style={styles.openerBottomSheetSteps}>
-            <Filter
-              backgroundColor="transparent"
-              color={colors.white}
-              width={50}
-              height={50}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-      {location && (
-        <View style={styles.containerCenter}>
-          <View style={styles.topUserPosition}>
-            <Text style={styles.topUserPositionLabel}>
-              Localisation actuelle
-            </Text>
-            <View style={styles.topUserPositionPlaceContainer}>
-              <PinPlain />
-              <Text style={styles.topUserPositionPlace}>
-                {currentLocationString}
-              </Text>
+    return (
+        <View style={styles.container}>
+            <View style={styles.backButton}>
+                <BackButton bg={colors.darkGrey} />
             </View>
-          </View>
-        </View>
-      )}
-      <View style={styles.containerBottomRigth}>
-        <View style={styles.containerBottomCenter}>
-          <Plus width={32}></Plus>
-        </View>
-      </View>
+
+            <View style={styles.openBottomSheetContainer}>
+                <TouchableOpacity
+                    onPress={() => {
+                        openBottomSheetSearch();
+                    }}
+                >
+                    <View style={styles.openerBottomSheetSearch}>
+                        <Glass color={colors.white} width={20} height={20} />
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        openBottomSheetSteps();
+                    }}
+                >
+                    <View style={styles.openerBottomSheetSteps}>
+                        <Filter
+                            backgroundColor="transparent"
+                            color={colors.white}
+                            width={50}
+                            height={50}
+                        />
+                    </View>
+                </TouchableOpacity>
+            </View>
+            {location && (
+                <View style={styles.containerCenter}>
+                    <View style={styles.topUserPosition}>
+                        <Text style={styles.topUserPositionLabel}>
+                            Localisation actuelle
+                        </Text>
+                        <View style={styles.topUserPositionPlaceContainer}>
+                            <PinPlain />
+                            <Text style={styles.topUserPositionPlace}>
+                                {currentLocationString}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            )}
+            <View style={styles.containerBottomRigth}>
+                <View style={styles.containerBottomCenter}>
+                    <Plus width={32}></Plus>
+                </View>
+            </View>
 
             <MapView
                 style={styles.map}
                 customMapStyle={mapStyle}
                 provider={PROVIDER_GOOGLE}
                 ref={mapRef}
+                initialRegion={FRANCE_DEFAULT_LOCATION}
             >
-                {stepList.length >= 2 &&
+                {location && stepList.length >= 2 &&
                     <>
                         <MapViewDirections
                             origin={{ latitude: stepList[0].geometry.coordinates[1], longitude: stepList[0].geometry.coordinates[0] }}

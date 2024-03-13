@@ -5,8 +5,9 @@ import { Star } from "../icons/Star";
 import { colors } from "../../assets/styles/constants/colors";
 import mapStyle from "./../../../map-style.json";
 import { Restaurant } from "../icons/Restaurant";
+import { matchCategoryIdIcon } from "../../utils/icon";
 
-export const Map = ({ lat, long }) => {
+export const Map = ({ lat, long, categoryId }) => {
   if (!lat || !long) {
     return null;
   }
@@ -29,12 +30,12 @@ export const Map = ({ lat, long }) => {
         {/* Marqueur de lieu */}
         <Marker
           coordinate={{ latitude: lat, longitude: long }}
-          // title="Emplacement"
-          // description="Description de l'emplacement"
+        // title="Emplacement"
+        // description="Description de l'emplacement"
         >
           <View style={styles.markerContainer}>
             <View style={styles.iconContainer}>
-              <Restaurant size={25} />
+              {matchCategoryIdIcon[categoryId]}
             </View>
             <View style={styles.triangle} />
           </View>

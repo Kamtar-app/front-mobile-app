@@ -1,10 +1,10 @@
 import { ClipPath, Defs, Path, Rect, Svg } from "react-native-svg";
 
-export const Parking = ({ color = "white" }) => (
-  <Svg width="35" height="35" viewBox="0 0 35 35">
+export const Parking = ({ color = "white", size = 35 }) => (
+  <Svg width={size} height={size} viewBox="0 0 35 35">
     <Defs>
       <ClipPath id="clip0_46_2589">
-        <Rect width="35" height="35" fill={color} />
+        <Rect width={size} height={size} fill={color} />
       </ClipPath>
     </Defs>
     <Path

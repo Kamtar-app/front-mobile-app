@@ -54,6 +54,10 @@ export const BottomSheetSearch = forwardRef(
     const [searchResults, setSearchResults] = useState([]);
     const { location, stepList, setStepList } = useContext(AppContext);
 
+    useImperativeHandle(ref, () => ({
+        openBottomSheet, closeBottomSheet
+    }));
+
     useEffect(() => {
       addCurrentLocationToStep();
     }, [, location]);
@@ -72,7 +76,6 @@ export const BottomSheetSearch = forwardRef(
     };
 
     const openBottomSheet = () => {
-      console.log("pkkkk");
       bottomSheetModalRef.current.present();
       bottomSheetModalRef.current.expand();
     };

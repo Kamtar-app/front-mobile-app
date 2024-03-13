@@ -1,10 +1,10 @@
 import * as React from "react"
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg"
 
-export const Truck = () => (
+export const Truck = ({ size = 35 }) => (
     <Svg
-        width={35}
-        height={35}
+        width={size}
+        height={size}
         viewBox="0 0 35 35"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

@@ -12,10 +12,14 @@ import { calculateDistance } from '../utils/location';
 import { ButtonCustom } from './ButtonCustom';
 import { Arrow } from './icons/Arrow';
 
-export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps, closeAllBottomSheet, addToStepList, display }, ref) => {
+export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps, closeAllBottomSheet, insertCoordinate, display }, ref) => {
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ['53%'], []);
   const { location } = useContext(AppContext);
+
+  useImperativeHandle(ref, () => ({
+    openBottomSheet, closeBottomSheet
+  }));
 
   const formatCategoriesPlaceNames = () => {
     if (currentPlace.categoryPlaces) {
@@ -35,14 +39,15 @@ export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps
     bottomSheetModalRef.current.dismiss();
   };
 
-  useImperativeHandle(ref, () => ({
-    openBottomSheet, closeBottomSheet
-  }));
-
   const handleChangeState = (modalState) => {
     if (modalState === -1) {
       openBottomSheetSteps();
     }
+  }
+
+  const addPlaceToStepList = () => {
+    insertCoordinate(currentPlace);
+    closeBottomSheet();
   }
 
   return (
@@ -74,7 +79,7 @@ export const BottomSheetPlace = forwardRef(({ currentPlace, openBottomSheetSteps
                 closeAllBottomSheet={closeAllBottomSheet}
               />
               <View style={{ marginTop: 90, width: "100%", marginRight: 15 }}>
-                <ButtonCustom text={"Ajouter à mon trajet"}></ButtonCustom>
+                <ButtonCustom text={"Ajouter à mon trajet"} onPress={() => addPlaceToStepList()}></ButtonCustom>
               </View>
             </View>
           </>

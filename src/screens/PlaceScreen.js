@@ -197,7 +197,7 @@ export const PlaceScreen = ({ route, navigation }) => {
             <Text style={styles.location}>{place?.address}</Text>
           </View>
           <View style={styles.map}>
-            <Map lat={place?.latitude} long={place?.longitude} />
+            {place &&  <Map lat={place.latitude} long={place.longitude} categoryId={place.categoryPlaces[0].categoryId} />}
           </View>
         </View>
       </ScrollView>

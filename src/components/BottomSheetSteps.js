@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { View, Image, StyleSheet, Text, ScrollView, Button, TextInput, TouchableOpacity, FlatList } from "react-native";
+import { View, Image, StyleSheet, Text, ScrollView, Button, TextInput, TouchableOpacity, FlatList, Linking } from "react-native";
 
 import { colors } from "../assets/styles/constants/colors";
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
@@ -17,9 +17,9 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
   const bottomSheetModalRef = useRef(null);
   const { stepList, setStepList } = useContext(AppContext);
 
-  useEffect(() => {
-    bottomSheetModalRef.current.present();
-  }, []);
+  useImperativeHandle(ref, () => ({
+    openBottomSheet, closeBottomSheet
+  }));
 
   const openBottomSheet = () => {
     bottomSheetModalRef.current.present();
@@ -30,10 +30,6 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
     bottomSheetModalRef.current.dismiss();
     bottomSheetModalRef.current.close();
   };
-
-  useImperativeHandle(ref, () => ({
-    openBottomSheet, closeBottomSheet
-  }));
 
   const getLabelStep = (stepId) => {
     switch (stepId) {
@@ -84,6 +80,21 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
     openBottomSheetSearch()
   }
 
+  const openGoogleMaps = () => {
+    const destination = stepList[stepList.length - 1].geometry.coordinates;
+    const origin = stepList[0].geometry.coordinates;
+    const steps = stepList.slice(1, stepList.length - 1).map(step => step.geometry.coordinates);
+
+    const originString = `${origin[1]},${origin[0]}`;
+    const destinationString = `${destination[1]},${destination[0]}`;
+    const stepsString = steps.map(step => `${step[1]},${step[0]}`).join('|');
+
+    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${originString}&destination=${destinationString}&waypoints=${stepsString}&travelmode=driving&dir_action=navigate`;
+
+    Linking.openURL(googleMapsUrl)
+      .catch((err) => console.error('Erreur lors de l\'ouverture de Google Maps :', err));
+  }
+
   return (
     <View style={styles.container}>
       <BottomSheetModal
@@ -121,7 +132,7 @@ export const BottomSheetSteps = forwardRef(({ openBottomSheetSearch, duration, d
                 )}
               </View>
             </View>
-            {/* <ButtonCustom text={"Y aller"} /> */}
+            <ButtonCustom text={"Y aller"} onPress={() => openGoogleMaps()} />
           </View>
         </BottomSheetScrollView>
       </BottomSheetModal>
@@ -139,7 +150,7 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 15,
     paddingTop: 30,
-    marginBottom: 2,
+    marginBottom: 40,
   },
   steps: {
     flex: 1,
@@ -159,7 +170,7 @@ const styles = StyleSheet.create({
     color: colors.grey,
   },
   stepsBlock: {
-    marginBottom: 30,
+    marginBottom: 20,
     flexDirection: "row",
   },
   stepList: {

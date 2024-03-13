@@ -30,6 +30,7 @@ export const ThumbnailPlace1 = ({
     if(closeAllBottomSheet){
       closeAllBottomSheet();
     }
+    console.log(id)
     navigation.navigate("PlaceScreen", { id: String(id) });
   };
 

@@ -17,11 +17,11 @@ export const ThumbnailPlace1 = ({
   city,
   name,
   type,
+  id,
   average = 9.1,
   small = false,
   width = 210,
   placeColor = colors.black,
-  id = 1,
   closeAllBottomSheet = null
 }) => {
   const navigation = useNavigation();

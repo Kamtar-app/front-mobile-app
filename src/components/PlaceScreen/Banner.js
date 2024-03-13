@@ -22,7 +22,7 @@ export const Banner = ({ id }) => {
       {/* TODO Manon : ajouter un lien vers la map */}
       <View style={stylesBanner.buttonContainer}>
         <ButtonCustom
-          text={"Y aller"}
+          text={"Ajouter au trajet"}
           icon={<ArrowTwo color="white" size={20} />}
           style={stylesBanner.button}
           onPress={handleNavigateToMap}
@@ -47,7 +47,7 @@ const stylesBanner = StyleSheet.create({
     alignItems: "flex-end",
   },
   buttonContainer: {
-    width: 140,
+    width: 225,
   },
   button: {
     display: "flex",

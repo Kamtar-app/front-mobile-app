@@ -16,11 +16,17 @@ import { MapScreen } from "./src/screens/MapScreen";
 import { ListPlaceScreen } from "./src/screens/ListPlaceScreen";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { MessagesScreen } from "./src/screens/MessagesScreen";
+import { LogBox } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const fontsLoaded = useCustomFonts();
+
+  useEffect(() => {
+    // Désactiver les warning pour la démo
+    // LogBox.ignoreAllLogs();
+  }, [])
 
   if (!fontsLoaded) {
     return null; // Attend que les polices soient chargées
@@ -37,12 +43,12 @@ export default function App() {
               }}
             >
               {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
-              <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              {/* <Stack.Screen name="HomeScreen" component={HomeScreen} />
               <Stack.Screen
                 name="ListPlaceScreen"
                 component={ListPlaceScreen}
-              />
-              {/* <Stack.Screen name="MapScreen" component={MapScreen} /> */}
+              /> */}
+              <Stack.Screen name="MapScreen" component={MapScreen} />
               {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
               {/* <Stack.Screen name="ChatScreen" component={ChatScreen} /> */}
               <Stack.Screen name="PlaceScreen" component={PlaceScreen} />

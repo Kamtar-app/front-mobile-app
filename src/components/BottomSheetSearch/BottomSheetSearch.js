@@ -180,6 +180,7 @@ export const BottomSheetSearch = forwardRef(
                     openBottomSheet={openBottomSheet}
                     setSearchText={setSearchText}
                     searchText={searchText}
+                    width={"75%"}
                   />
                   <TouchableOpacity
                     onPress={() => {

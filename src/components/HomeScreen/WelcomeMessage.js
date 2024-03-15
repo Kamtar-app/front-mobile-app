@@ -11,13 +11,20 @@ import { colors } from "../../assets/styles/constants/colors";
 export const WelcomeMessage = ({ label }) => {
   return (
     <View style={styles.messageContainer}>
-      <Text style={styles.label}>Belle journée,</Text>
-      <Text style={styles.name}>Elsa</Text>
+      <View style={styles.inline}>
+        <Text style={styles.text}>Salut </Text>
+        <Text style={styles.textOrange}>Edgar</Text>
+        <Text style={styles.text}>,</Text>
+      </View>
+      <Text style={styles.text}>Prêt pour la route ?</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  inline: {
+    flexDirection: "row"
+  },
   messageContainer: {
     alignItems: "flex-start",
     justifyContent: "center",
@@ -25,12 +32,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 25
   },
-  label: {
+  text: {
     fontSize: 25,
     fontWeight: "bold",
     color: colors.black,
   },
-  name: {
+  textOrange: {
     fontSize: 25,
     fontWeight: "bold",
     color: colors.primary,

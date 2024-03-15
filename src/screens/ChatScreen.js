@@ -37,30 +37,20 @@ export const ChatScreen = ({}) => {
             profilePicture={require("./../../assets/images/camion.jpg")}
             children={
               <Text>
-                Premier message Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Fusce non bibendum dolor. Proin ultrices arcu a
-                nisi dignissim, ac sollicitudin nisi tincidunt. Sed sollicitudin
-                felis in feugiat fermentum.
+                Fais attention accident sur la A65 !!
               </Text>
             }
           />
           <ConversationMessageInternal>
-            Nullam iaculis nunc in metus eleifend, id ullamcorper nulla varius.
-            Nulla fermentum urna a erat dictum vestibulum. Integer semper, ex
-            sit amet convallis vulputate, ligula nunc interdum ex, sit amet
-            efficitur elit dui sed risus.
+            ça marche merci !! On se retrouve manger ce midi au restaurant routier à côté de Janzé ?
           </ConversationMessageInternal>
           <ConversationMessageInternal>
-            Pellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas.
+            Normalement Jason et Jerem nous rejoignent là bas vers 12h45
           </ConversationMessageInternal>
           <ConversationMessageExternal
             profilePicture={require("./../../assets/images/camion.jpg")}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            bibendum dolor. Proin ultrices arcu a nisi dignissim, ac
-            sollicitudin nisi tincidunt. Sed sollicitudin felis in feugiat
-            fermentum.
+            Tu veux manger ou ce midi ?
           </ConversationMessageExternal>
           {elements.map((item, index) => (
             <ConversationMessageInternal key={index}>

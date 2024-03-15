@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { BackArrow } from "../icons/BackArrow";
-import { Phone } from "../icons/Phone";
 import { useNavigation } from "@react-navigation/native";
 
 export const ConversationHeader = ({ username, profilePicture }) => {
@@ -11,32 +10,35 @@ export const ConversationHeader = ({ username, profilePicture }) => {
   };
 
   return (
-    <View style={stylesConversationHeader.container}>
-      <View style={stylesConversationHeader.firstContainer}>
+    <View style={styles.container}>
+      <View style={styles.firstContainer}>
         <TouchableOpacity onPress={handlePress}>
-          <BackArrow style={stylesConversationHeader.backArrow} />
+          <BackArrow style={styles.backArrow} />
         </TouchableOpacity>
         <Image
           source={profilePicture}
-          style={stylesConversationHeader.profilePicture}
+          style={styles.profilePicture}
         />
-        <Text style={stylesConversationHeader.username}>{username}</Text>
+        <Text style={styles.username}>{username}</Text>
       </View>
-      <View style={stylesConversationHeader.secondContainer}>
-        <Phone />
+      <View style={styles.secondContainer}>
+        <Image
+          source={require("../../../assets/images/talkie-walkie.png")}
+          style={styles.image}
+        />
       </View>
     </View>
   );
 };
 
-const stylesConversationHeader = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     width: "100%",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "space-between",
     flexDirection: "row",
-    height: 60,
+    height: 80,
     marginTop: 40,
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -68,6 +70,10 @@ const stylesConversationHeader = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: 20,
-    justifyContent: "flex-end",
+    justifyContent: "center",
+    marginRight: 20
+  },
+  image: {
+    height: 45,
   },
 });

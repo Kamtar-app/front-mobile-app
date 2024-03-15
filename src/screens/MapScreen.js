@@ -286,12 +286,6 @@ export const MapScreen = ({ }) => {
                     </View>
                 </View>
             )}
-            <View style={styles.containerBottomRigth}>
-                <View style={styles.containerBottomCenter}>
-                    <Plus width={32}></Plus>
-                </View>
-            </View>
-
             <MapView
                 style={styles.map}
                 customMapStyle={mapStyle}
@@ -482,21 +476,6 @@ const styles = StyleSheet.create({
     topUserPositionPlaceContainer: {
         flexDirection: "row",
         alignItems: "center"
-    },
-    containerBottomRigth: {
-        backgroundColor: colors.primary,
-        borderRadius: 50,
-        position: 'absolute',
-        bottom: 30,
-        right: 25,
-        zIndex: 2,
-        width: 60,
-        height: 60,
-    },
-    containerBottomCenter: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
     },
     iconContainer: {
         backgroundColor: colors.black,

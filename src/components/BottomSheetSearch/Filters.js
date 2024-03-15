@@ -16,6 +16,7 @@ export const Filters = ({ close }) => {
     ];
 
     const filterPlaceTypeList = [
+        "Tous",
         "Carburant",
         "Douche",
         "Entreprise",
@@ -29,7 +30,7 @@ export const Filters = ({ close }) => {
     const noteList = [4, 3, 2, 1];
 
     return (
-        <BottomSheetScrollView style={styles.container} showsHorizontalScrollIndicator={false}>
+        <View style={styles.container}>
             <View style={styles.iconCross}>
                 <TouchableOpacity onPress={() => close()}>
                     <Cross />
@@ -44,28 +45,28 @@ export const Filters = ({ close }) => {
                             {sortItem}
                         </Text>
                         <View style={styles.select}>
-                            <View style={styles.selectPlain}>
-                            </View>
+                            {key === 0 &&
+                                <View style={styles.selectPlain}>
+                                </View>
+                            }
                         </View>
                     </View>
                 ))}
             </View>
-            <View>
-                <Text>Distance</Text>
-                <Text>5 km</Text>
-            </View>
-            <View>
-
-            </View>
+            <Text style={styles.secondTitle}>Types</Text>
             <View>
                 {filterPlaceTypeList.map((filterItem, key) => (
                     <View key={key} style={styles.input}>
                         <Text style={styles.label}>
                             {filterItem}
                         </Text>
-                        <View style={styles.checkPlain}>
-                            <Check color={colors.black} width={14} height={18} />
-                        </View>
+                        {key === 0
+                            ? <View style={styles.checkPlain}>
+                                <Check color={colors.black} width={14} height={18} />
+                            </View>
+                            : <View style={styles.checkEmpty}>
+                            </View>
+                        }
                     </View>
                 ))}
             </View>
@@ -86,13 +87,15 @@ export const Filters = ({ close }) => {
                             </Text>
                         </View>
                         <View style={styles.select}>
-                            <View style={styles.selectPlain}>
-                            </View>
+                            {key === 0 &&
+                                <View style={styles.selectPlain}>
+                                </View>
+                            }
                         </View>
                     </View>
                 ))}
             </View>
-        </BottomSheetScrollView>
+        </View>
     );
 };
 
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         margin: 20,
-        flexGrow: 1 
+        flexGrow: 1
     },
     firstTitle: {
         fontSize: 30,
@@ -125,7 +128,6 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 17,
         color: colors.white,
-        fontWeight: "500"
     },
     select: {
         height: 27,

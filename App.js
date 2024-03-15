@@ -49,7 +49,7 @@ export default function App() {
                 component={ListPlaceScreen}
               />
               <Stack.Screen name="MapScreen" component={MapScreen} />
-              <Stack.Screen name="SigninScreen" component={SigninScreen} />
+              <Stack.Screen name="SigninScreen" component={SigninScreen} /> 
               <Stack.Screen name="ChatScreen" component={ChatScreen} />
               <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
               <Stack.Screen name="MessagesScreen" component={MessagesScreen} />

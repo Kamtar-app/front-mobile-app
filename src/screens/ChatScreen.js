@@ -34,21 +34,22 @@ export const ChatScreen = ({}) => {
         >
           <ConversationMessageExternal
             profilePicture={require("./../../assets/images/camion.jpg")}
-            children={<Text>Premier message</Text>}
+            children={
+              <Text>
+                Fais attention accident sur la A65 !!
+              </Text>
+            }
           />
           <ConversationMessageInternal>
-            Nullam iaculis
+            ça marche merci !! On se retrouve manger ce midi au restaurant routier à côté de Janzé ?
           </ConversationMessageInternal>
           <ConversationMessageInternal>
-            Pellentesque
+            Normalement Jason et Jerem nous rejoignent là bas vers 12h45
           </ConversationMessageInternal>
           <ConversationMessageExternal
             profilePicture={require("./../../assets/images/camion.jpg")}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            bibendum dolor. Proin ultrices arcu a nisi dignissim, ac
-            sollicitudin nisi tincidunt. Sed sollicitudin felis in feugiat
-            fermentum.
+            Tu veux manger ou ce midi ?
           </ConversationMessageExternal>
           {elements.map((item, index) => (
             <ConversationMessageInternal key={index}>

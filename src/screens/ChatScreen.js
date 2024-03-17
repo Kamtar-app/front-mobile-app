@@ -28,31 +28,19 @@ export const ChatScreen = ({}) => {
       />
       <View style={styles.body}>
         <ScrollView
-          style={styles.containerScrollView}
           showsVerticalScrollIndicator={false}
           ref={scrollViewRef}
           contentContainerStyle={styles.scrollViewContent}
         >
           <ConversationMessageExternal
             profilePicture={require("./../../assets/images/camion.jpg")}
-            children={
-              <Text>
-                Premier message Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Fusce non bibendum dolor. Proin ultrices arcu a
-                nisi dignissim, ac sollicitudin nisi tincidunt. Sed sollicitudin
-                felis in feugiat fermentum.
-              </Text>
-            }
+            children={<Text>Premier message</Text>}
           />
           <ConversationMessageInternal>
-            Nullam iaculis nunc in metus eleifend, id ullamcorper nulla varius.
-            Nulla fermentum urna a erat dictum vestibulum. Integer semper, ex
-            sit amet convallis vulputate, ligula nunc interdum ex, sit amet
-            efficitur elit dui sed risus.
+            Nullam iaculis
           </ConversationMessageInternal>
           <ConversationMessageInternal>
-            Pellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas.
+            Pellentesque
           </ConversationMessageInternal>
           <ConversationMessageExternal
             profilePicture={require("./../../assets/images/camion.jpg")}
@@ -86,6 +74,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     width: "100%",
+  },
+  scrollViewContent: {
+    justifyContent: "flex-end",
+    height: "100%",
   },
   image: {
     flex: 1,

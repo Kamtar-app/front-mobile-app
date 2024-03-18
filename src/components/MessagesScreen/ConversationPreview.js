@@ -12,12 +12,13 @@ export const ConversationPreview = ({
   lastMessage,
   hour,
   messageNumber,
+  profilePicture,
 }) => {
   return (
     <View style={stylesConversationPreview.container}>
       <View style={stylesConversationPreview.containerContent}>
         <Image
-          source={require("./../../../assets/icon.png")}
+          source={profilePicture}
           style={stylesConversationPreview.profilePicture}
         />
         <View style={stylesConversationPreview.content}>
@@ -46,9 +47,9 @@ const stylesConversationPreview = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
+    marginTop: 10,
   },
   containerContent: {
-    paddingHorizontal: 10,
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",

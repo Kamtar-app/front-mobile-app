@@ -12,7 +12,6 @@ export const StepTwo = ({ handleContinuePress, step }) => {
 
   const handlePress = () => {
     handleContinuePress("", commentContent);
-    // console.log(commentContent);
   };
 
   return (

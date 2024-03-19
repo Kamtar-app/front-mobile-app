@@ -17,7 +17,6 @@ export const LikeButton = ({ bg = colors.black }) => {
 
   const handlePress = () => {
     setFilled(!filled);
-    console.log(filled);
   };
 
   return (

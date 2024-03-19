@@ -90,7 +90,6 @@ export const PlaceScreen = ({ route, navigation }) => {
     setRatesLength(rates ? rates.length : null);
 
     if (rates.length > 0) {
-      // console.log("ratesLength : " + ratesLength);
       const total = rates.reduce((acc, note) => acc + note.value, 0);
       setTotalRates((total / rates.length).toFixed(2));
     }

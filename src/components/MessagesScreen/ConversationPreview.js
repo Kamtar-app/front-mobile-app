@@ -6,6 +6,8 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import { texts } from "../../assets/styles/constants/texts";
+import { colors } from "../../assets/styles/constants/colors";
 
 export const ConversationPreview = ({
   username,
@@ -23,18 +25,25 @@ export const ConversationPreview = ({
         />
         <View style={stylesConversationPreview.content}>
           <Text style={stylesConversationPreview.username}>{username}</Text>
-          <Text style={stylesConversationPreview.lastMessage}>
+          <Text
+            style={[
+              stylesConversationPreview.lastMessage,
+              !messageNumber && stylesConversationPreview.grayText,
+            ]}
+          >
             {lastMessage}
           </Text>
         </View>
       </View>
       <View style={stylesConversationPreview.metadata}>
         <Text style={stylesConversationPreview.hour}>{hour}</Text>
-        <View style={stylesConversationPreview.messageNumberContainer}>
-          <Text style={stylesConversationPreview.roundText}>
-            {messageNumber}
-          </Text>
-        </View>
+        {messageNumber !== "" && (
+          <View style={stylesConversationPreview.messageNumberContainer}>
+            <Text style={stylesConversationPreview.roundText}>
+              {messageNumber}
+            </Text>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -60,11 +69,14 @@ const stylesConversationPreview = StyleSheet.create({
   username: {
     color: "#000000",
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily: texts.fontFamilyBold,
   },
   lastMessage: {
     color: "#000000",
     fontSize: 15,
+  },
+  grayText: {
+    color: colors.grey,
   },
   metadata: {
     flexDirection: "column",

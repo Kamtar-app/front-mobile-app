@@ -61,6 +61,7 @@ export const PlaceScreen = ({ route, navigation }) => {
     fetch(`${process.env.API_END_POINT}/place/${id}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setPlace(data);
       })
       .catch((error) => console.error("Error fetching place details:", error));

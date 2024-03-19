@@ -50,7 +50,28 @@ export const MessagesScreen = ({}) => {
                 lastMessage={"Ça roule à toute, bise"}
                 hour={"11:57"}
                 messageNumber={"1"}
-                profilePicture={require("./../../assets/images/camion.jpg")}
+                profilePicture={require("./../../assets/images/john.png")}
+              />
+              <ConversationPreview
+                username={"Laura"}
+                lastMessage={"Hey, ça va ?"}
+                hour={"11:01"}
+                messageNumber={"2"}
+                profilePicture={require("./../../assets/images/laura.png")}
+              />
+              <ConversationPreview
+                username={"David"}
+                lastMessage={"On se voit vendredi"}
+                hour={"11:57"}
+                messageNumber={""}
+                profilePicture={require("./../../assets/images/yann.png")}
+              />
+              <ConversationPreview
+                username={"Jerem"}
+                lastMessage={"Oui, au quai 6"}
+                hour={"15:50"}
+                messageNumber={""}
+                profilePicture={require("./../../assets/images/bastien.png")}
               />
             </View>
           </TouchableOpacity>

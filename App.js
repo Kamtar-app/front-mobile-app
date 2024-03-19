@@ -36,15 +36,15 @@ export default function App() {
                 headerShown: false,
               }}
             >
-              {/* <Stack.Screen name="SignupScreen" component={SignupScreen} /> */}
-              {/* <Stack.Screen name="HomeScreen" component={HomeScreen} />
+              <Stack.Screen name="SignupScreen" component={SignupScreen} />
+              <Stack.Screen name="HomeScreen" component={HomeScreen} />
               <Stack.Screen
                 name="ListPlaceScreen"
                 component={ListPlaceScreen}
-              /> */}
-              {/* <Stack.Screen name="MapScreen" component={MapScreen} /> */}
-              {/* <Stack.Screen name="SigninScreen" component={SigninScreen} /> */}
-              {/* <Stack.Screen name="PlaceScreen" component={PlaceScreen} /> */}
+              />
+              <Stack.Screen name="MapScreen" component={MapScreen} />
+              <Stack.Screen name="SigninScreen" component={SigninScreen} />
+              <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
               <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
               <Stack.Screen name="ChatScreen" component={ChatScreen} />
             </Stack.Navigator>

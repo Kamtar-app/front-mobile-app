@@ -52,6 +52,7 @@ export const HomeScreen = ({}) => {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         setPlaces(data);
         const shuffledPlaces = [...data].sort(() => Math.random() - 0.5);
         setPlacesShuffle(shuffledPlaces);

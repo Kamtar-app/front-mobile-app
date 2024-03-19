@@ -5,8 +5,7 @@ import React, {
   useState,
   useCallback,
 } from "react";
-import { View, StyleSheet } from "react-native";
-
+import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -20,12 +19,10 @@ import { StepThree } from "./StepThree";
 
 export const RatingBottomSheet = ({
   bottomSheetModal,
-  // isSheetOpen,
   handleSheetChanges,
   placeId,
 }) => {
-  // const bottomSheetModalRef = useRef(bottomSheetModal);
-  const snapPoints = useMemo(() => ["62%"], []);
+  const snapPoints = useMemo(() => ["62%", "88%"], []);
   const [currentStep, setCurrentStep] = useState(1);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [rate, setRate] = useState();
@@ -36,9 +33,6 @@ export const RatingBottomSheet = ({
   };
 
   useEffect(() => {
-    console.log(rate);
-    console.log(placeId);
-    console.log("comment " + comment);
     if (rate && comment) {
       try {
         fetch(`${process.env.API_END_POINT}/rate`, {
@@ -59,7 +53,7 @@ export const RatingBottomSheet = ({
                 "La requête a échoué avec un statut " + response.status
               );
             }
-            return response.json(); // Renvoie une promesse résolue avec le corps de la réponse
+            return response.json();
           })
           .then((responseData) => {
             console.log(responseData);
@@ -125,7 +119,9 @@ export const RatingBottomSheet = ({
   };
 
   return (
-    <BottomSheetModalProvider>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
       <View style={styles.container}>
         <BottomSheetModal
           ref={bottomSheetModal}
@@ -133,7 +129,7 @@ export const RatingBottomSheet = ({
           snapPoints={snapPoints}
           backgroundStyle={{ backgroundColor: colors.darkGrey2 }}
           handleIndicatorStyle={{ backgroundColor: "white" }}
-          // onChange={handleSheetChanges}
+        // onChange={handleSheetChanges}
         >
           <BottomSheetScrollView>
             <View style={styles.contentContainer}>{renderContent()}</View>
@@ -141,12 +137,13 @@ export const RatingBottomSheet = ({
           </BottomSheetScrollView>
         </BottomSheetModal>
       </View>
-    </BottomSheetModalProvider>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     zIndex: 9999,
     position: "relative",

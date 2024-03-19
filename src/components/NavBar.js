@@ -12,7 +12,6 @@ export const NavBar = () => {
   const { activeLink, setActiveLink } = useContext(AppContext);
 
   const isActive = (screen) => {
-    // console.log(activeLink, screen);
     return activeLink === screen;
   };
 

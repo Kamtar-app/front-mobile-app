@@ -25,7 +25,7 @@ export default function App() {
 
   useEffect(() => {
     // Désactiver les warning pour la démo
-    // LogBox.ignoreAllLogs();
+    LogBox.ignoreAllLogs();
   }, [])
 
   if (!fontsLoaded) {
@@ -53,7 +53,6 @@ export default function App() {
               <Stack.Screen name="ChatScreen" component={ChatScreen} />
               <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
               <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
-              <Stack.Screen name="ChatScreen" component={ChatScreen} />
             </Stack.Navigator>
           </BottomSheetModalProvider>
         </NavigationContainer>

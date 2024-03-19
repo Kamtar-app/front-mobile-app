@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Link,
+  KeyboardAvoidingView,
 } from "react-native";
 import { TextInputCustom } from "../components/TextInputCustom";
 import { ButtonCustom } from "../components/ButtonCustom";

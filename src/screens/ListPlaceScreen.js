@@ -35,8 +35,6 @@ export const ListPlaceScreen = ({}) => {
 
   useEffect(() => {
     console.log(`${process.env.API_END_POINT}/place/`);
-    // console.log(location.latitude);
-
     fetch(`${process.env.API_END_POINT}/place/`, {
       timeout: 40000,
     })
@@ -115,7 +113,6 @@ export const ListPlaceScreen = ({}) => {
         </View>
       </ScrollView>
       <NavBar />
-      <BottomSheetSearch />
     </View>
   );
 };

@@ -21,7 +21,6 @@ export const TextInputChat = ({
     const newElement = textInput;
     setElements([...elements, newElement]);
     setTextInput("");
-    console.log(textInput);
     scrollview();
   };
 

@@ -60,7 +60,7 @@ export const BottomSheetSearch = forwardRef(
 
     useEffect(() => {
       addCurrentLocationToStep();
-    }, [, location]);
+    }, [location]);
 
     useEffect(() => {
       bottomSheetModalRef.current.present();
@@ -90,6 +90,10 @@ export const BottomSheetSearch = forwardRef(
         return;
       }
       try {
+        if(stepList.length > 0){
+          return;
+        }
+
         const response = await fetch(
           `${process.env.API_GOUV_END_POINT}/reverse/?lon=${location.longitude}&lat=${location.latitude}&limit=1`
         );
@@ -138,12 +142,11 @@ export const BottomSheetSearch = forwardRef(
       let newStepList = [...stepList];
 
       let stepPosition = null;
-      if (idStepToModify !== null) {
+      if (idStepToModify !== null && idStepToModify !== undefined) {
         stepPosition = idStepToModify;
         newStepList = newStepList.filter((step, id) => id !== idStepToModify);
       } else {
-        stepPosition =
-          newStepList.length < 2 ? newStepList.length : newStepList.length - 1;
+        stepPosition = newStepList.length < 2 ? newStepList.length : newStepList.length - 1;
       }
 
       setIdStepToModify(null);

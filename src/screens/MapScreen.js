@@ -78,7 +78,7 @@ export const MapScreen = ({ }) => {
     }, [directionData]);
 
     useEffect(() => {
-        if(stepList && location){
+        if (stepList && location) {
             mapRef.current?.animateToRegion({ ...getMapRegion() })
         }
     }, [stepList, location])
@@ -135,9 +135,6 @@ export const MapScreen = ({ }) => {
     };
 
     const insertCoordinate = (place) => {
-        console.log(place);
-        console.log("ok");
-
         let newStepList = [...stepList];
         newStepList.splice(
             stepList.length - 1,
@@ -150,9 +147,6 @@ export const MapScreen = ({ }) => {
                 }
             }
         );
-
-        console.log(JSON.stringify(newStepList));
-
         setStepList(newStepList);
     }
 
@@ -293,20 +287,22 @@ export const MapScreen = ({ }) => {
                 ref={mapRef}
                 initialRegion={FRANCE_DEFAULT_LOCATION}
             >
-                {location && stepList.length >= 2 &&
+                {location && stepList.length > 0 &&
                     <>
-                        <MapViewDirections
-                            origin={{ latitude: stepList[0].geometry.coordinates[1], longitude: stepList[0].geometry.coordinates[0] }}
-                            destination={{ latitude: stepList[stepList.length - 1].geometry.coordinates[1], longitude: stepList[stepList.length - 1].geometry.coordinates[0] }}
-                            waypoints={stepList.map(step => ({
-                                latitude: step.geometry.coordinates[1],
-                                longitude: step.geometry.coordinates[0],
-                            }))}
-                            apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY}
-                            strokeWidth={3}
-                            strokeColor={colors.primary}
-                            onReady={(result) => { setDirectionData(result) }}
-                        />
+                        {stepList.length > 1 &&
+                            <MapViewDirections
+                                origin={{ latitude: stepList[0].geometry.coordinates[1], longitude: stepList[0].geometry.coordinates[0] }}
+                                destination={{ latitude: stepList[stepList.length - 1].geometry.coordinates[1], longitude: stepList[stepList.length - 1].geometry.coordinates[0] }}
+                                waypoints={stepList.map(step => ({
+                                    latitude: step.geometry.coordinates[1],
+                                    longitude: step.geometry.coordinates[0],
+                                }))}
+                                apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY}
+                                strokeWidth={3}
+                                strokeColor={colors.primary}
+                                onReady={(result) => { setDirectionData(result) }}
+                            />
+                        }
                         {stepListExtremity?.start && <Marker coordinate={{ latitude: stepListExtremity.start.latitude, longitude: stepListExtremity.start.longitude }}>
                             <View style={styles.extremityMarker} />
                         </Marker>}

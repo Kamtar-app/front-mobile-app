@@ -17,7 +17,7 @@ import { texts } from "../assets/styles/constants/texts";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../assets/styles/constants/colors";
 
-export const MessagesScreen = ({}) => {
+export const MessagesScreen = ({ }) => {
   const navigation = useNavigation();
 
   const handlePress = () => {
@@ -43,8 +43,8 @@ export const MessagesScreen = ({}) => {
         </View> */}
         <View>
           <Text style={styles.title}>Conversations</Text>
-          <TouchableOpacity onPress={handlePress}>
-            <View>
+          <View>
+            <TouchableOpacity onPress={handlePress}>
               <ConversationPreview
                 username={"John"}
                 lastMessage={"Ça roule à toute, bise"}
@@ -52,6 +52,8 @@ export const MessagesScreen = ({}) => {
                 messageNumber={"1"}
                 profilePicture={require("./../../assets/images/john.png")}
               />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handlePress}>
               <ConversationPreview
                 username={"Laura"}
                 lastMessage={"Hey, ça va ?"}
@@ -59,6 +61,8 @@ export const MessagesScreen = ({}) => {
                 messageNumber={"2"}
                 profilePicture={require("./../../assets/images/laura.png")}
               />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handlePress}>
               <ConversationPreview
                 username={"David"}
                 lastMessage={"On se voit vendredi"}
@@ -66,6 +70,8 @@ export const MessagesScreen = ({}) => {
                 messageNumber={""}
                 profilePicture={require("./../../assets/images/yann.png")}
               />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handlePress}>
               <ConversationPreview
                 username={"Jerem"}
                 lastMessage={"Oui, au quai 6"}
@@ -73,8 +79,8 @@ export const MessagesScreen = ({}) => {
                 messageNumber={""}
                 profilePicture={require("./../../assets/images/bastien.png")}
               />
-            </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
       <NavBar />

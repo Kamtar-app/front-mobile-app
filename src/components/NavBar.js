@@ -17,25 +17,23 @@ export const NavBar = () => {
 
   const navItemLinks = [
     {
-      active: isActive(Routes.HomeScreen),
-      action: () => setActiveLink(Routes.HomeScreen),
+      active: () => isActive(Routes.HomeScreen),
+      action: "HomeScreen",
       component: (props) => <Home {...props} />,
     },
     {
-      active: isActive(Routes.MapScreen),
-      // action: () => setActiveLink(Routes.MapScreen),
+      active: () => isActive(Routes.MapScreen),
       action: "MapScreen",
       component: (props) => <Map {...props} />,
     },
     {
-      active: isActive(Routes.ConversationScreen),
-      // action: () => setActiveLink(Routes.ConversationScreen),
-      action: "ChatScreen",
+      active: () => isActive(Routes.MessagesScreen),
+      action: "MessagesScreen",
       component: (props) => <Conversation {...props} />,
     },
     {
-      active: isActive(Routes.AccountScreen),
-      action: () => setActiveLink(Routes.AccountScreen),
+      active: () => isActive(Routes.AccountScreen),
+      action: "AccountScreen",
       component: (props) => <Account {...props} />,
     },
   ];
@@ -51,8 +49,8 @@ export const NavBar = () => {
           >
             {navItemLink.component({
               style: stylesNavBar.logo,
-              strokeColor: navItemLink.active ? null : "white",
-              backgroundColor: navItemLink.active ? "white" : null,
+              strokeColor: navItemLink.active() ? null : "white",
+              backgroundColor: navItemLink.active() ? "white" : null,
             })}
           </NavBarItem>
         ))}

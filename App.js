@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet, Text } from "react-native";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import useCustomFonts from "./src/useCustomFonts";
@@ -33,9 +33,9 @@ export default function App() {
   }
 
   return (
-    <AppContextProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <NavigationContainer>
+    <NavigationContainer>
+      <AppContextProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
           <BottomSheetModalProvider>
             <Stack.Navigator
               screenOptions={{
@@ -49,15 +49,15 @@ export default function App() {
                 component={ListPlaceScreen}
               />
               <Stack.Screen name="MapScreen" component={MapScreen} />
-              <Stack.Screen name="SigninScreen" component={SigninScreen} /> 
+              <Stack.Screen name="SigninScreen" component={SigninScreen} />
               <Stack.Screen name="ChatScreen" component={ChatScreen} />
               <Stack.Screen name="PlaceScreen" component={PlaceScreen} />
               <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
             </Stack.Navigator>
           </BottomSheetModalProvider>
-        </NavigationContainer>
-      </GestureHandlerRootView>
-    </AppContextProvider>
+        </GestureHandlerRootView>
+      </AppContextProvider>
+    </NavigationContainer>
   );
 }
 

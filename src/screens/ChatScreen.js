@@ -27,7 +27,7 @@ export const ChatScreen = ({ }) => {
       <View style={styles.container}>
         <ConversationHeader
           username={"John"}
-          profilePicture={require("./../../assets/images/camion.jpg")}
+          profilePicture={require("./../../assets/images/john.png")}
         />
         <View style={styles.body}>
           <ScrollView
@@ -37,7 +37,7 @@ export const ChatScreen = ({ }) => {
             contentContainerStyle={styles.scrollViewContent}
           >
             <ConversationMessageExternal
-              profilePicture={require("./../../assets/images/camion.jpg")}
+              profilePicture={require("./../../assets/images/john.png")}
               children={
                 <Text>
                   Fais attention accident sur la A65 !!
@@ -51,7 +51,7 @@ export const ChatScreen = ({ }) => {
               Normalement Jason et Jerem nous rejoignent là bas vers 12h45
             </ConversationMessageInternal>
             <ConversationMessageExternal
-              profilePicture={require("./../../assets/images/camion.jpg")}
+              profilePicture={require("./../../assets/images/john.png")}
             >
               Tu veux manger ou ce midi ?
             </ConversationMessageExternal>

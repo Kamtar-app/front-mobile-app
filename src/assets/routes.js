@@ -1,6 +1,6 @@
 export const Routes = {
 	HomeScreen: "HomeScreen",
 	MapScreen: "MapScreen",
-	ConversationScreen: "ConversationScreen",
+	MessagesScreen: "MessagesScreen",
 	AccountScreen: "AccountScreen",
 }

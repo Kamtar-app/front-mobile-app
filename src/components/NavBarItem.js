@@ -4,11 +4,15 @@ import { useNavigation } from "@react-navigation/native";
 export const NavBarItem = ({ active, action, children }) => {
   const navigation = useNavigation();
 
+  const handlePress = () => {
+    navigation.navigate(action);
+  }
+
   return (
     <TouchableOpacity
-      style={[stylesNavBar.navBarItem, active && stylesNavBar.active]}
+      style={[stylesNavBar.navBarItem, active() === true && stylesNavBar.active]}
       onPress={() => {
-        navigation.navigate(action);
+        handlePress()
       }}
     >
       {children}

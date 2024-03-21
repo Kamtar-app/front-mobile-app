@@ -5,26 +5,19 @@ import { Star } from "../icons/Star";
 import { colors } from "../../assets/styles/constants/colors";
 import mapStyle from "./../../../map-style.json";
 import { Restaurant } from "../icons/Restaurant";
+import { matchCategoryIdIcon } from "../../utils/icon";
 
-export const Map = () => {
+export const Map = ({ lat, long, categoryId }) => {
+  if (!lat || !long) {
+    return null;
+  }
   // Coordonnées du lieu (par exemple, Paris)
   const initialRegion = {
-    latitude: 48.8566,
-    longitude: 2.3522,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitude: lat,
+    longitude: long,
+    latitudeDelta: 0.05,
+    longitudeDelta: 0.05,
   };
-
-  const customMapStyle = [
-    {
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#f5f5f5", // Couleur de fond grise
-        },
-      ],
-    },
-  ];
 
   return (
     <View style={styles.container}>
@@ -36,13 +29,13 @@ export const Map = () => {
       >
         {/* Marqueur de lieu */}
         <Marker
-          coordinate={{ latitude: 48.8566, longitude: 2.3522 }}
-          title="Emplacement"
-          description="Description de l'emplacement"
+          coordinate={{ latitude: lat, longitude: long }}
+        // title="Emplacement"
+        // description="Description de l'emplacement"
         >
           <View style={styles.markerContainer}>
             <View style={styles.iconContainer}>
-              <Restaurant size={25} />
+              {matchCategoryIdIcon[categoryId]}
             </View>
             <View style={styles.triangle} />
           </View>

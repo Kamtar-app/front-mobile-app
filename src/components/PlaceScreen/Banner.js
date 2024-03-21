@@ -9,16 +9,23 @@ import {
 import { colors } from "../../assets/styles/constants/colors";
 import { ButtonCustom } from "../ButtonCustom";
 import { ArrowTwo } from "../icons/ArrowTwo";
+import { useNavigation } from "@react-navigation/native";
 
-export const Banner = ({}) => {
+export const Banner = ({ id }) => {
+  const navigation = useNavigation();
+  const handleNavigateToMap = () => {
+    navigation.navigate("MapScreen", { placeId: id });
+  };
+
   return (
     <View style={stylesBanner.container}>
       {/* TODO Manon : ajouter un lien vers la map */}
       <View style={stylesBanner.buttonContainer}>
         <ButtonCustom
-          text={"Y aller"}
+          text={"Ajouter au trajet"}
           icon={<ArrowTwo color="white" size={20} />}
           style={stylesBanner.button}
+          onPress={handleNavigateToMap}
         />
       </View>
     </View>
@@ -40,7 +47,7 @@ const stylesBanner = StyleSheet.create({
     alignItems: "flex-end",
   },
   buttonContainer: {
-    width: 140,
+    width: 225,
   },
   button: {
     display: "flex",

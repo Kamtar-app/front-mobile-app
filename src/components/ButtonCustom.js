@@ -13,6 +13,7 @@ import { texts } from "./../assets/styles/constants/texts";
 export const ButtonCustom = ({
   text,
   onPress = null,
+  screen = null,
   icon = null,
   color = colors.primary,
   textColor = colors.white,
@@ -22,7 +23,9 @@ export const ButtonCustom = ({
   return (
     <TouchableOpacity
       style={[stylesButtonCustom.button, { backgroundColor: color }]}
-      onPress={onPress}
+      onPress={() => {
+        onPress ? onPress() : navigation.navigate(screen);
+      }}
     >
       <Text style={[stylesButtonCustom.textButton, { color: textColor }]}>
         {text}

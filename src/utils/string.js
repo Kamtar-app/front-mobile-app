@@ -1,0 +1,1 @@
+export const cropString = (string, length) => (string.substring(0, length) + (string.length > length ? "..." : ""));

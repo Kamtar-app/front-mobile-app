@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView } from "react-native";
 import { ConversationHeader } from "../components/ChatScreen/ConversationHeader";
 import { ConversationMessageExternal } from "../components/ChatScreen/ConversationMessageExternal";
 import { ConversationMessageInternal } from "../components/ChatScreen/ConversationMessageInternal";
@@ -7,7 +7,7 @@ import { TextInputChat } from "../components/ChatScreen/TextInputChat";
 import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
 
-export const ChatScreen = ({}) => {
+export const ChatScreen = ({ }) => {
   const [textInput, setTextInput] = useState("");
   const [elements, setElements] = useState([]);
   const scrollViewRef = useRef();
@@ -21,63 +21,57 @@ export const ChatScreen = ({}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <ConversationHeader
-        username={"John"}
-        profilePicture={require("./../../assets/images/camion.jpg")}
-      />
-      <View style={styles.body}>
-        <ScrollView
-          style={styles.containerScrollView}
-          showsVerticalScrollIndicator={false}
-          ref={scrollViewRef}
-          contentContainerStyle={styles.scrollViewContent}
-        >
-          <ConversationMessageExternal
-            profilePicture={require("./../../assets/images/camion.jpg")}
-            children={
-              <Text>
-                Premier message Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Fusce non bibendum dolor. Proin ultrices arcu a
-                nisi dignissim, ac sollicitudin nisi tincidunt. Sed sollicitudin
-                felis in feugiat fermentum.
-              </Text>
-            }
-          />
-          <ConversationMessageInternal>
-            Nullam iaculis nunc in metus eleifend, id ullamcorper nulla varius.
-            Nulla fermentum urna a erat dictum vestibulum. Integer semper, ex
-            sit amet convallis vulputate, ligula nunc interdum ex, sit amet
-            efficitur elit dui sed risus.
-          </ConversationMessageInternal>
-          <ConversationMessageInternal>
-            Pellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas.
-          </ConversationMessageInternal>
-          <ConversationMessageExternal
-            profilePicture={require("./../../assets/images/camion.jpg")}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non
-            bibendum dolor. Proin ultrices arcu a nisi dignissim, ac
-            sollicitudin nisi tincidunt. Sed sollicitudin felis in feugiat
-            fermentum.
-          </ConversationMessageExternal>
-          {elements.map((item, index) => (
-            <ConversationMessageInternal key={index}>
-              {item}
-            </ConversationMessageInternal>
-          ))}
-        </ScrollView>
-        <TextInputChat
-          elements={elements}
-          setElements={setElements}
-          textInput={textInput}
-          setTextInput={setTextInput}
-          style={styles.input}
-          scrollview={handleScrollview}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <View style={styles.container}>
+        <ConversationHeader
+          username={"John"}
+          profilePicture={require("./../../assets/images/john.png")}
         />
+        <View style={styles.body}>
+          <ScrollView
+            style={styles.containerScrollView}
+            showsVerticalScrollIndicator={false}
+            ref={scrollViewRef}
+            contentContainerStyle={styles.scrollViewContent}
+          >
+            <ConversationMessageExternal
+              profilePicture={require("./../../assets/images/john.png")}
+              children={
+                <Text>
+                  Fais attention accident sur la A65 !!
+                </Text>
+              }
+            />
+            <ConversationMessageInternal>
+              ça marche merci !! On se retrouve manger ce midi au restaurant routier à côté de Janzé ?
+            </ConversationMessageInternal>
+            <ConversationMessageInternal>
+              Normalement Jason et Jerem nous rejoignent là bas vers 12h45
+            </ConversationMessageInternal>
+            <ConversationMessageExternal
+              profilePicture={require("./../../assets/images/john.png")}
+            >
+              Tu veux manger ou ce midi ?
+            </ConversationMessageExternal>
+            {elements.map((item, index) => (
+              <ConversationMessageInternal key={index}>
+                {item}
+              </ConversationMessageInternal>
+            ))}
+          </ScrollView>
+          <TextInputChat
+            elements={elements}
+            setElements={setElements}
+            textInput={textInput}
+            setTextInput={setTextInput}
+            style={styles.input}
+            scrollview={handleScrollview}
+          />
+        </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -86,6 +80,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     width: "100%",
+  },
+  scrollViewContent: {
+    justifyContent: "flex-end",
+    height: "100%",
   },
   image: {
     flex: 1,

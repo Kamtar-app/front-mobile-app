@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Link,
+  KeyboardAvoidingView,
 } from "react-native";
 import { TextInputCustom } from "../components/TextInputCustom";
 import { ButtonCustom } from "../components/ButtonCustom";
@@ -23,10 +24,12 @@ import { colors } from "../assets/styles/constants/colors";
 import { texts } from "../assets/styles/constants/texts";
 import { useNavigation } from "@react-navigation/native";
 import { SignupScreen } from "./SignupScreen";
+import { HomeScreen } from "./HomeScreen";
 import { NavBar } from "../components/NavBar";
 
-export const SigninScreen = ({}) => {
+export const SigninScreen = ({ }) => {
   return (
+
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <View style={styles.view}>
@@ -40,6 +43,7 @@ export const SigninScreen = ({}) => {
           <TextInputCustom
             placeholder={"Mot de passe"}
             startIcon={<Password color="#fff" />}
+            secureTextEntry={true}
           />
           <TouchableOpacity
             style={styles.containerText}
@@ -49,9 +53,8 @@ export const SigninScreen = ({}) => {
           >
             <Text style={styles.text}>Mot de passe oublié ?</Text>
           </TouchableOpacity>
-          <ButtonCustom text={"Connexion"} screen={"WelcomeScreen"} />
+          <ButtonCustom text={"Connexion"} screen={"HomeScreen"} />
           <ButtonUnderlinedCustom text={"S'inscrire"} screen={"SignupScreen"} />
-          <ButtonUnderlinedCustom text={"ChatScreen"} screen={"ChatScreen"} />
         </View>
       </ImageBackground>
     </View>
@@ -62,11 +65,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "start",
   },
   image: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "start",
     width: "100%",
   },
   view: {
@@ -75,13 +78,13 @@ const styles = StyleSheet.create({
   containerLogo: {
     display: "flex",
     alignItems: "center",
-    marginTop: 100,
-    marginBottom: 135,
+    marginTop: 50,
+    marginBottom: 50,
   },
   containerText: {
     display: "flex",
     alignItems: "flex-end",
-    marginBottom: 70
+    marginBottom: 25,
   },
   text: {
     fontSize: 17,

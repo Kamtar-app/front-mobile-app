@@ -10,20 +10,36 @@ import { colors } from "../../assets/styles/constants/colors";
 import { Star } from "../icons/Star";
 
 export const Average = ({ notesData }) => {
-  const maxFrequency = Math.max(...notesData.map((note) => note.frequency));
+  if (!Array.isArray(notesData)) {
+    return null;
+  }
+
+  const frequencies = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  };
+
+  notesData.forEach((note) => {
+    frequencies[note.value]++;
+  });
+
+  const maxFrequency = Math.max(...Object.values(frequencies));
 
   return (
     <View style={stylesAverage.container}>
-      {notesData.map((note, index) => (
+      {Object.entries(frequencies).map(([noteValue, frequency], index) => (
         <View key={index} style={stylesAverage.noteContainer}>
-          <Text style={stylesAverage.value}>{note.value}</Text>
+          <Text style={stylesAverage.value}>{noteValue}</Text>
           <View style={stylesAverage.star}>
             <Star size={13} />
           </View>
           <View
             style={[
               stylesAverage.bar,
-              { width: `${(note.frequency / maxFrequency) * 100}%` },
+              { width: `${(frequency / maxFrequency) * 50}%` },
             ]}
           />
         </View>
@@ -33,10 +49,13 @@ export const Average = ({ notesData }) => {
 };
 
 const stylesAverage = StyleSheet.create({
+  container: {
+    width: "50%",
+  },
   noteContainer: {
     display: "flex",
     flexDirection: "row",
-    maxWidth: "70%",
+    maxWidth: "100%",
     marginBottom: 5,
   },
   value: {

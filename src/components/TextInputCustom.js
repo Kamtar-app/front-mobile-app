@@ -15,6 +15,7 @@ export const TextInputCustom = ({
   endIcon = null,
   value = null,
   onChange = null,
+  secureTextEntry = false,
 }) => {
   return (
     <View style={stylestextInputCustom.inputContainer}>
@@ -23,8 +24,10 @@ export const TextInputCustom = ({
         style={stylestextInputCustom.input}
         placeholder={placeholder}
         placeholderTextColor="white"
+        color="white"
         onChange={onChange}
         value={value}
+        secureTextEntry={secureTextEntry}
       />
       {endIcon && (
         <View style={stylestextInputCustom.containerEndIcon}>{endIcon}</View>

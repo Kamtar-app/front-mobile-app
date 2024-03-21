@@ -1,9 +1,9 @@
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg";
 
-export const Shower = ({ color = "white" }) => (
+export const Shower = ({ color = "white", size = 35 }) => (
   <Svg
-    width={35}
-    height={41}
+    width={size} 
+    height={size * 1.17}
     viewBox="0 0 35 41"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

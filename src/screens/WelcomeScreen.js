@@ -37,26 +37,7 @@ export const WelcomeScreen = ({ navigation }) => {
 
     let currentLocation = await Location.getCurrentPositionAsync({});
     setLocation(currentLocation);
-    console.log("Location:");
-    console.log(currentLocation);
   };
-
-  // const geocode = async () => {
-  //   const geocodedLocation = await Location.geocodeAsync(address);
-  //   console.log("Geocoded Address:");
-  //   console.log(geocodedLocation);
-  // };
-
-  // const reverseGeocode = async () => {
-  //   const reverseGeocodedAddress = await Location.reverseGeocodeAsync({
-  //     longitude: location.coords.longitude,
-  //     latitude: location.coords.latitude,
-  //   });
-
-  //   console.log("Reverse Geocoded:");
-  //   console.log(reverseGeocodedAddress);
-  // };
-  // }
 
   return (
     <View style={styles.container}>

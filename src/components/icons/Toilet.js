@@ -1,9 +1,9 @@
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg";
 
-export const Toilet = ({ color = "white" }) => (
+export const Toilet = ({ color = "white", size = 35 }) => (
   <Svg
-    width={31}
-    height={45}
+    width={size}
+    height={size * 1.45}
     viewBox="0 0 31 45"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

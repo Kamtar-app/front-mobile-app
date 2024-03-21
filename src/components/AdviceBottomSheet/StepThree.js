@@ -17,7 +17,6 @@ import { Star } from "../icons/Star";
 import { texts } from "../../assets/styles/constants/texts";
 import { ButtonCustom } from "../ButtonCustom";
 import { ArrowTwo } from "../icons/ArrowTwo";
-import { HomeScreen } from "../../screens/HomeScreen";
 import { Image } from "react-native-svg";
 
 export const StepThree = ({ handleContinuePress, step, handleClose }) => {

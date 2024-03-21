@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Link,
+  KeyboardAvoidingView,
 } from "react-native";
 import { TextInputCustom } from "../components/TextInputCustom";
 import { ButtonCustom } from "../components/ButtonCustom";
@@ -47,11 +48,13 @@ export const SignupScreen = ({ navigation }) => {
           />
           <TextInputCustom
             placeholder={"Mot de passe"}
+            secureTextEntry={true}
             startIcon={<Password color="#fff" />}
             endIcon={<HiddenEye color="#fff" />}
           />
           <TextInputCustom
             placeholder={"Confirmation"}
+            secureTextEntry={true}
             startIcon={<Password color="#fff" />}
             endIcon={<HiddenEye color="#fff" />}
           />

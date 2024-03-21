@@ -4,7 +4,14 @@ import { colors } from "../../assets/styles/constants/colors";
 import { Star } from "../icons/Star";
 import { texts } from "../../assets/styles/constants/texts";
 
-export const AdviceCard = ({ date, comment, profil, name, dateMember }) => {
+export const AdviceCard = ({
+  rate,
+  date,
+  comment,
+  profil,
+  name,
+  dateMember,
+}) => {
   const starsArray = Array(5).fill(null);
 
   return (
@@ -13,7 +20,11 @@ export const AdviceCard = ({ date, comment, profil, name, dateMember }) => {
         <View style={styleAdviceCard.stars}>
           {starsArray.map((_, index) => (
             <View key={index} style={styleAdviceCard.star}>
-              <Star color={colors.primary} />
+              {index < rate ? (
+                <Star color={colors.primary} />
+              ) : (
+                <Star color={colors.grey} />
+              )}
             </View>
           ))}
         </View>
@@ -21,7 +32,7 @@ export const AdviceCard = ({ date, comment, profil, name, dateMember }) => {
       </View>
       <Text style={styleAdviceCard.text}>{comment}</Text>
       <View style={styleAdviceCard.person}>
-        <Image source={profil} style={styleAdviceCard.image} />
+        <Image source={{ uri: profil }} style={styleAdviceCard.image} />
         <View style={styleAdviceCard.memberContainer}>
           <Text style={styleAdviceCard.text}>{name}</Text>
           <Text style={styleAdviceCard.dateMember}>
